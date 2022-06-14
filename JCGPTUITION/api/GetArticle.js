@@ -10,6 +10,7 @@ export default async function GetArticle() {
       Authorization: 'Bearer ' + result,
     },
   });
-  const list = JSON.stringify(await response.json());
-  return list;
+  const list = await response.json();
+  const exportList = JSON.stringify(list.data);
+  return exportList;
 }

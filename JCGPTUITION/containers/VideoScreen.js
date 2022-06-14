@@ -11,6 +11,10 @@ export default function VideoScreen() {
     setList(videos);
   }
 
+  useEffect(() => {
+    get();
+  }, []);
+
   return (
     <View>
       <Button title="Press" onPress={get}></Button>
