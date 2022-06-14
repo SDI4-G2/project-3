@@ -12,8 +12,8 @@ export default async function Register({ email, username, password, navigation }
   })
     .then((response) => response.json())
     .then(() => {
-      alert('Account created successfully');
-      navigation.navigate('Dashboard');
+      alert('Account created successfully, please try logging in via main page.');
+      navigation.navigate('WelcomeScreen');
     })
     .catch(() => {
       alert('Please enter valid username, email and password');
