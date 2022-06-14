@@ -2,14 +2,14 @@ import * as SecureStore from 'expo-secure-store';
 
 export default async function GetVideo() {
   let result = await SecureStore.getItemAsync('token');
-  await fetch('https://sdi4-g2.herokuapp.com/video', {
+
+  const response = await fetch('https://sdi4-g2.herokuapp.com/video', {
     method: 'GET',
     headers: {
+      'Content-Type': 'application/json',
       Authorization: 'Bearer ' + result,
     },
-  })
-    .then((response) => response.json())
-    .then((serverResponse) => {
-      return serverResponse.data;
-    });
+  });
+  const list = JSON.stringify(await response.json());
+  return list;
 }
