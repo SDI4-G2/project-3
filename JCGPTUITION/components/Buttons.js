@@ -1,17 +1,42 @@
 import { StyleSheet, Text } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
+import AppLoading from "expo-app-loading";
+import { useFonts, Poppins_500Medium } from "@expo-google-fonts/poppins";
 
 export default function ButtonsOne({ naming }) {
-  return (
-    <LinearGradient
-      style={styles.gradient}
-      start={{ x: 0, y: 0 }}
-      end={{ x: 1, y: 0 }}
-      colors={["#6A68E2", "#FF98B7"]}
-    >
-      <Text style={styles.buttonText}>{naming}</Text>
-    </LinearGradient>
-  );
+  let [fontsLoaded] = useFonts({
+    Poppins_500Medium,
+  });
+
+  let fontSize = 20;
+  let paddingVertical = 6;
+  if (!fontsLoaded) {
+    return <AppLoading />;
+  } else {
+    return (
+      <LinearGradient
+        style={styles.gradient}
+        start={{ x: 0, y: 0 }}
+        end={{ x: 1, y: 0 }}
+        colors={["#6A68E2", "#FF98B7"]}
+      >
+        <Text
+          style={{
+            fontSize,
+            paddingVertical,
+            // Note the quoting of the value for `fontFamily` here; it expects a string!
+            fontFamily: "Poppins_500Medium",
+            color: "white",
+            opacity: 0.7,
+
+            textAlign: "center",
+          }}
+        >
+          {naming}
+        </Text>
+      </LinearGradient>
+    );
+  }
 }
 
 var styles = StyleSheet.create({
@@ -28,7 +53,7 @@ var styles = StyleSheet.create({
     top: 200,
     justifyContent: "center",
     borderRadius: 6,
-    width: "80%",
+    width: "100%",
     shadowColor: "#FF98B7",
     elevation: 10,
     backgroundColor: "white",
