@@ -9,5 +9,7 @@ export default async function GetVideo() {
     },
   })
     .then((response) => response.json())
-    .then((serverResponse) => console.log(serverResponse));
+    .then((serverResponse) => {
+      return serverResponse.data;
+    });
 }

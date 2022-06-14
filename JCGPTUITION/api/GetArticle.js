@@ -9,5 +9,7 @@ export default async function GetArticle() {
     },
   })
     .then((response) => response.json())
-    .then((serverResponse) => console.log(serverResponse));
+    .then((serverResponse) => {
+      return serverResponse.data;
+    });
 }
