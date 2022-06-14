@@ -14,9 +14,14 @@ export default async function Login({ email, username, password, navigation }) {
   })
     .then((response) => response.json())
     .then((serverResponse) => {
-      SecureStore.setItemAsync('token', serverResponse.data);
-      alert('Login Successful');
-      navigation.navigate('Dashboard');
+      if (serverResponse.data) {
+        SecureStore.setItemAsync('token', serverResponse.data);
+        // console.log(serverResponse);
+        alert('Login Successful');
+        navigation.navigate('Dashboard');
+      } else {
+        alert('Please enter valid email/username and password');
+      }
     })
     .catch((err) => {
       alert('Please enter valid email/username and password');
