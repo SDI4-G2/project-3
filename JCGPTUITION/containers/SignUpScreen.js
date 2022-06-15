@@ -24,32 +24,34 @@ export default function SignUpScreen({ navigation }) {
   return (
     <View style={styles.container}>
       <HeaderBar />
-      <Bold fontBold="Join Us"></Bold>
-      <TouchableOpacity style={styles.textContainer}>
-        <Small fontSmall="Username"></Small>
-        <TextInput value={username} onChangeText={setUsername}></TextInput>
-      </TouchableOpacity>
-      <TouchableOpacity style={styles.textContainer}>
-        <Small fontSmall="Email"></Small>
-        <TextInput value={email} onChangeText={setEmail}></TextInput>
-      </TouchableOpacity>
-      <TouchableOpacity style={styles.textContainer}>
-        <Small fontSmall="Password"></Small>
-        <TextInput
-          secureTextEntry={true}
-          value={password}
-          onChangeText={setPassword}
-        ></TextInput>
-      </TouchableOpacity>
-      <TouchableOpacity
-        style={
-          !username || !email || !password ? styles.disabled : styles.normal
-        }
-        onPress={() => Register({ email, username, password, navigation })}
-        disabled={!username || !email || !password}
-      >
-        <Buttons naming="Sign Up"></Buttons>
-      </TouchableOpacity>
+      <View style={styles.padding}>
+        <Bold fontBold="Join Us"></Bold>
+        <TouchableOpacity style={styles.textContainer}>
+          <Small fontSmall="Username"></Small>
+          <TextInput value={username} onChangeText={setUsername}></TextInput>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.textContainer}>
+          <Small fontSmall="Email"></Small>
+          <TextInput value={email} onChangeText={setEmail}></TextInput>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.textContainer}>
+          <Small fontSmall="Password"></Small>
+          <TextInput
+            secureTextEntry={true}
+            value={password}
+            onChangeText={setPassword}
+          ></TextInput>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={
+            !username || !email || !password ? styles.disabled : styles.normal
+          }
+          onPress={() => Register({ email, username, password, navigation })}
+          disabled={!username || !email || !password}
+        >
+          <Buttons naming="Sign Up"></Buttons>
+        </TouchableOpacity>
+      </View>
     </View>
   );
 }
@@ -60,10 +62,15 @@ const styles = StyleSheet.create({
     //   backgroundColor: "#fff",
     // alignItems: "center",
     // justifyContent: "center",
-    padding: "5%",
+    padding: "1%",
     top: 0,
     // flexDirection: "column",
   },
+
+  padding: {
+    padding: "4%",
+  },
+
   textContainer: {
     top: "20%",
   },
