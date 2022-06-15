@@ -8,7 +8,8 @@ import Dashboard from "../containers/Dashboard";
 // import ArticleScreen from "../containers/ArticleScreen";
 // import VideoScreen from "../containers/VideoScreen";
 import background from "../assets/background.png";
-import { StyleSheet, Text, View, ImageBackground } from "react-native";
+import { StyleSheet, Text, View, ImageBackground, TouchableOpacity } from "react-native";
+import Feather from 'react-native-vector-icons/Feather';
 
 const Stack = createNativeStackNavigator();
 
@@ -38,7 +39,17 @@ const Navigation = () => {
             component={SignUpScreen}
             options={{ headerShown: false }}
           />
-          {/* <Stack.Screen name="Dashboard" component={Dashboard} /> */}
+          <Stack.Screen name="Dashboard" component={Dashboard} 
+            options={({ navigation }) => ({
+              title: '',
+                headerLeft: () => <Text style={styles.bigText}>Hi, Apple!</Text>,
+                headerRight: () => 
+                    <TouchableOpacity onPress={() => navigation.navigate('EditProfile')} style={{backgroundColor: 'rgba(102, 112, 128, 0.3)', padding: 10, borderRadius: 30}}>
+                        <Feather name="user" size={20} color="#fff" />
+                    </TouchableOpacity>,
+                headerTransparent: true,
+             })}
+            />
           {/* <Stack.Screen name="ProfileScreen" component={ProfileScreen} />
         <Stack.Screen name="EditProfile" component={EditProfile} />
         <Stack.Screen name="ArticleScreen" component={ArticleScreen} />
@@ -57,6 +68,14 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
   },
+  bigText: {
+    fontWeight: '400',
+    fontSize: 25,
+    lineHeight: 30,
+    display: 'flex',
+    alignItems: 'center',
+    color: 'rgba(255, 255, 255, 0.7)',
+  }
 });
 
 export default Navigation;
