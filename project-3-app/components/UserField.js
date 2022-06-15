@@ -1,12 +1,11 @@
 import { View, StyleSheet, Text } from "react-native";
 import { TextInput } from "react-native-paper";
 
-export default function UserField() {
+export default function UserField({ value }) {
   return (
     <View>
       <TextInput
         style={styles.userInput}
-        keyboardType="email-address"
         theme={{ colors: { text: "white" } }}
       ></TextInput>
     </View>
@@ -14,7 +13,7 @@ export default function UserField() {
 }
 const styles = StyleSheet.create({
   userInput: {
-    height: 55,
+    height: 50,
     backgroundColor: "transparent",
     borderColor: "#667080",
     borderWidth: 1,
@@ -22,7 +21,7 @@ const styles = StyleSheet.create({
     borderTopEndRadius: 16,
     borderTopStartRadius: 16,
     paddingHorizontal: 10,
-    width: "80%",
+    width: "100%",
     alignSelf: "center",
   },
 });
