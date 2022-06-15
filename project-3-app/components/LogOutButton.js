@@ -2,7 +2,7 @@ import { StyleSheet, Text } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { useFonts, Poppins_500Medium } from "@expo-google-fonts/poppins";
 
-export default function ButtonsOne({ naming }) {
+export default function LogOutButton({ naming }) {
   let [fontsLoaded] = useFonts({
     Poppins_500Medium,
   });
@@ -17,7 +17,7 @@ export default function ButtonsOne({ naming }) {
         style={styles.gradient}
         start={{ x: 0, y: 0 }}
         end={{ x: 1, y: 0 }}
-        colors={["#6A68E2", "#FF98B7"]}
+        colors={["#F4C79D", "#F99C9C"]}
       >
         <Text
           style={{
@@ -44,10 +44,10 @@ var styles = StyleSheet.create({
   // },
   gradient: {
     alignSelf: "center",
-    // top: 200,
+    top: 150,
     justifyContent: "center",
     borderRadius: 6,
-    width: "100%",
+    width: "90%",
     shadowColor: "#FF98B7",
     elevation: 10,
     backgroundColor: "white",
