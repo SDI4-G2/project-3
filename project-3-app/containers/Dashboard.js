@@ -4,8 +4,8 @@ import React, {useState, useEffect } from 'react';
 import * as SecureStore from 'expo-secure-store';
 
 export default function Dashboard({navigation}) {
-  const [videos, setVideos] = useState('');
-  const [articles, setArticles] = useState('');
+  const [videos, setVideos] = useState([]);
+  const [articles, setArticles] = useState([]);
   const [refreshing, setRefreshing] = React.useState(false);
 
   async function fetch_all_videos() {
@@ -34,7 +34,7 @@ export default function Dashboard({navigation}) {
       },
     });
     const list = await response.json();
-    console.log(list.data);
+    // console.log(list.data);
     setArticles(list.data);
   }
 
