@@ -10,7 +10,7 @@ import {
 
 import Buttons from "../components/Buttons";
 import Register from "../api/Register";
-import HeaderBar from "../components/Headers";
+// import HeaderBar from "../components/Headers";
 import Bold from "../assets/Poppins_Bold";
 import Small from "../assets/Poppins_Small";
 import Underline from "../assets/Poppins_Underline";
@@ -23,7 +23,7 @@ export default function SignUpScreen({ navigation }) {
 
   return (
     <View style={styles.container}>
-      <HeaderBar />
+      {/* <HeaderBar /> */}
       <View style={styles.padding}>
         <Bold fontBold="Join Us"></Bold>
         <TouchableOpacity style={styles.textContainer}>
