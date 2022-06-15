@@ -1,6 +1,6 @@
 import { Text, View, StyleSheet } from "react-native";
-import AppLoading from "expo-app-loading";
-import { useFonts, Poppins_300Light } from "@expo-google-fonts/poppins";
+import { useFonts } from "expo-font";
+import { Poppins_300Light } from "@expo-google-fonts/poppins";
 
 export default function Small({ fontSmall }) {
   let [fontsLoaded] = useFonts({
@@ -10,7 +10,7 @@ export default function Small({ fontSmall }) {
   let fontSize = 15;
   // let paddingVertical = 6;
   if (!fontsLoaded) {
-    return <AppLoading />;
+    return null;
   } else {
     return (
       <Text

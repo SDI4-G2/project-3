@@ -1,6 +1,7 @@
 import { Text, View, StyleSheet } from "react-native";
-import AppLoading from "expo-app-loading";
-import { useFonts, Poppins_400Regular } from "@expo-google-fonts/poppins";
+
+import { useFonts } from "expo-font";
+import { Poppins_400Regular } from "@expo-google-fonts/poppins";
 
 export default function Med({ fontMed }) {
   let [fontsLoaded] = useFonts({
@@ -10,7 +11,7 @@ export default function Med({ fontMed }) {
   let fontSize = 30;
   let paddingVertical = 6;
   if (!fontsLoaded) {
-    return <AppLoading />;
+    return null;
   } else {
     return (
       <Text
