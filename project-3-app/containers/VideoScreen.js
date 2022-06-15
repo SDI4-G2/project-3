@@ -37,7 +37,7 @@ export default function VideoScreen({ navigation, route }) {
         renderers={renderers}
         WebView={WebView}
         source={{
-          html: '<iframe width="400" height="200" src="https://drive.google.com/file/d/1jyZiAuzrdzyn-LoKx0IUbP_ZvDhx1Ap5/preview"></iframe>',
+          html: `<iframe width="400" height="200" src=${list}></iframe>`,
         }}
         customHTMLElementModels={customHTMLElementModels}
       />
