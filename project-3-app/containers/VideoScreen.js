@@ -1,24 +1,47 @@
 import React, { useState, useEffect } from 'react';
-import { Text, TouchableOpacity, StyleSheet, View, TextInput, Button } from 'react-native';
+import { Text, TouchableOpacity, View, Button } from 'react-native';
+import WebView from 'react-native-webview';
+import IframeRenderer, { iframeModel } from '@native-html/iframe-plugin';
+import RenderHTML from 'react-native-render-html';
 
 import GetVideo from '../api/GetVideo';
 
-export default function VideoScreen() {
+export default function VideoScreen({ navigation, route }) {
   const [list, setList] = useState(undefined);
+  const { videoid, url } = route.params;
 
   async function get() {
     const videos = await GetVideo();
-    setList(videos);
+    let newList = videos.filter((vid) => {
+      return vid.videoid === videoid;
+    });
+    setList(newList[0].url);
+    // console.log(list);
   }
 
   useEffect(() => {
     get();
   }, []);
 
+  const renderers = {
+    iframe: IframeRenderer,
+  };
+
+  const customHTMLElementModels = {
+    iframe: iframeModel,
+  };
+
   return (
     <View>
-      <Button title="Press" onPress={get}></Button>
-      <Text>{list}</Text>
+      <RenderHTML
+        renderers={renderers}
+        WebView={WebView}
+        source={{
+          html: '<iframe width="400" height="200" src="https://drive.google.com/file/d/1jyZiAuzrdzyn-LoKx0IUbP_ZvDhx1Ap5/preview"></iframe>',
+        }}
+        customHTMLElementModels={customHTMLElementModels}
+      />
+      <Button title="try" onPress={get} />
     </View>
   );
 }

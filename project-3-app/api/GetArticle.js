@@ -11,6 +11,6 @@ export default async function GetArticle() {
     },
   });
   const list = await response.json();
-  const exportList = JSON.stringify(list.data);
+  const exportList = list.data;
   return exportList;
 }
