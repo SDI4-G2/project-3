@@ -8,7 +8,7 @@ export default function Underline({ fontUnderline }) {
   });
 
   let fontSize = 15;
-  let paddingVertical = 6;
+  // let paddingVertical = 6;
   if (!fontsLoaded) {
     return <AppLoading />;
   } else {
@@ -16,13 +16,14 @@ export default function Underline({ fontUnderline }) {
       <Text
         style={{
           fontSize,
-          paddingVertical,
+          // paddingVertical,
           // Note the quoting of the value for `fontFamily` here; it expects a string!
           fontFamily: "Poppins_300Light",
           color: "white",
           opacity: 0.7,
           textDecorationLine: "underline",
-          top: "28%",
+          bottom: "50%",
+          left: "6%",
         }}
       >
         {fontUnderline}

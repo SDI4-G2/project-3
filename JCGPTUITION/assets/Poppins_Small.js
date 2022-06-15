@@ -8,7 +8,7 @@ export default function Small({ fontSmall }) {
   });
 
   let fontSize = 15;
-  let paddingVertical = 6;
+  // let paddingVertical = 6;
   if (!fontsLoaded) {
     return <AppLoading />;
   } else {
@@ -16,7 +16,7 @@ export default function Small({ fontSmall }) {
       <Text
         style={{
           fontSize,
-          paddingVertical,
+          // paddingVertical,
           // Note the quoting of the value for `fontFamily` here; it expects a string!
           fontFamily: "Poppins_300Light",
           color: "white",
