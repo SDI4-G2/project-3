@@ -10,7 +10,6 @@ import {
 
 import Buttons from "../components/Buttons";
 import Login from "../api/Login";
-import HeaderBar from "../components/Headers";
 import Bold from "../assets/Poppins_Bold";
 import Small from "../assets/Poppins_Small";
 import Underline from "../assets/Poppins_Underline";
@@ -58,10 +57,13 @@ export default function WelcomeScreen({ navigation }) {
         <Buttons naming="Log In"></Buttons>
       </TouchableOpacity>
 
-      <Underline
-        fontUnderline="Sign Up"
+      <TouchableOpacity
         onPress={() => navigation.navigate("SignUpScreen")}
-      ></Underline>
+        style={styles.signUp}
+      >
+        <Small fontSmall="Or"></Small>
+        <Underline fontUnderline="Sign Up"></Underline>
+      </TouchableOpacity>
     </View>
   );
 }
@@ -86,12 +88,8 @@ const styles = StyleSheet.create({
     top: "20%",
   },
 
-  title: {
-    paddingLeft: "10%",
-    paddingRight: "10%",
-    paddingTop: "-20%",
-    paddingBottom: "20%",
-    flexDirection: "column",
+  signUp: {
+    top: "28%",
   },
 
   disabled: {

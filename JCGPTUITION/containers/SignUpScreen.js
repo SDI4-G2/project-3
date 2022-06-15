@@ -65,22 +65,8 @@ const styles = StyleSheet.create({
     // flexDirection: "column",
   },
   textContainer: {
-    // flex: 0,
-    // paddingLeft: "10%",
-    // paddingRight: "10%",
-    // paddingTop: 10,
-    // paddingBottom: 10,
-    // flexDirection: 'column',
     top: "20%",
   },
-
-  // title: {
-  //   paddingLeft: "10%",
-  //   paddingRight: "10%",
-  //   paddingTop: "-20%",
-  //   paddingBottom: "20%",
-  //   flexDirection: "column",
-  // },
 
   disabled: {
     opacity: 0.5,

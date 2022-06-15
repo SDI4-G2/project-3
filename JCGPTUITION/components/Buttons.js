@@ -1,6 +1,5 @@
 import { StyleSheet, Text } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
-import AppLoading from "expo-app-loading";
 import { useFonts, Poppins_500Medium } from "@expo-google-fonts/poppins";
 
 export default function ButtonsOne({ naming }) {
@@ -11,7 +10,7 @@ export default function ButtonsOne({ naming }) {
   let fontSize = 20;
   let paddingVertical = 6;
   if (!fontsLoaded) {
-    return <AppLoading />;
+    return null;
   } else {
     return (
       <LinearGradient
