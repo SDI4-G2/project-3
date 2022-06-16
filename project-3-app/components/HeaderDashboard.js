@@ -31,12 +31,12 @@ export default function HeaderDashboard({user_name}) {
 }
 
 const styles = StyleSheet.create({
-    bigText: {
-      fontWeight: "400",
-      fontSize: 25,
-      lineHeight: 30,
-      display: "flex",
-      alignItems: "center",
-      color: "rgba(255, 255, 255, 0.7)",
-    },
-  });
+  bigText: {
+    fontWeight: "400",
+    fontSize: 25,
+    lineHeight: 30,
+    display: "flex",
+    alignItems: "center",
+    color: "rgba(255, 255, 255, 0.7)",
+  },
+});

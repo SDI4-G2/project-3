@@ -21,7 +21,7 @@ export default function ProfileButton({ naming }) {
 }
 const styles = StyleSheet.create({
   container: {
-    width: "90%",
+    width: "100%",
     alignSelf: "center",
     alignContent: "center",
     alignItems: "center",
@@ -29,7 +29,7 @@ const styles = StyleSheet.create({
   button: {
     borderWidth: 1,
     height: 50,
-    width: "90%",
+    width: "80%",
     borderRadius: 16,
     backgroundColor: "#1B1B36",
     elevation: 10,
