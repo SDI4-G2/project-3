@@ -44,6 +44,7 @@ export default function WelcomeScreen({ navigation, props }) {
         <Small fontSmall="Password"></Small>
         <TouchableOpacity style={styles.textContainer}>
           <TextInput
+            value={password}
             onPress={() => setPasswordVisible(!passwordVisible)}
             onChangeText={setPassword}
             style={styles.userInput}
@@ -62,7 +63,11 @@ export default function WelcomeScreen({ navigation, props }) {
       <View style={styles.buttonsbottom}>
         <TouchableOpacity
           style={!(username || email) || !password ? styles.disabled : styles.normal}
-          onPress={() => Login({ email, username, password, navigation }, setIsLoading(true)).then(() => setIsLoading(false))}
+          onPress={() =>
+            Login({ email, username, password, navigation }, setIsLoading(true))
+              .then(() => setIsLoading(false))
+              .then(() => setPassword(''))
+          }
           disabled={!(username || email) || !password}
         >
           <Buttons naming="Log In"></Buttons>
