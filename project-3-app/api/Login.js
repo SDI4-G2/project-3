@@ -18,7 +18,7 @@ export default async function Login({ email, username, password, navigation }) {
         SecureStore.setItemAsync("token", serverResponse.data);
         // console.log(serverResponse);
         // alert('Login Successful');
-        navigation.navigate("Dashboard", {username: username});
+        navigation.navigate("Dashboard", {username: username, email: email});
       } else {
         alert("Please enter valid email/username and password");
       }

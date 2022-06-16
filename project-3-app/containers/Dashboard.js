@@ -14,7 +14,7 @@ import * as SecureStore from "expo-secure-store";
 import HeaderDashboard from "../components/HeaderDashboard";
 
 export default function Dashboard({ route, navigation }) {
-  const { username} = route.params;
+  const { username, email } = route.params;
   const [videos, setVideos] = useState([]);
   const [articles, setArticles] = useState([]);
   const [refreshing, setRefreshing] = React.useState(false);
@@ -71,7 +71,7 @@ export default function Dashboard({ route, navigation }) {
         <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
       }
     >
-      <HeaderDashboard user_name={username}/>
+      <HeaderDashboard user_name={username} email={email}/>
       <View style={styles.container}>
         <Text style={styles.mediumText}>Let's get started</Text>
 
@@ -96,7 +96,7 @@ export default function Dashboard({ route, navigation }) {
                   }}
                 >
                   <ImageBackground
-                    source={{ uri: item.url }}
+                    source={{ uri: item.thumb }}
                     style={styles.cardImage}
                     imageStyle={{
                       borderRadius: 15,

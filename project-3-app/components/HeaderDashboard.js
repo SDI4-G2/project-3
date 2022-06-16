@@ -4,14 +4,14 @@ import profileIcon from "../assets/profileicon.png";
 import arrow from "../assets/chevron-left.png";
 import { useNavigation } from "@react-navigation/native";
 
-export default function HeaderDashboard({user_name}) {
+export default function HeaderDashboard({user_name, email}) {
   const navigation = useNavigation();
   return (
     <Header
       backgroundColor="transparent"
       leftComponent={
         <View style={{width: 250, marginTop: 10}}>
-          <Text style={styles.bigText}>Hi, {user_name}!</Text>
+          <Text style={styles.bigText}>Hi, {(user_name != null ? user_name:email)}!</Text>
         </View>
       }
       rightComponent={
