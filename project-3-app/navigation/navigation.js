@@ -5,7 +5,7 @@ import SignUpScreen from "../containers/SignUpScreen";
 import Dashboard from "../containers/Dashboard";
 import ProfileScreen from "../containers/ProfileScreen";
 import EditProfile from "../containers/EditProfile";
-// import ArticleScreen from "../containers/ArticleScreen";
+import ArticleScreen from "../containers/ArticleScreen";
 import VideoScreen from "../containers/VideoScreen";
 import background from "../assets/background.png";
 import {
@@ -50,6 +50,7 @@ const Navigation = () => {
             component={Dashboard}
             options={{ headerShown: false }}
           />
+
           <Stack.Screen
             name="ProfileScreen"
             component={ProfileScreen}
@@ -60,7 +61,11 @@ const Navigation = () => {
             component={EditProfile}
             options={{ headerShown: false }}
           />
-          {/* <Stack.Screen name="ArticleScreen" component={ArticleScreen} /> */}
+          <Stack.Screen
+            name="ArticleScreen"
+            component={ArticleScreen}
+            options={{ headerShown: false }}
+          />
           <Stack.Screen
             name="VideoScreen"
             component={VideoScreen}

@@ -19,7 +19,7 @@ export default function EditProfile() {
             <Small fontSmall="Username"></Small>
             <TextInput
               style={styles.userInput}
-              theme={{ colors: { text: "white" } }}
+              theme={{ colors: { text: "rgba(255, 255, 255, 0.6)" } }}
             ></TextInput>
           </TouchableOpacity>
           <TouchableOpacity style={styles.textContainer}>
@@ -28,14 +28,14 @@ export default function EditProfile() {
               style={styles.noInput}
               editable={false}
               value={"This Cannot Be Edited"}
-              theme={{ colors: { text: "white" } }}
+              theme={{ colors: { text: "rgba(255, 255, 255, 0.6)" } }}
             ></TextInput>
           </TouchableOpacity>
           <TouchableOpacity style={styles.textContainer}>
             <Small fontSmall="Password"></Small>
             <TextInput
               style={styles.userInput}
-              theme={{ colors: { text: "white" } }}
+              theme={{ colors: { text: "rgba(255, 255, 255, 0.6)" } }}
               right={<TextInput.Icon />}
             />
           </TouchableOpacity>
@@ -70,8 +70,8 @@ const styles = StyleSheet.create({
   },
   userInput: {
     height: 55,
-    backgroundColor: "transparent",
-    borderColor: "#667080",
+    backgroundColor: "rgba(27, 27, 54, 0.3)",
+    borderColor: "rgba(102, 112, 128, 0.4)",
     borderWidth: 1,
     borderRadius: 16,
     borderTopEndRadius: 16,
@@ -82,8 +82,8 @@ const styles = StyleSheet.create({
   },
   noInput: {
     height: 55,
-    backgroundColor: "#BAC0CA",
-    borderColor: "#667080",
+    backgroundColor: "rgba(186, 192, 202, 0.6)",
+    borderColor: "rgba(102, 112, 128, 0.4)",
     borderWidth: 1,
     borderRadius: 16,
     borderTopEndRadius: 16,

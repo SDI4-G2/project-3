@@ -1,18 +1,19 @@
-import React, { useState } from "react";
-import { Text, TouchableOpacity, StyleSheet, View, Button } from "react-native";
-import { TextInput } from "react-native-paper";
+import React, { useState } from 'react';
+import { Text, TouchableOpacity, StyleSheet, View, Button, ActivityIndicator } from 'react-native';
+import { TextInput } from 'react-native-paper';
 
-import Buttons from "../components/Buttons";
-import Login from "../api/Login";
-import Bold from "../assets/Poppins_Bold";
-import Small from "../assets/Poppins_Small";
-import Underline from "../assets/Poppins_Underline";
+import Buttons from '../components/Buttons';
+import Login from '../api/Login';
+import Bold from '../assets/Poppins_Bold';
+import Small from '../assets/Poppins_Small';
+import Underline from '../assets/Poppins_Underline';
 
-export default function WelcomeScreen({ navigation }) {
+export default function WelcomeScreen({ navigation, props }) {
   const [email, setEmail] = useState(undefined);
   const [username, setUsername] = useState(undefined);
   const [password, setPassword] = useState(undefined);
   const [passwordVisible, setPasswordVisible] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
 
   function validate(text) {
     let reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w\w+)+$/;
@@ -37,20 +38,22 @@ export default function WelcomeScreen({ navigation }) {
             onChangeText={(text) => validate(text)}
             style={styles.userInput}
             keyboardType="email-address"
-            theme={{ colors: { text: "white" } }}
+            theme={{ colors: { text: "rgba(255, 255, 255, 0.6)" } }}
+
           ></TextInput>
         </TouchableOpacity>
         <Small fontSmall="Password"></Small>
         <TouchableOpacity style={styles.textContainer}>
           <TextInput
+            value={password}
             onPress={() => setPasswordVisible(!passwordVisible)}
             onChangeText={setPassword}
             style={styles.userInput}
-            theme={{ colors: { text: "white" } }}
+            theme={{ colors: { text: "rgba(255, 255, 255, 0.6)" } }}
             secureTextEntry={passwordVisible}
             right={
               <TextInput.Icon
-                name={passwordVisible ? "eye" : "eye-off"}
+                name={passwordVisible ? 'eye' : 'eye-off'}
                 onPress={() => setPasswordVisible(!passwordVisible)}
                 onChangeText={setPassword}
               />
@@ -60,19 +63,19 @@ export default function WelcomeScreen({ navigation }) {
       </View>
       <View style={styles.buttonsbottom}>
         <TouchableOpacity
-          style={
-            !(username || email) || !password ? styles.disabled : styles.normal
+          style={!(username || email) || !password ? styles.disabled : styles.normal}
+          onPress={() =>
+            Login({ email, username, password, navigation }, setIsLoading(true))
+              .then(() => setIsLoading(false))
+              .then(() => setPassword(''))
           }
-          onPress={() => Login({ email, username, password, navigation })}
           disabled={!(username || email) || !password}
         >
           <Buttons naming="Log In"></Buttons>
+          {isLoading === true && <ActivityIndicator style={styles.loading} color={'#fff'} />}
         </TouchableOpacity>
 
-        <TouchableOpacity
-          onPress={() => navigation.navigate("SignUpScreen")}
-          style={styles.signUp}
-        >
+        <TouchableOpacity onPress={() => navigation.navigate('SignUpScreen')} style={styles.signUp}>
           <Small fontSmall="Or"></Small>
           <Underline fontUnderline="Sign Up"></Underline>
         </TouchableOpacity>
@@ -83,16 +86,16 @@ export default function WelcomeScreen({ navigation }) {
 
 const styles = StyleSheet.create({
   container: {
-    padding: "5%",
-    top: "15%",
+    padding: '5%',
+    top: '15%',
   },
 
   fieldsInput: {
-    top: "20%",
+    top: '20%',
   },
 
   buttonsbottom: {
-    top: "30%",
+    top: '30%',
   },
 
   disabled: {
@@ -103,14 +106,22 @@ const styles = StyleSheet.create({
   },
   userInput: {
     height: 55,
-    backgroundColor: "transparent",
-    borderColor: "#667080",
+    backgroundColor: "rgba(27, 27, 54, 0.3)",
+    borderColor: "rgba(102, 112, 128, 0.4)",
     borderWidth: 1,
     borderRadius: 16,
     borderTopEndRadius: 16,
     borderTopStartRadius: 16,
     paddingHorizontal: 10,
-    width: "100%",
-    alignSelf: "center",
+    width: '100%',
+    alignSelf: 'center',
+  },
+  loading: {
+    position: 'absolute',
+    zIndex: 10000,
+    top: 0,
+    bottom: 0,
+    right: 0,
+    left: 0,
   },
 });

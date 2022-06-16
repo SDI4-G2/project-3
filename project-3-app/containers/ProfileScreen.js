@@ -51,16 +51,17 @@ export default function ProfileScreen({ navigation }) {
 
 const styles = StyleSheet.create({
   container: {
-    top: "15%",
+    top: "5%",
   },
   padding: {
-    padding: 10,
+    padding: 5,
   },
   avatar: {
     alignSelf: "center",
-    top: "10%",
+    top: "0%",
   },
   editprofile: {
     alignSelf: "center",
+    opacity: 0.8,
   },
 });

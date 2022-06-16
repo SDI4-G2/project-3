@@ -19,8 +19,7 @@ export default function Small({ fontSmall }) {
           paddingVertical,
           // Note the quoting of the value for `fontFamily` here; it expects a string!
           fontFamily: "Poppins_300Light",
-          color: "white",
-          opacity: 0.7,
+          color: "rgba(255,255,255, 0.6)",
         }}
       >
         {fontSmall}
