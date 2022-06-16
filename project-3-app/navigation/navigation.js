@@ -61,7 +61,11 @@ const Navigation = () => {
             options={{ headerShown: false }}
           />
           {/* <Stack.Screen name="ArticleScreen" component={ArticleScreen} /> */}
-          <Stack.Screen name="VideoScreen" component={VideoScreen} />
+          <Stack.Screen
+            name="VideoScreen"
+            component={VideoScreen}
+            options={{ headerShown: false }}
+          />
         </Stack.Navigator>
       </NavigationContainer>
     </ImageBackground>

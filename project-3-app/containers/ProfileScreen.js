@@ -15,7 +15,7 @@ import editprofile from "../assets/editprofile.png";
 export default function ProfileScreen({ navigation }) {
   function Logout() {
     SecureStore.deleteItemAsync("token");
-    alert("Logout Successful");
+    // alert("Logout Successful");
     navigation.navigate("WelcomeScreen");
   }
   return (

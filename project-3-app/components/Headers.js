@@ -18,7 +18,9 @@ export default function HeaderBar() {
       }
       rightComponent={
         <View>
-          <TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => navigation.navigate("ProfileScreen")}
+          >
             <Image source={profileIcon} />
           </TouchableOpacity>
         </View>
