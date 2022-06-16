@@ -5,14 +5,14 @@ import arrow from "../assets/chevron-left.png";
 import { useNavigation } from "@react-navigation/native";
 import Med from "../assets/Poppins_Medium";
 
-export default function HeaderDashboard({ user_name }) {
+export default function HeaderDashboard({user_name, email}) {
   const navigation = useNavigation();
   return (
     <Header
       backgroundColor="transparent"
       leftComponent={
-        <View style={{ width: 250, marginTop: 5 }}>
-          <Med fontMed={`Hi, ${user_name}!`}></Med>
+        <View style={{width: 250, marginTop: 10}}>
+          <Text style={styles.bigText}>Hi, {(user_name != null ? user_name:email)}!</Text>
         </View>
       }
       rightComponent={
