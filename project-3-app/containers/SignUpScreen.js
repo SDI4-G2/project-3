@@ -25,11 +25,22 @@ export default function SignUpScreen({ navigation }) {
         <View style={styles.fieldsInput}>
           <TouchableOpacity style={styles.textContainer}>
             <Small fontSmall="Username"></Small>
-            <TextInput style={styles.userInput} theme={{ colors: { text: 'white' } }} value={username} onChangeText={setUsername}></TextInput>
+            <TextInput
+              style={styles.userInput}
+              theme={{ colors: { text: "rgba(255, 255, 255, 0.6)" } }}
+              value={username}
+              onChangeText={setUsername}
+            ></TextInput>
           </TouchableOpacity>
           <TouchableOpacity style={styles.textContainer}>
             <Small fontSmall="Email"></Small>
-            <TextInput style={styles.userInput} theme={{ colors: { text: 'white' } }} value={email} onChangeText={setEmail}></TextInput>
+            <TextInput
+              style={styles.userInput}
+              theme={{ colors: { text: "rgba(255, 255, 255, 0.6)" } }}
+              value={email}
+              onChangeText={setEmail}
+            ></TextInput>
+
           </TouchableOpacity>
           <TouchableOpacity style={styles.textContainer}>
             <Small fontSmall="Password"></Small>
@@ -37,7 +48,8 @@ export default function SignUpScreen({ navigation }) {
               onPress={() => setPasswordVisible(!passwordVisible)}
               onChangeText={setPassword}
               style={styles.userInput}
-              theme={{ colors: { text: 'white' } }}
+              theme={{ colors: { text: "rgba(255, 255, 255, 0.6)" } }}
+
               secureTextEntry={passwordVisible}
               right={
                 <TextInput.Icon
@@ -84,8 +96,9 @@ const styles = StyleSheet.create({
   },
   userInput: {
     height: 55,
-    backgroundColor: 'transparent',
-    borderColor: '#667080',
+
+    backgroundColor: "rgba(27, 27, 54, 0.3)",
+    borderColor: "rgba(102, 112, 128, 0.4)",
     borderWidth: 1,
     borderRadius: 16,
     borderTopEndRadius: 16,

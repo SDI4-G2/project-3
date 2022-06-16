@@ -3,6 +3,7 @@ import { Header } from "@rneui/themed";
 import profileIcon from "../assets/profileicon.png";
 import arrow from "../assets/chevron-left.png";
 import { useNavigation } from "@react-navigation/native";
+import Med from "../assets/Poppins_Medium";
 
 export default function HeaderDashboard({user_name, email}) {
   const navigation = useNavigation();
@@ -16,7 +17,9 @@ export default function HeaderDashboard({user_name, email}) {
       }
       rightComponent={
         <View>
-          <TouchableOpacity onPress={() => navigation.navigate('ProfileScreen')}>
+          <TouchableOpacity
+            onPress={() => navigation.navigate("ProfileScreen")}
+          >
             <Image source={profileIcon} />
           </TouchableOpacity>
         </View>

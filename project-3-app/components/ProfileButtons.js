@@ -25,14 +25,16 @@ const styles = StyleSheet.create({
     alignSelf: "center",
     alignContent: "center",
     alignItems: "center",
+    opacity: 0.4,
   },
   button: {
     borderWidth: 1,
     height: 50,
-    width: "80%",
+    width: "75%",
     borderRadius: 16,
     backgroundColor: "#1B1B36",
     elevation: 10,
+    borderColor: "rgba(255, 255, 255, 0.4)",
   },
   buttonText: {
     color: "pink",

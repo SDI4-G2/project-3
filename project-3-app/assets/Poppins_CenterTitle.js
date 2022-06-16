@@ -3,7 +3,7 @@ import { Text, View, StyleSheet } from "react-native";
 import { useFonts } from "expo-font";
 import { Poppins_400Regular } from "@expo-google-fonts/poppins";
 
-export default function Med({ fontMed }) {
+export default function MedCenter({ fontMedCenter }) {
   let [fontsLoaded] = useFonts({
     Poppins_400Regular,
   });
@@ -21,10 +21,11 @@ export default function Med({ fontMed }) {
           // Note the quoting of the value for `fontFamily` here; it expects a string!
           fontFamily: "Poppins_400Regular",
           color: "white",
-          opacity: 0.7,
+          //   opacity: 1,
+          textAlign: "center",
         }}
       >
-        {fontMed}
+        {fontMedCenter}
       </Text>
     );
   }
