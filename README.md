@@ -23,4 +23,4 @@ Core:
 
 ## Preview
 
-<img src="./project-3-app/assets/ss.png" style="border-radius:10px;margin-bottom:1rem;" width="200">
+<img src="./project-3-app/assets/ss.png" style="border-radius:10px;margin-bottom:1rem;" width="300">
