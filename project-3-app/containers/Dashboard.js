@@ -12,9 +12,10 @@ import { Card, Title } from "react-native-paper";
 import React, { useState, useEffect } from "react";
 import * as SecureStore from "expo-secure-store";
 import HeaderDashboard from "../components/HeaderDashboard";
+import Small from "../assets/Poppins_Small";
 
 export default function Dashboard({ route, navigation }) {
-  const { username} = route.params;
+  const { username } = route.params;
   const [videos, setVideos] = useState([]);
   const [articles, setArticles] = useState([]);
   const [refreshing, setRefreshing] = React.useState(false);
@@ -71,14 +72,13 @@ export default function Dashboard({ route, navigation }) {
         <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
       }
     >
-
-      <HeaderDashboard user_name={username}/>
+      <HeaderDashboard user_name={username} />
 
       <View style={styles.container}>
-        <Text style={styles.mediumText}>Let's get started</Text>
+        <Small fontSmall="Let's get started" />
 
-        <View style={{ marginBottom: 20, marginTop: 10 }}>
-          <Text style={styles.mediumText}>Videos</Text>
+        <View style={{ marginBottom: 20 }}>
+          <Small fontSmall={"Videos"}></Small>
           <ScrollView
             horizontal={true}
             contentContainerStyle={{
@@ -119,7 +119,7 @@ export default function Dashboard({ route, navigation }) {
         </View>
 
         <View style={{ marginBottom: 20 }}>
-          <Text style={styles.mediumText}>Articles</Text>
+          <Small fontSmall={"Articles"}></Small>
           <ScrollView
             horizontal={true}
             contentContainerStyle={{
@@ -128,7 +128,15 @@ export default function Dashboard({ route, navigation }) {
             }}
           >
             {articles.map((item, index) => (
-              <Card style={styles.cardDashboard} key={item.articleid}>
+              <Card
+                style={styles.cardDashboard}
+                key={item.articleid}
+                onPress={() => {
+                  navigation.navigate("ArticleScreen", {
+                    articleid: item.articleid,
+                  });
+                }}
+              >
                 <ImageBackground
                   resizeMode="stretch"
                   source={{ uri: item.url }}
@@ -159,6 +167,7 @@ const styles = StyleSheet.create({
     flex: 1,
     // marginTop: 60, //StatusBar.currentHeight,
     padding: 15,
+    bottom: 35,
   },
   mediumText: {
     fontStyle: "normal",

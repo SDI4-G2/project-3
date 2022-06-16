@@ -54,7 +54,7 @@ const styles = StyleSheet.create({
     top: "5%",
   },
   padding: {
-    padding: 10,
+    padding: 5,
   },
   avatar: {
     alignSelf: "center",
@@ -62,5 +62,6 @@ const styles = StyleSheet.create({
   },
   editprofile: {
     alignSelf: "center",
+    opacity: 0.8,
   },
 });
