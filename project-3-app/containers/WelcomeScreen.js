@@ -1,12 +1,19 @@
-import React, { useState } from 'react';
-import { Text, TouchableOpacity, StyleSheet, View, Button, ActivityIndicator } from 'react-native';
-import { TextInput } from 'react-native-paper';
+import React, { useState } from "react";
+import {
+  Text,
+  TouchableOpacity,
+  StyleSheet,
+  View,
+  Button,
+  ActivityIndicator,
+} from "react-native";
+import { TextInput } from "react-native-paper";
 
-import Buttons from '../components/Buttons';
-import Login from '../api/Login';
-import Bold from '../assets/Poppins_Bold';
-import Small from '../assets/Poppins_Small';
-import Underline from '../assets/Poppins_Underline';
+import Buttons from "../components/Buttons";
+import Login from "../api/Login";
+import Bold from "../assets/Poppins_Bold";
+import Small from "../assets/Poppins_Small";
+import Underline from "../assets/Poppins_Underline";
 
 export default function WelcomeScreen({ navigation, props }) {
   const [email, setEmail] = useState(undefined);
@@ -39,7 +46,6 @@ export default function WelcomeScreen({ navigation, props }) {
             style={styles.userInput}
             keyboardType="email-address"
             theme={{ colors: { text: "rgba(255, 255, 255, 0.6)" } }}
-
           ></TextInput>
         </TouchableOpacity>
         <Small fontSmall="Password"></Small>
@@ -53,7 +59,7 @@ export default function WelcomeScreen({ navigation, props }) {
             secureTextEntry={passwordVisible}
             right={
               <TextInput.Icon
-                name={passwordVisible ? 'eye' : 'eye-off'}
+                name={passwordVisible ? "eye" : "eye-off"}
                 onPress={() => setPasswordVisible(!passwordVisible)}
                 onChangeText={setPassword}
               />
@@ -63,19 +69,29 @@ export default function WelcomeScreen({ navigation, props }) {
       </View>
       <View style={styles.buttonsbottom}>
         <TouchableOpacity
-          style={!(username || email) || !password ? styles.disabled : styles.normal}
+          style={
+            !(username || email) || !password ? styles.disabled : styles.normal
+          }
           onPress={() =>
             Login({ email, username, password, navigation }, setIsLoading(true))
               .then(() => setIsLoading(false))
-              .then(() => setPassword(''))
+              .then(() => setPassword(""))
           }
           disabled={!(username || email) || !password}
         >
           <Buttons naming="Log In"></Buttons>
-          {isLoading === true && <ActivityIndicator style={styles.loading} color={'#fff'} />}
+          {isLoading === true && (
+            <ActivityIndicator
+              style={styles.loading}
+              color={"rgba(255,255,255,0.5)"}
+            />
+          )}
         </TouchableOpacity>
 
-        <TouchableOpacity onPress={() => navigation.navigate('SignUpScreen')} style={styles.signUp}>
+        <TouchableOpacity
+          onPress={() => navigation.navigate("SignUpScreen")}
+          style={styles.signUp}
+        >
           <Small fontSmall="Or"></Small>
           <Underline fontUnderline="Sign Up"></Underline>
         </TouchableOpacity>
@@ -86,16 +102,16 @@ export default function WelcomeScreen({ navigation, props }) {
 
 const styles = StyleSheet.create({
   container: {
-    padding: '5%',
-    top: '15%',
+    padding: "5%",
+    top: "15%",
   },
 
   fieldsInput: {
-    top: '20%',
+    top: "20%",
   },
 
   buttonsbottom: {
-    top: '30%',
+    top: "30%",
   },
 
   disabled: {
@@ -113,11 +129,11 @@ const styles = StyleSheet.create({
     borderTopEndRadius: 16,
     borderTopStartRadius: 16,
     paddingHorizontal: 10,
-    width: '100%',
-    alignSelf: 'center',
+    width: "100%",
+    alignSelf: "center",
   },
   loading: {
-    position: 'absolute',
+    position: "absolute",
     zIndex: 10000,
     top: 0,
     bottom: 0,

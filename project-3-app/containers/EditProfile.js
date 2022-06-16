@@ -10,41 +10,43 @@ import Underline from "../assets/Poppins_Underline";
 
 export default function EditProfile() {
   return (
-    <View style={styles.container}>
+    <View>
       <SecondHeaderBar />
-      <View style={styles.padding}>
-        <Bold fontBold="Edit Profile"></Bold>
-        <View style={styles.fieldsInput}>
-          <TouchableOpacity style={styles.textContainer}>
-            <Small fontSmall="Username"></Small>
-            <TextInput
-              style={styles.userInput}
-              theme={{ colors: { text: "rgba(255, 255, 255, 0.6)" } }}
-            ></TextInput>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.textContainer}>
-            <Small fontSmall="Email"></Small>
-            <TextInput
-              style={styles.noInput}
-              editable={false}
-              value={"This Cannot Be Edited"}
-              theme={{ colors: { text: "rgba(255, 255, 255, 0.6)" } }}
-            ></TextInput>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.textContainer}>
-            <Small fontSmall="Password"></Small>
-            <TextInput
-              style={styles.userInput}
-              theme={{ colors: { text: "rgba(255, 255, 255, 0.6)" } }}
-              right={<TextInput.Icon />}
-            />
+      <View style={styles.container}>
+        <View style={styles.padding}>
+          <Bold fontBold="Edit Profile"></Bold>
+          <View style={styles.fieldsInput}>
+            <TouchableOpacity style={styles.textContainer}>
+              <Small fontSmall="Username"></Small>
+              <TextInput
+                style={styles.userInput}
+                theme={{ colors: { text: "rgba(255, 255, 255, 0.6)" } }}
+              ></TextInput>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.textContainer}>
+              <Small fontSmall="Email"></Small>
+              <TextInput
+                style={styles.noInput}
+                editable={false}
+                value={"This Cannot Be Edited"}
+                theme={{ colors: { text: "rgba(255, 255, 255, 0.6)" } }}
+              ></TextInput>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.textContainer}>
+              <Small fontSmall="Password"></Small>
+              <TextInput
+                style={styles.userInput}
+                theme={{ colors: { text: "rgba(255, 255, 255, 0.6)" } }}
+                right={<TextInput.Icon />}
+              />
+            </TouchableOpacity>
+          </View>
+        </View>
+        <View style={styles.buttonsbottom}>
+          <TouchableOpacity>
+            <Buttons naming="Save Changes"></Buttons>
           </TouchableOpacity>
         </View>
-      </View>
-      <View style={styles.buttonsbottom}>
-        <TouchableOpacity>
-          <Buttons naming="Save Changes"></Buttons>
-        </TouchableOpacity>
       </View>
     </View>
   );

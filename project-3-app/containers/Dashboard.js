@@ -1,9 +1,21 @@
-import { StyleSheet, Text, View, ScrollView, ImageBackground, RefreshControl, ActivityIndicator, TouchableOpacity, Image } from 'react-native';
-import { Card, Title } from 'react-native-paper';
-import React, { useState, useEffect } from 'react';
-import * as SecureStore from 'expo-secure-store';
-import HeaderDashboard from '../components/HeaderDashboard';
+import {
+  StyleSheet,
+  Text,
+  View,
+  ScrollView,
+  ImageBackground,
+  RefreshControl,
+  ActivityIndicator,
+  TouchableOpacity,
+  Image,
+} from "react-native";
+import { Card, Title } from "react-native-paper";
+import React, { useState, useEffect } from "react";
+import * as SecureStore from "expo-secure-store";
+import HeaderDashboard from "../components/HeaderDashboard";
 import Small from "../assets/Poppins_Small";
+
+import { PulseIndicator } from "react-native-indicators";
 
 export default function Dashboard({ route, navigation }) {
   const { username, email } = route.params;
@@ -14,13 +26,13 @@ export default function Dashboard({ route, navigation }) {
   const [isLoading, setIsLoading] = useState(true);
 
   async function fetch_all_videos() {
-    let result = await SecureStore.getItemAsync('token');
+    let result = await SecureStore.getItemAsync("token");
 
-    const response = await fetch('https://sdi4-g2.herokuapp.com/video', {
-      method: 'GET',
+    const response = await fetch("https://sdi4-g2.herokuapp.com/video", {
+      method: "GET",
       headers: {
-        'Content-Type': 'application/json',
-        Authorization: 'Bearer ' + result,
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + result,
       },
     });
     const list = await response.json();
@@ -29,13 +41,13 @@ export default function Dashboard({ route, navigation }) {
   }
 
   async function fetch_all_articles() {
-    let result = await SecureStore.getItemAsync('token');
+    let result = await SecureStore.getItemAsync("token");
 
-    const response = await fetch('https://sdi4-g2.herokuapp.com/article', {
-      method: 'GET',
+    const response = await fetch("https://sdi4-g2.herokuapp.com/article", {
+      method: "GET",
       headers: {
-        'Content-Type': 'application/json',
-        Authorization: 'Bearer ' + result,
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + result,
       },
     });
     const list = await response.json();
@@ -60,8 +72,11 @@ export default function Dashboard({ route, navigation }) {
   }, []);
 
   return (
-
-    <ScrollView refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}>
+    <ScrollView
+      refreshControl={
+        <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+      }
+    >
       <HeaderDashboard user_name={username} email={email} />
       <View style={styles.container}>
         <Small fontSmall="Let's get started" />
@@ -71,18 +86,20 @@ export default function Dashboard({ route, navigation }) {
           <ScrollView
             horizontal={true}
             contentContainerStyle={{
-              justifyContent: 'center',
-              flexDirection: 'row',
+              justifyContent: "center",
+              flexDirection: "row",
             }}
           >
-            {isLoading === true && <ActivityIndicator color={'#fff'} />}
+            {isLoading === true && (
+              <PulseIndicator color={"rgba(255,255,255,0.5)"} />
+            )}
             {videos.map((item) => {
               return (
                 <Card
                   style={styles.cardDashboard}
                   key={item.videoid}
                   onPress={() => {
-                    navigation.navigate('VideoScreen', {
+                    navigation.navigate("VideoScreen", {
                       videoid: item.videoid,
                     });
                   }}
@@ -93,12 +110,14 @@ export default function Dashboard({ route, navigation }) {
                     imageStyle={{
                       borderRadius: 15,
                       opacity: 0.5,
-                      backgroundColor: '#000',
+                      backgroundColor: "#000",
                     }}
                     onLoadEnd={() => setIsLoading(false)}
                   >
                     <Card.Content>
-                      <Title style={styles.cardTitle}>{item.Category.description}</Title>
+                      <Title style={styles.cardTitle}>
+                        {item.Category.description}
+                      </Title>
                     </Card.Content>
                   </ImageBackground>
                 </Card>
@@ -112,11 +131,13 @@ export default function Dashboard({ route, navigation }) {
           <ScrollView
             horizontal={true}
             contentContainerStyle={{
-              justifyContent: 'center',
-              flexDirection: 'row',
+              justifyContent: "center",
+              flexDirection: "row",
             }}
           >
-            {isLoading === true && <ActivityIndicator color={'#fff'} />}
+            {isLoading === true && (
+              <PulseIndicator color={"rgba(255,255,255,0.5)"} />
+            )}
             {articles.map((item, index) => (
               <Card
                 style={styles.cardDashboard}
@@ -134,12 +155,14 @@ export default function Dashboard({ route, navigation }) {
                   imageStyle={{
                     borderRadius: 15,
                     opacity: 0.5,
-                    backgroundColor: '#000',
+                    backgroundColor: "#000",
                   }}
                   onLoadEnd={() => setIsLoading(false)}
                 >
                   <Card.Content>
-                    <Title style={styles.cardTitle}>{item.Category.description}</Title>
+                    <Title style={styles.cardTitle}>
+                      {item.Category.description}
+                    </Title>
                   </Card.Content>
                 </ImageBackground>
               </Card>
@@ -159,13 +182,13 @@ const styles = StyleSheet.create({
     bottom: 35,
   },
   mediumText: {
-    fontStyle: 'normal',
-    fontWeight: '400',
+    fontStyle: "normal",
+    fontWeight: "400",
     fontSize: 14,
     lineHeight: 30,
-    display: 'flex',
-    alignItems: 'center',
-    color: 'rgba(255, 255, 255, 0.7)',
+    display: "flex",
+    alignItems: "center",
+    color: "rgba(255, 255, 255, 0.7)",
   },
   cardDashboard: {
     width: 200,
@@ -173,26 +196,26 @@ const styles = StyleSheet.create({
     marginTop: 10,
     marginBottom: 10,
     marginRight: 15,
-    borderColor: 'rgba(102, 112, 128, 0.3)',
+    borderColor: "rgba(102, 112, 128, 0.3)",
     borderRadius: 15,
-    backgroundColor: '#d2d5db',
+    backgroundColor: "#d2d5db",
     borderWidth: 1,
     fontWeight: 700,
   },
   cardTitle: {
-    fontStyle: 'normal',
-    fontWeight: '400',
+    fontStyle: "normal",
+    fontWeight: "400",
     fontSize: 20,
     lineHeight: 30,
-    display: 'flex',
-    alignItems: 'center',
-    color: 'rgba(255, 255, 255, 0.7)',
+    display: "flex",
+    alignItems: "center",
+    color: "rgba(255, 255, 255, 0.7)",
   },
   cardImage: {
     width: 200,
     height: 200,
-    alignItems: 'center',
-    justifyContent: 'center',
-    alignSelf: 'center',
+    alignItems: "center",
+    justifyContent: "center",
+    alignSelf: "center",
   },
 });
