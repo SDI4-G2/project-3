@@ -1,7 +1,5 @@
 # Online Tuition App
 
-### Link: [Bus Checker App](https://SDI4-G2.github.io/project-1)
-
 ---
 
 ## Description
