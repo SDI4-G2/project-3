@@ -19,11 +19,11 @@ export default function WelcomeScreen({ navigation }) {
     if (reg.test(text) === true) {
       setEmail(text);
       setUsername(undefined);
-      console.log("email" + email);
+      // console.log("email" + email);
     } else {
       setUsername(text);
       setEmail(undefined);
-      console.log("username" + username);
+      // console.log("username" + username);
     }
   }
 
