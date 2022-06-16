@@ -13,14 +13,15 @@ import React, { useState, useEffect } from "react";
 import * as SecureStore from "expo-secure-store";
 import HeaderDashboard from "../components/HeaderDashboard";
 
-export default function Dashboard({ navigation }) {
+export default function Dashboard({ route, navigation }) {
+  const { username} = route.params;
   const [videos, setVideos] = useState([]);
   const [articles, setArticles] = useState([]);
   const [refreshing, setRefreshing] = React.useState(false);
 
   async function fetch_all_videos() {
     let result = await SecureStore.getItemAsync("token");
-    console.log(result);
+    
     const response = await fetch("https://sdi4-g2.herokuapp.com/video", {
       method: "GET",
       headers: {
@@ -70,7 +71,7 @@ export default function Dashboard({ navigation }) {
         <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
       }
     >
-      <HeaderDashboard/>
+      <HeaderDashboard user_name={username}/>
       <View style={styles.container}>
         <Text style={styles.mediumText}>Let's get started</Text>
 
