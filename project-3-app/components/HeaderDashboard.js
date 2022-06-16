@@ -10,13 +10,15 @@ export default function HeaderDashboard() {
     <Header
       backgroundColor="transparent"
       leftComponent={
-        <View style={{width: 250, marginTop: 10}}>
+        <View style={{ width: 250, marginTop: 10 }}>
           <Text style={styles.bigText}>Hi, Apple!</Text>
         </View>
       }
       rightComponent={
         <View>
-          <TouchableOpacity onPress={() => navigation.navigate('EditProfile')}>
+          <TouchableOpacity
+            onPress={() => navigation.navigate("ProfileScreen")}
+          >
             <Image source={profileIcon} />
           </TouchableOpacity>
         </View>
@@ -31,12 +33,12 @@ export default function HeaderDashboard() {
 }
 
 const styles = StyleSheet.create({
-    bigText: {
-      fontWeight: "400",
-      fontSize: 25,
-      lineHeight: 30,
-      display: "flex",
-      alignItems: "center",
-      color: "rgba(255, 255, 255, 0.7)",
-    },
-  });
+  bigText: {
+    fontWeight: "400",
+    fontSize: 25,
+    lineHeight: 30,
+    display: "flex",
+    alignItems: "center",
+    color: "rgba(255, 255, 255, 0.7)",
+  },
+});

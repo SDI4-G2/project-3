@@ -20,7 +20,7 @@ export default function Dashboard({ navigation }) {
 
   async function fetch_all_videos() {
     let result = await SecureStore.getItemAsync("token");
-    console.log(result);
+    // console.log(result);
     const response = await fetch("https://sdi4-g2.herokuapp.com/video", {
       method: "GET",
       headers: {
@@ -70,7 +70,7 @@ export default function Dashboard({ navigation }) {
         <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
       }
     >
-      <HeaderDashboard/>
+      <HeaderDashboard />
       <View style={styles.container}>
         <Text style={styles.mediumText}>Let's get started</Text>
 
