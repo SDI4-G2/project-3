@@ -1,14 +1,12 @@
 # Online Tuition App
 
-### Link: [Bus Checker App](https://SDI4-G2.github.io/project-1)
-
 ---
 
 ## Description
 
 To start using, run `expo start` on your terminal. You may run on an emulator or install Expo Go on your personal mobile device and scan the QR code.
 
-On the Welcome page, you may try using entering the below credentials and see the different media loads, depending if the user has subscription or not!
+On the Welcome page, you may try entering the below credentials and see the different media loads on the Dasbboard, depending if the user has subscription or not!
 
 <br>Eg.
 <br>Username/Email: `John Doe` or `banana@banana.com`
@@ -25,4 +23,4 @@ Core:
 
 ## Preview
 
-<img src="./assets/ss.png" style="border-radius:10px;margin-bottom:1rem;">
+<img src="./project-3-app/assets/ss.png" style="border-radius:10px;margin-bottom:1rem;" width="300">

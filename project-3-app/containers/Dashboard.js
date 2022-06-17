@@ -16,6 +16,7 @@ import HeaderDashboard from "../components/HeaderDashboard";
 import Small from "../assets/Poppins_Small";
 
 import { PulseIndicator } from "react-native-indicators";
+import books from "../assets/books.png";
 
 export default function Dashboard({ route, navigation }) {
   const { username, email } = route.params;
@@ -105,7 +106,8 @@ export default function Dashboard({ route, navigation }) {
                   }}
                 >
                   <ImageBackground
-                    source={{ uri: item.thumb }}
+                    source={books}
+                    // source={{ uri: item.thumb }}
                     style={styles.cardImage}
                     imageStyle={{
                       borderRadius: 15,
