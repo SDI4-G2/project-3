@@ -9,7 +9,7 @@ To start using, run `expo start` on your terminal. You may run on an emulator or
 On the Welcome page, you may try entering the below credentials and see the different media loads on the Dasbboard, depending if the user has subscription or not!
 
 <br>Eg.
-<br>Username/Email: `John Doe` or `banana@banana.com`
+<br>Username/E-mail: `John Doe` or `banana@banana.com`
 <br>Password: `banana`
 
 ```
