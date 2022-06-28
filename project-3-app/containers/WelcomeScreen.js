@@ -45,6 +45,8 @@ export default function WelcomeScreen({ navigation, props }) {
             onChangeText={(text) => validate(text)}
             style={styles.userInput}
             keyboardType="email-address"
+            textContentType="emailAddress"
+            autoFocus={true}
             theme={{ colors: { text: "rgba(255, 255, 255, 0.6)" } }}
           ></TextInput>
         </TouchableOpacity>

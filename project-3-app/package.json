@@ -17,6 +17,7 @@
     "@rneui/base": "^0.0.0-edge.2",
     "@rneui/themed": "^0.0.0-edge.2",
     "email-validation": "^0.1.2",
+    "email-validator": "^2.0.4",
     "expo": "~45.0.0",
     "expo-font": "~10.1.0",
     "expo-linear-gradient": "^11.3.0",
