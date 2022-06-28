@@ -72,8 +72,8 @@ const styles = StyleSheet.create({
   },
   userInput: {
     height: 55,
-    backgroundColor: "rgba(27, 27, 54, 0.3)",
-    borderColor: "rgba(102, 112, 128, 0.4)",
+    backgroundColor: "rgba(255,255,255, 0.05)",
+    borderColor: "rgba(255,255,255, 0.4)",
     borderWidth: 1,
     borderRadius: 16,
     borderTopEndRadius: 16,

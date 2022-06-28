@@ -6,7 +6,7 @@ export default function UserField({ value }) {
     <View>
       <TextInput
         style={styles.userInput}
-        theme={{ colors: { text: "white" } }}
+        // theme={{ colors: { text: "white" } }}
       ></TextInput>
     </View>
   );

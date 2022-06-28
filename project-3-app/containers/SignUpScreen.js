@@ -1,13 +1,20 @@
-import React, { useState } from 'react';
-import { Text, TouchableOpacity, StyleSheet, View, Button, ActivityIndicator } from 'react-native';
-import { TextInput } from 'react-native-paper';
+import React, { useState } from "react";
+import {
+  Text,
+  TouchableOpacity,
+  StyleSheet,
+  View,
+  Button,
+  ActivityIndicator,
+} from "react-native";
+import { TextInput } from "react-native-paper";
 
-import Buttons from '../components/Buttons';
-import Register from '../api/Register';
-import SecondHeaderBar from '../components/SecondHeader';
-import Bold from '../assets/Poppins_Bold';
-import Small from '../assets/Poppins_Small';
-import Underline from '../assets/Poppins_Underline';
+import Buttons from "../components/Buttons";
+import Register from "../api/Register";
+import SecondHeaderBar from "../components/SecondHeader";
+import Bold from "../assets/Poppins_Bold";
+import Small from "../assets/Poppins_Small";
+import Underline from "../assets/Poppins_Underline";
 
 export default function SignUpScreen({ navigation }) {
   const [email, setEmail] = useState(undefined);
@@ -40,7 +47,6 @@ export default function SignUpScreen({ navigation }) {
               value={email}
               onChangeText={setEmail}
             ></TextInput>
-
           </TouchableOpacity>
           <TouchableOpacity style={styles.textContainer}>
             <Small fontSmall="Password"></Small>
@@ -49,11 +55,10 @@ export default function SignUpScreen({ navigation }) {
               onChangeText={setPassword}
               style={styles.userInput}
               theme={{ colors: { text: "rgba(255, 255, 255, 0.6)" } }}
-
               secureTextEntry={passwordVisible}
               right={
                 <TextInput.Icon
-                  name={passwordVisible ? 'eye' : 'eye-off'}
+                  name={passwordVisible ? "eye" : "eye-off"}
                   onPress={() => setPasswordVisible(!passwordVisible)}
                   onChangeText={setPassword}
                 />
@@ -64,12 +69,21 @@ export default function SignUpScreen({ navigation }) {
       </View>
       <View style={styles.buttonsbottom}>
         <TouchableOpacity
-          style={!username || !email || !password ? styles.disabled : styles.normal}
-          onPress={() => Register({ email, username, password, navigation }, setIsLoading(true)).then(() => setIsLoading(false))}
+          style={
+            !username || !email || !password ? styles.disabled : styles.normal
+          }
+          onPress={() =>
+            Register(
+              { email, username, password, navigation },
+              setIsLoading(true)
+            ).then(() => setIsLoading(false))
+          }
           disabled={!username || !email || !password}
         >
           <Buttons naming="Sign Up"></Buttons>
-          {isLoading === true && <ActivityIndicator style={styles.loading} color={'#fff'} />}
+          {isLoading === true && (
+            <ActivityIndicator style={styles.loading} color={"#fff"} />
+          )}
         </TouchableOpacity>
       </View>
     </View>
@@ -77,15 +91,15 @@ export default function SignUpScreen({ navigation }) {
 }
 const styles = StyleSheet.create({
   container: {
-    padding: '3%',
+    padding: "3%",
   },
 
   fieldsInput: {
-    top: '3%',
+    top: "3%",
   },
 
   buttonsbottom: {
-    top: '10%',
+    top: "10%",
   },
 
   disabled: {
@@ -97,18 +111,18 @@ const styles = StyleSheet.create({
   userInput: {
     height: 55,
 
-    backgroundColor: "rgba(27, 27, 54, 0.3)",
-    borderColor: "rgba(102, 112, 128, 0.4)",
+    backgroundColor: "rgba(255,255,255, 0.05)",
+    borderColor: "rgba(255,255,255, 0.4)",
     borderWidth: 1,
     borderRadius: 16,
     borderTopEndRadius: 16,
     borderTopStartRadius: 16,
     paddingHorizontal: 10,
-    width: '100%',
-    alignSelf: 'center',
+    width: "100%",
+    alignSelf: "center",
   },
   loading: {
-    position: 'absolute',
+    position: "absolute",
     zIndex: 10000,
     top: 0,
     bottom: 0,
