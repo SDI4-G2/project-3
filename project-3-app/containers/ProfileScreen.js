@@ -42,7 +42,7 @@ export default function ProfileScreen({ navigation }) {
           <ProfileButton naming="Help and Support"></ProfileButton>
         </TouchableOpacity>
       </View>
-      <TouchableOpacity onPress={Logout}>
+      <TouchableOpacity onPress={Logout} style={styles.paddingButton}>
         <LogOutButton naming="Log Out"></LogOutButton>
       </TouchableOpacity>
     </View>
@@ -59,5 +59,8 @@ const styles = StyleSheet.create({
   avatar: {
     alignSelf: "center",
     top: "0%",
+  },
+  paddingButton: {
+    padding: "5%",
   },
 });

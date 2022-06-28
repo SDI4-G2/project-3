@@ -79,10 +79,13 @@ export default function Dashboard({ navigation }) {
     >
       <HeaderDashboard />
       <View style={styles.container}>
-        <Small fontSmall="Let's get started" />
-
+        <View style={{ paddingTop: "5%" }}>
+          <Small fontSmall="Let's get started" />
+        </View>
         <View style={{ marginBottom: 20 }}>
-          <Small fontSmall={"Videos"}></Small>
+          <View style={{ paddingTop: "5%" }}>
+            <Small fontSmall={"Videos"}></Small>
+          </View>
           <ScrollView
             horizontal={true}
             contentContainerStyle={{

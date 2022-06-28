@@ -8,7 +8,7 @@ export default function Med({ fontMed }) {
     Poppins_400Regular,
   });
 
-  let fontSize = 30;
+  let fontSize = 20;
   let paddingVertical = 0;
   if (!fontsLoaded) {
     return null;

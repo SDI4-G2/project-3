@@ -48,24 +48,26 @@ export default function WelcomeScreen({ navigation, props }) {
             theme={{ colors: { text: "rgba(255, 255, 255, 0.6)" } }}
           ></TextInput>
         </TouchableOpacity>
-        <Small fontSmall="Password"></Small>
-        <TouchableOpacity style={styles.textContainer}>
-          <TextInput
-            value={password}
-            onPress={() => setPasswordVisible(!passwordVisible)}
-            onChangeText={setPassword}
-            style={styles.userInput}
-            theme={{ colors: { text: "rgba(255, 255, 255, 0.6)" } }}
-            secureTextEntry={passwordVisible}
-            right={
-              <TextInput.Icon
-                name={passwordVisible ? "eye" : "eye-off"}
-                onPress={() => setPasswordVisible(!passwordVisible)}
-                onChangeText={setPassword}
-              />
-            }
-          />
-        </TouchableOpacity>
+        <View style={{ paddingTop: "5%" }}>
+          <Small fontSmall="Password"></Small>
+          <TouchableOpacity style={styles.textContainer}>
+            <TextInput
+              value={password}
+              onPress={() => setPasswordVisible(!passwordVisible)}
+              onChangeText={setPassword}
+              style={styles.userInput}
+              theme={{ colors: { text: "rgba(255, 255, 255, 0.6)" } }}
+              secureTextEntry={passwordVisible}
+              right={
+                <TextInput.Icon
+                  name={passwordVisible ? "eye" : "eye-off"}
+                  onPress={() => setPasswordVisible(!passwordVisible)}
+                  onChangeText={setPassword}
+                />
+              }
+            />
+          </TouchableOpacity>
+        </View>
       </View>
       <View style={styles.buttonsbottom}>
         <TouchableOpacity
@@ -87,13 +89,19 @@ export default function WelcomeScreen({ navigation, props }) {
             />
           )}
         </TouchableOpacity>
-        <View>
+        <View style={styles.bottomButtons}>
           <TouchableOpacity
+            style={styles.flexSpacing}
             onPress={() => navigation.navigate("SignUpScreen")}
-            style={styles.signUp}
           >
-            <Small fontSmall="Or"></Small>
+            <Small fontSmall="Or "></Small>
+
             <Underline fontUnderline="Sign Up"></Underline>
+          </TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => navigation.navigate("ForgetPwScreen")}
+          >
+            <Underline fontUnderline="Forgot Password?"></Underline>
           </TouchableOpacity>
         </View>
       </View>
@@ -103,8 +111,8 @@ export default function WelcomeScreen({ navigation, props }) {
 
 const styles = StyleSheet.create({
   container: {
-    padding: "5%",
-    top: "15%",
+    padding: "10%",
+    top: "10%",
   },
 
   fieldsInput: {
@@ -124,7 +132,7 @@ const styles = StyleSheet.create({
   userInput: {
     height: 55,
     backgroundColor: "rgba(255, 255,255, 0.05)",
-    borderColor: "rgba(255, 255, 255, 0.4)",
+    borderColor: "rgba(255, 255, 255, 0.3)",
     borderWidth: 1,
     borderRadius: 16,
     borderTopEndRadius: 16,
@@ -140,5 +148,13 @@ const styles = StyleSheet.create({
     bottom: 0,
     right: 0,
     left: 0,
+  },
+  flexSpacing: {
+    flexDirection: "row",
+  },
+  bottomButtons: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    paddingTop: "2%",
   },
 });
