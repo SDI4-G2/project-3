@@ -7,7 +7,7 @@ import ProfileScreen from "../containers/ProfileScreen";
 import EditProfile from "../containers/EditProfile";
 import ArticleScreen from "../containers/ArticleScreen";
 import VideoScreen from "../containers/VideoScreen";
-// import ForgetPw from "../containers/ForgetPwScreen";
+import ForgetPwScreen from "../containers/ForgetPwScreen";
 // import SubscriptionScreen from "../containers/SubscriptionScreen";
 // import HistoryScreen from "../containers/HistoryScreen";
 // import SupportScreen from "../containers/SupportScreen";
@@ -78,11 +78,11 @@ const Navigation = () => {
             component={VideoScreen}
             options={{ headerShown: false }}
           />
-          {/* <Stack.Screen
-            name="ForgetPwScren"
-            component={ForgetPw}
+          <Stack.Screen
+            name="ForgetPwScreen"
+            component={ForgetPwScreen}
             options={{ headerShown: false }}
-          /> */}
+          />
           {/* <Stack.Screen
             name="SubscriptionScreen"
             component={SubscriptionScreen}

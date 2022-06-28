@@ -53,15 +53,19 @@ export default function EditProfile() {
 }
 const styles = StyleSheet.create({
   container: {
-    padding: "3%",
+    padding: "10%",
   },
 
   fieldsInput: {
     top: "3%",
   },
 
+  textContainer: {
+    paddingTop: "5%",
+  },
+
   buttonsbottom: {
-    top: "10%",
+    top: "20%",
   },
 
   disabled: {
@@ -73,7 +77,7 @@ const styles = StyleSheet.create({
   userInput: {
     height: 55,
     backgroundColor: "rgba(255,255,255, 0.05)",
-    borderColor: "rgba(255,255,255, 0.4)",
+    borderColor: "rgba(255,255,255, 0.3)",
     borderWidth: 1,
     borderRadius: 16,
     borderTopEndRadius: 16,

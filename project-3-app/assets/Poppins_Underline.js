@@ -7,8 +7,8 @@ export default function Underline({ fontUnderline }) {
     Poppins_300Light,
   });
 
-  let fontSize = 15;
-  // let paddingVertical = 6;
+  let fontSize = 13;
+  // let paddingVertical = 10;
   if (!fontsLoaded) {
     return null;
   } else {
@@ -22,8 +22,6 @@ export default function Underline({ fontUnderline }) {
           color: "white",
           opacity: 0.7,
           textDecorationLine: "underline",
-          bottom: "50%",
-          left: "6%",
         }}
       >
         {fontUnderline}

@@ -6,6 +6,7 @@ import {
   View,
   Button,
   ActivityIndicator,
+  SafeAreaView,
 } from "react-native";
 import { TextInput } from "react-native-paper";
 
@@ -25,77 +26,89 @@ export default function SignUpScreen({ navigation }) {
   const [isLoading, setIsLoading] = useState(false);
 
   return (
-    <View style={styles.container}>
+    <SafeAreaView>
       <SecondHeaderBar />
-      <View style={styles.padding}>
-        <Bold fontBold="Join Us"></Bold>
-        <View style={styles.fieldsInput}>
-          <TouchableOpacity style={styles.textContainer}>
-            <Small fontSmall="Username"></Small>
-            <TextInput
-              style={styles.userInput}
-              theme={{ colors: { text: "rgba(255, 255, 255, 0.6)" } }}
-              value={username}
-              onChangeText={setUsername}
-            ></TextInput>
+      <View style={styles.container}>
+        <View style={styles.padding}>
+          <Bold fontBold="Join Us"></Bold>
+          <View style={styles.fieldsInput}>
+            <TouchableOpacity style={styles.textContainer}>
+              <Small fontSmall="Username"></Small>
+              <TextInput
+                style={styles.userInput}
+                theme={{ colors: { text: "rgba(255, 255, 255, 0.6)" } }}
+                value={username}
+                onChangeText={setUsername}
+              ></TextInput>
+            </TouchableOpacity>
+            <TouchableOpacity style={[styles.textContainer]}>
+              <Small fontSmall="Email"></Small>
+              <TextInput
+                style={styles.userInput}
+                theme={{ colors: { text: "rgba(255, 255, 255, 0.6)" } }}
+                value={email}
+                onChangeText={setEmail}
+              ></TextInput>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.textContainer}>
+              <Small fontSmall="Password"></Small>
+              <TextInput
+                onPress={() => setPasswordVisible(!passwordVisible)}
+                onChangeText={setPassword}
+                style={styles.userInput}
+                theme={{ colors: { text: "rgba(255, 255, 255, 0.6)" } }}
+                secureTextEntry={passwordVisible}
+                right={
+                  <TextInput.Icon
+                    name={passwordVisible ? "eye" : "eye-off"}
+                    onPress={() => setPasswordVisible(!passwordVisible)}
+                    onChangeText={setPassword}
+                  />
+                }
+              />
+            </TouchableOpacity>
+          </View>
+        </View>
+        <View style={styles.buttonsbottom}>
+          <TouchableOpacity
+            style={
+              !username || !email || !password ? styles.disabled : styles.normal
+            }
+            onPress={() =>
+              Register(
+                { email, username, password, navigation },
+                setIsLoading(true)
+              ).then(() => setIsLoading(false))
+            }
+            disabled={!username || !email || !password}
+          >
+            <Buttons naming="Sign Up"></Buttons>
+            {isLoading === true && (
+              <ActivityIndicator style={styles.loading} color={"#fff"} />
+            )}
           </TouchableOpacity>
-          <TouchableOpacity style={styles.textContainer}>
-            <Small fontSmall="Email"></Small>
-            <TextInput
-              style={styles.userInput}
-              theme={{ colors: { text: "rgba(255, 255, 255, 0.6)" } }}
-              value={email}
-              onChangeText={setEmail}
-            ></TextInput>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.textContainer}>
-            <Small fontSmall="Password"></Small>
-            <TextInput
-              onPress={() => setPasswordVisible(!passwordVisible)}
-              onChangeText={setPassword}
-              style={styles.userInput}
-              theme={{ colors: { text: "rgba(255, 255, 255, 0.6)" } }}
-              secureTextEntry={passwordVisible}
-              right={
-                <TextInput.Icon
-                  name={passwordVisible ? "eye" : "eye-off"}
-                  onPress={() => setPasswordVisible(!passwordVisible)}
-                  onChangeText={setPassword}
-                />
-              }
-            />
+          <TouchableOpacity
+            style={{ paddingTop: "5%", flexDirection: "row" }}
+            onPress={() => navigation.navigate("WelcomeScreen")}
+          >
+            <Small fontSmall={"Already have an account? "}></Small>
+            <Underline fontUnderline="Log In"></Underline>
           </TouchableOpacity>
         </View>
       </View>
-      <View style={styles.buttonsbottom}>
-        <TouchableOpacity
-          style={
-            !username || !email || !password ? styles.disabled : styles.normal
-          }
-          onPress={() =>
-            Register(
-              { email, username, password, navigation },
-              setIsLoading(true)
-            ).then(() => setIsLoading(false))
-          }
-          disabled={!username || !email || !password}
-        >
-          <Buttons naming="Sign Up"></Buttons>
-          {isLoading === true && (
-            <ActivityIndicator style={styles.loading} color={"#fff"} />
-          )}
-        </TouchableOpacity>
-      </View>
-    </View>
+    </SafeAreaView>
   );
 }
 const styles = StyleSheet.create({
   container: {
-    padding: "3%",
+    padding: "10%",
   },
 
   fieldsInput: {
     top: "3%",
+  },
+  textContainer: {
+    paddingTop: "5%",
   },
 
   buttonsbottom: {
@@ -112,7 +125,7 @@ const styles = StyleSheet.create({
     height: 55,
 
     backgroundColor: "rgba(255,255,255, 0.05)",
-    borderColor: "rgba(255,255,255, 0.4)",
+    borderColor: "rgba(255,255,255, 0.3)",
     borderWidth: 1,
     borderRadius: 16,
     borderTopEndRadius: 16,
