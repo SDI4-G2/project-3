@@ -11,10 +11,8 @@ export default function ProfileButton({ naming }) {
     return null;
   } else {
     return (
-      <View style={styles.container}>
-        <TouchableOpacity style={styles.button}>
-          <Text style={styles.buttonText}>{naming}</Text>
-        </TouchableOpacity>
+      <View style={[styles.container, styles.button]}>
+        <Text style={styles.buttonText}>{naming}</Text>
       </View>
     );
   }
@@ -32,7 +30,7 @@ const styles = StyleSheet.create({
     height: 50,
     width: "75%",
     borderRadius: 16,
-    backgroundColor: "#1B1B36",
+    backgroundColor: "rgba(255, 255, 255, 0.1)",
     borderColor: "rgba(255, 255, 255, 0.4)",
   },
   buttonText: {
@@ -40,7 +38,7 @@ const styles = StyleSheet.create({
     textAlign: "center",
     fontFamily: "Poppins_300Light",
     color: "white",
-    opacity: 0.7,
+    opacity: 1,
     paddingTop: 12,
     fontSize: 15,
     paddingVertical: 6,

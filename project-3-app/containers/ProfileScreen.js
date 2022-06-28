@@ -24,10 +24,10 @@ export default function ProfileScreen({ navigation }) {
       <Image style={styles.avatar} source={Avatar} />
       <View style={styles.container}>
         <TouchableOpacity
-          onPress={() => navigation.navigate("EditProfile")}
           style={styles.padding}
+          onPress={() => navigation.navigate("EditProfile")}
         >
-          <Image style={styles.editprofile} source={editprofile} />
+          <ProfileButton naming="Edit Profile"></ProfileButton>
         </TouchableOpacity>
         <TouchableOpacity style={styles.padding}>
           <ProfileButton naming="Subscription"></ProfileButton>
@@ -59,9 +59,5 @@ const styles = StyleSheet.create({
   avatar: {
     alignSelf: "center",
     top: "0%",
-  },
-  editprofile: {
-    alignSelf: "center",
-    opacity: 0.8,
   },
 });
