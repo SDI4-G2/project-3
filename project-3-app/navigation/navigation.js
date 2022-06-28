@@ -7,6 +7,13 @@ import ProfileScreen from "../containers/ProfileScreen";
 import EditProfile from "../containers/EditProfile";
 import ArticleScreen from "../containers/ArticleScreen";
 import VideoScreen from "../containers/VideoScreen";
+// import ForgetPw from "../containers/ForgetPwScreen";
+// import SubscriptionScreen from "../containers/SubscriptionScreen";
+// import HistoryScreen from "../containers/HistoryScreen";
+// import SupportScreen from "../containers/SupportScreen";
+// import BookmarkScreen from "../containers/BookmarksScreen";
+// import LibraryScreen from "../containers/LibraryScreen";
+// import SubMainScreen from "../containers/SubMainScreen";
 import background from "../assets/background.png";
 import {
   StyleSheet,
@@ -71,6 +78,41 @@ const Navigation = () => {
             component={VideoScreen}
             options={{ headerShown: false }}
           />
+          {/* <Stack.Screen
+            name="ForgetPwScren"
+            component={ForgetPw}
+            options={{ headerShown: false }}
+          /> */}
+          {/* <Stack.Screen
+            name="SubscriptionScreen"
+            component={SubscriptionScreen}
+            options={{ headerShown: false }}
+          /> */}
+          {/* <Stack.Screen
+            name="HistoryScreen"
+            component={HistoryScreen}
+            options={{ headerShown: false }}
+          /> */}
+          {/* <Stack.Screen
+            name="SupportScreen"
+            component={SupportScreen}
+            options={{ headerShown: false }}
+          /> */}
+          {/* <Stack.Screen
+            name="BookmarkScreen"
+            component={BookmarkScreen}
+            options={{ headerShown: false }}
+          /> */}
+          {/* <Stack.Screen
+            name="LibraryScreen"
+            component={LibraryScreen}
+            options={{ headerShown: false }}
+          /> */}
+          {/* <Stack.Screen
+            name="SubMainScreen"
+            component={SubMainScreen}
+            options={{ headerShown: false }}
+          /> */}
         </Stack.Navigator>
       </NavigationContainer>
     </ImageBackground>
