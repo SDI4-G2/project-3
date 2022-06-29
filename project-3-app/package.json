@@ -16,6 +16,7 @@
     "@react-navigation/native-stack": "^6.6.2",
     "@rneui/base": "^0.0.0-edge.2",
     "@rneui/themed": "^0.0.0-edge.2",
+    "@stripe/stripe-react-native": "^0.6.1",
     "email-validation": "^0.1.2",
     "email-validator": "^2.0.4",
     "expo": "~45.0.0",
