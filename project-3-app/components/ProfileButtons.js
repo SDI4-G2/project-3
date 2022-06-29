@@ -23,7 +23,6 @@ const styles = StyleSheet.create({
     alignSelf: "center",
     alignContent: "center",
     alignItems: "center",
-    opacity: 0.4,
   },
   button: {
     borderWidth: 1,
@@ -38,7 +37,7 @@ const styles = StyleSheet.create({
     textAlign: "center",
     fontFamily: "Poppins_300Light",
     color: "white",
-    opacity: 1,
+    opacity: 0.7,
     paddingTop: 12,
     fontSize: 15,
     paddingVertical: 6,

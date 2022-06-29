@@ -57,6 +57,13 @@ export default function ForgetPwScreen({ navigation, props }) {
                             ? "rgba(255, 255, 255, 0.4)"
                             : "rgba(244, 107, 107, 0.4)",
                       },
+                      {
+                        borderWidth:
+                          values.email.length < 1 ||
+                          Validator.validate(values.email)
+                            ? 1
+                            : 3,
+                      },
                     ]}
                     keyboardType="email-address"
                     textContentType="emailAddress"
@@ -69,12 +76,12 @@ export default function ForgetPwScreen({ navigation, props }) {
                 </Pressable>
               </View>
 
-              <TouchableOpacity
+              <Pressable
                 onPress={handleSubmit}
                 style={styles.sendEmail(isValid)}
               >
                 <Buttons naming="Send Email"></Buttons>
-              </TouchableOpacity>
+              </Pressable>
             </>
           )}
         </Formik>
