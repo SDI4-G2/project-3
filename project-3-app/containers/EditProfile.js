@@ -100,7 +100,7 @@ export default function EditProfile({ firstLine, textForInput }) {
                   style={styles.gradient}
                   start={{ x: 0, y: 0 }}
                   end={{ x: 1, y: 1 }}
-                  colors={["rgba(203,179,132,0.3)", "rgba(255,255,255,0.1)"]}
+                  colors={["rgba(203,179,132,0.5)", "rgba(125,114,93,0.1)"]}
                 >
                   <Image
                     source={chevronDown}
@@ -115,10 +115,10 @@ export default function EditProfile({ firstLine, textForInput }) {
                   <View
                     style={{
                       alignSelf: "center",
-                      width: "80%",
+                      width: "70%",
                     }}
                   >
-                    <Small fontSmall={"Username"}></Small>
+                    <Small fontSmall={"Edit Username"}></Small>
                   </View>
                   <TouchableOpacity>
                     <TextInput
@@ -132,7 +132,7 @@ export default function EditProfile({ firstLine, textForInput }) {
                   <View
                     style={{
                       alignSelf: "center",
-                      width: "80%",
+                      width: "70%",
                       paddingTop: "3%",
                     }}
                   >
@@ -150,7 +150,7 @@ export default function EditProfile({ firstLine, textForInput }) {
                   </TouchableOpacity>
                   <TouchableOpacity
                     style={{
-                      paddingTop: "3%",
+                      paddingTop: "5%",
                       width: "85%",
                       alignSelf: "center",
                     }}
@@ -245,13 +245,15 @@ const styles = StyleSheet.create({
     height: 280,
     borderTopEndRadius: 30,
     borderTopStartRadius: 30,
-    // borderWidth: 2,
+    borderTopWidth: 1,
+    borderLeftWidth: 1,
+    borderRightWidth: 1,
     borderColor: "rgba(255,255,255,0.4)",
   },
   gradient: {
     borderTopLeftRadius: 30,
     borderTopRightRadius: 30,
-    height: 270,
+    height: 280,
   },
   userInput: {
     height: 40,
@@ -262,7 +264,7 @@ const styles = StyleSheet.create({
     borderTopEndRadius: 16,
     borderTopStartRadius: 16,
     paddingHorizontal: 10,
-    width: "80%",
+    width: "70%",
     alignSelf: "center",
   },
 });
