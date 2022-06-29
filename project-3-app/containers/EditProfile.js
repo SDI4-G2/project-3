@@ -1,71 +1,108 @@
-import { Text, TouchableOpacity, StyleSheet, View, Button } from "react-native";
-import { TextInput } from "react-native-paper";
+import {
+  Text,
+  TouchableOpacity,
+  StyleSheet,
+  View,
+  Button,
+  Image,
+} from "react-native";
 
-import Buttons from "../components/Buttons";
-import Register from "../api/Register";
 import SecondHeaderBar from "../components/SecondHeader";
 import Bold from "../assets/Poppins_Bold";
-import Small from "../assets/Poppins_Small";
-import Underline from "../assets/Poppins_Underline";
+import editingIconSeven from "../assets/editingiconseven.png";
 
 export default function EditProfile() {
   return (
     <View>
       <SecondHeaderBar />
       <View style={styles.container}>
+        <Bold fontBold="Edit Profile"></Bold>
         <View style={styles.padding}>
-          <Bold fontBold="Edit Profile"></Bold>
           <View style={styles.fieldsInput}>
-            <TouchableOpacity style={styles.textContainer}>
-              <Small fontSmall="Username"></Small>
-              <TextInput
-                style={styles.userInput}
-                theme={{ colors: { text: "rgba(255, 255, 255, 0.6)" } }}
-              ></TextInput>
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.textContainer}>
-              <Small fontSmall="Email"></Small>
-              <TextInput
-                style={styles.noInput}
-                editable={false}
-                value={"This Cannot Be Edited"}
-                theme={{ colors: { text: "rgba(255, 255, 255, 0.6)" } }}
-              ></TextInput>
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.textContainer}>
-              <Small fontSmall="Password"></Small>
-              <TextInput
-                style={styles.userInput}
-                theme={{ colors: { text: "rgba(255, 255, 255, 0.6)" } }}
-                right={<TextInput.Icon />}
-              />
-            </TouchableOpacity>
+            <View style={styles.buttonComponent}>
+              <View style={{ justifyContent: "center" }}>
+                <Text style={styles.buttonText}>Username</Text>
+                <Text style={styles.buttonTextTwo}>banana</Text>
+              </View>
+              <TouchableOpacity style={styles.editingIcon}>
+                <Image
+                  source={editingIconSeven}
+                  style={{ height: 50, width: 50, opacity: 0.8 }}
+                />
+              </TouchableOpacity>
+            </View>
+            <View style={styles.buttonComponent}>
+              <View style={{ justifyContent: "center" }}>
+                <Text style={styles.buttonText}>E-mail</Text>
+                <Text style={styles.buttonTextTwo}>banana@gmail.com</Text>
+              </View>
+              {/* <TouchableOpacity style={styles.editingIcon}>
+                <Image source={editingIcon} />
+              </TouchableOpacity> */}
+            </View>
+            <View style={styles.buttonComponent}>
+              <View style={{ justifyContent: "center" }}>
+                <Text style={styles.buttonText}>Password</Text>
+                <Text style={styles.buttonTextTwo}>******</Text>
+              </View>
+              <TouchableOpacity style={styles.editingIcon}>
+                <Image
+                  source={editingIconSeven}
+                  style={{ height: 50, width: 50, opacity: 0.8 }}
+                />
+              </TouchableOpacity>
+            </View>
           </View>
         </View>
-        <View style={styles.buttonsbottom}>
+        {/* <View>
           <TouchableOpacity>
             <Buttons naming="Save Changes"></Buttons>
           </TouchableOpacity>
-        </View>
+        </View> */}
       </View>
     </View>
   );
 }
 const styles = StyleSheet.create({
   container: {
-    padding: "10%",
+    paddingLeft: "10%",
+    paddingRight: "10%",
   },
 
-  fieldsInput: {
-    top: "3%",
-  },
-
-  textContainer: {
+  padding: {
     paddingTop: "5%",
   },
 
-  buttonsbottom: {
-    top: "20%",
+  buttonComponent: {
+    borderWidth: 1,
+    padding: "7%",
+    flexDirection: "row",
+    justifyContent: "space-between",
+    borderRadius: 30,
+    backgroundColor: "rgba(255, 255, 255, 0.1)",
+    borderColor: "rgba(255, 255, 255, 0.4)",
+    marginBottom: 20,
+    width: "95%",
+    alignSelf: "center",
+  },
+  buttonText: {
+    textAlign: "left",
+    fontFamily: "Poppins_500Medium",
+    color: "white",
+    opacity: 0.8,
+
+    fontSize: 20,
+  },
+  buttonTextTwo: {
+    textAlign: "left",
+    fontFamily: "Poppins_300Light",
+    color: "white",
+    opacity: 0.8,
+    paddingTop: 15,
+    fontSize: 13,
+  },
+  editingIcon: {
+    alignSelf: "center",
   },
 
   disabled: {
