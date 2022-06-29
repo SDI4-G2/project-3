@@ -1,6 +1,6 @@
 import { Text, TouchableOpacity, StyleSheet, View, Button, Image } from 'react-native';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import SecondHeaderBar from '../components/SecondHeader';
 import Bold from '../assets/Poppins_Bold';
@@ -32,6 +32,10 @@ export default function EditProfile({ firstLine, textForInput }) {
     //Toggling the visibility state of the bottom sheet
     setVisible(!visible);
   };
+
+  useEffect(() => {
+    getJwt();
+  }, []);
 
   let [fontsLoaded] = useFonts({
     Poppins_300Light,
