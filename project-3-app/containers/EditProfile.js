@@ -100,7 +100,7 @@ export default function EditProfile({ firstLine, textForInput }) {
                   style={styles.gradient}
                   start={{ x: 0, y: 0 }}
                   end={{ x: 1, y: 1 }}
-                  colors={["rgba(203,179,132,0.2)", "rgba(255,255,255,0.1)"]}
+                  colors={["rgba(203,179,132,0.3)", "rgba(255,255,255,0.1)"]}
                 >
                   <Image
                     source={chevronDown}
@@ -150,7 +150,7 @@ export default function EditProfile({ firstLine, textForInput }) {
                   </TouchableOpacity>
                   <TouchableOpacity
                     style={{
-                      paddingTop: "5%",
+                      paddingTop: "3%",
                       width: "85%",
                       alignSelf: "center",
                     }}
@@ -241,8 +241,8 @@ const styles = StyleSheet.create({
     alignSelf: "center",
   },
   bottomNavigationView: {
-    // backgroundColor: "rgba(000,000,000,0.4)",
-    height: 270,
+    // backgroundColor: "rgba(000,000,000,0.5)",
+    height: 280,
     borderTopEndRadius: 30,
     borderTopStartRadius: 30,
     // borderWidth: 2,
