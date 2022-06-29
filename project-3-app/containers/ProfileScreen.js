@@ -29,7 +29,9 @@ export default function ProfileScreen({ navigation }) {
         >
           <ProfileButton naming="Edit Profile"></ProfileButton>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.padding}>
+        <TouchableOpacity style={styles.padding}
+          onPress={() => navigation.navigate("SubscriptionScreen")}
+        >
           <ProfileButton naming="Subscription"></ProfileButton>
         </TouchableOpacity>
         <TouchableOpacity style={styles.padding}>
