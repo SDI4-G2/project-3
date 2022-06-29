@@ -29,7 +29,8 @@ export default function ProfileScreen({ navigation }) {
         >
           <ProfileButton naming="Edit Profile"></ProfileButton>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.padding}
+        <TouchableOpacity
+          style={styles.padding}
           onPress={() => navigation.navigate("SubscriptionScreen")}
         >
           <ProfileButton naming="Subscription"></ProfileButton>
@@ -57,6 +58,7 @@ const styles = StyleSheet.create({
   },
   padding: {
     padding: 5,
+    top: "5%",
   },
   avatar: {
     alignSelf: "center",
@@ -64,5 +66,6 @@ const styles = StyleSheet.create({
   },
   paddingButton: {
     padding: "5%",
+    top: 80,
   },
 });

@@ -27,12 +27,14 @@ export default function ForgetPwScreen({ navigation, props }) {
       <SecondHeaderBar />
       <View style={styles.container}>
         <View style={{ paddingBottom: "5%" }}>
-          <Bold fontBold="Forgot Your Password?"></Bold>
+          <Bold fontBold="No worries,"></Bold>
         </View>
         <View style={{ paddingBottom: "5%" }}>
-          <Med fontMed={"No worries,"}></Med>
+          {/* <Med fontMed={"No worries,"}></Med> */}
 
-          <Med fontMed={"We will send you an email."}></Med>
+          <Med
+            fontMed={"We will send you an email to reset your password."}
+          ></Med>
         </View>
         <Formik
           initialValues={{ email: "" }}
