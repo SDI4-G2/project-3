@@ -1,10 +1,8 @@
 import React, { useState } from "react";
 import {
-  Text,
   TouchableOpacity,
   StyleSheet,
   View,
-  Button,
   SafeAreaView,
   Pressable,
 } from "react-native";
@@ -15,11 +13,9 @@ import * as Yup from "yup";
 import Validator from "email-validator";
 
 import Buttons from "../components/Buttons";
-import Register from "../api/Register";
 import SecondHeaderBar from "../components/SecondHeader";
 import Bold from "../assets/Poppins_Bold";
 import Small from "../assets/Poppins_Small";
-import Underline from "../assets/Poppins_Underline";
 import Med from "../assets/Poppins_Medium";
 
 export default function ForgetPwScreen({ navigation, props }) {
@@ -73,12 +69,12 @@ export default function ForgetPwScreen({ navigation, props }) {
                 </Pressable>
               </View>
 
-              <Pressable
+              <TouchableOpacity
                 onPress={handleSubmit}
                 style={styles.sendEmail(isValid)}
               >
                 <Buttons naming="Send Email"></Buttons>
-              </Pressable>
+              </TouchableOpacity>
             </>
           )}
         </Formik>
