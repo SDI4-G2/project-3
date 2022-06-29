@@ -42,7 +42,7 @@ const Navigation = () => {
     >
       <NavigationContainer theme={MyTheme}>
         <Stack.Navigator>
-          {/* <Stack.Screen
+          <Stack.Screen
             name="WelcomeScreen"
             component={WelcomeScreen}
             options={{ headerShown: false }}
@@ -56,13 +56,13 @@ const Navigation = () => {
             name="Dashboard"
             component={Dashboard}
             options={{ headerShown: false }}
-          /> */}
+          />
 
-          {/* <Stack.Screen
+          <Stack.Screen
             name="ProfileScreen"
             component={ProfileScreen}
             options={{ headerShown: false }}
-          /> */}
+          />
           <Stack.Screen
             name="EditProfile"
             component={EditProfile}
