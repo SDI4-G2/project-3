@@ -44,7 +44,7 @@ var styles = StyleSheet.create({
   // },
   gradient: {
     alignSelf: "center",
-    top: 70,
+    // top: 70,
     justifyContent: "center",
     borderRadius: 6,
     width: "90%",
