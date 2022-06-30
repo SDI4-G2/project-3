@@ -61,16 +61,7 @@ export default function ForgetPwScreen({ navigation, props }) {
                   ]}
                 >
                   <TextInput
-                    style={[
-                      styles.userInput,
-                      // {
-                      //   borderColor:
-                      //     values.email.length < 1 ||
-                      //     Validator.validate(values.email)
-                      //       ? "rgba(255, 255, 255, 0.4)"
-                      //       : "rgba(244, 107, 107, 0.4)",
-                      // },
-                    ]}
+                    style={[styles.userInput]}
                     keyboardType="email-address"
                     textContentType="emailAddress"
                     autoFocus={true}

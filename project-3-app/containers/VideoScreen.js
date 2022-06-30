@@ -17,10 +17,11 @@ import { useFonts } from "expo-font";
 import { Poppins_300Light } from "@expo-google-fonts/poppins";
 import { Poppins_500Medium } from "@expo-google-fonts/poppins";
 import HeaderBar from "../components/Headers";
+import PreviousAndNext from "../components/PreviousAndNext";
 
 import GetVideo from "../api/GetVideo";
 
-export default function VideoScreen({ navigation, route }) {
+export default function VideoScreen({ navigation, route, wording }) {
   const [list, setList] = useState(undefined);
   const { videoid, url } = route.params;
 
@@ -104,6 +105,9 @@ export default function VideoScreen({ navigation, route }) {
             aliquam eros nunc, a posuere nibh pulvinar a.
           </Text>
         </ScrollView>
+        <View style={{ top: 50 }}>
+          <PreviousAndNext wording={"Video"} />
+        </View>
       </SafeAreaView>
     );
   }
@@ -120,10 +124,10 @@ const styles = StyleSheet.create({
     alignSelf: "center",
   },
   border: {
-    borderWidth: 3,
-    borderColor: "rgba(102, 112, 128, 0.4)",
+    borderWidth: 1,
+    borderColor: "rgba(255, 255, 255, 0.4)",
     borderRadius: 18,
-    backgroundColor: "rgba(27, 27, 54, 0.3)",
+    backgroundColor: "rgba(255, 255, 255, 0.1)",
     height: "40%",
     width: "90%",
     alignSelf: "center",
