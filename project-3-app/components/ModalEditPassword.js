@@ -15,8 +15,11 @@ import { TextInput } from "react-native-paper";
 import LogOutButton from "./LogOutButton";
 import { LinearGradient } from "expo-linear-gradient";
 
-export default function Modal({ firstLine, textForInput }) {
-  const [visible, setVisible] = useState(false);
+export default function ModalEditPassword() {
+  const [visible, setVisible] = useState(true);
+
+  const [passwordVisible, setPasswordVisible] = useState(true);
+
   const toggleBottomNavigationView = () => {
     //Toggling the visibility state of the bottom sheet
     setVisible(!visible);
@@ -24,14 +27,6 @@ export default function Modal({ firstLine, textForInput }) {
   return (
     <SafeAreaView>
       <View>
-        {/* <Pressable
-          onPress={toggleBottomNavigationView}
-
-          //on Press of the button bottom sheet will be visible
-        >
-          <Text style={{ color: "white" }}>Show</Text>
-        </Pressable> */}
-
         <BottomSheet
           visible={visible}
           //setting the visibility state of the bottom sheet
@@ -53,7 +48,7 @@ export default function Modal({ firstLine, textForInput }) {
                 style={styles.gradient}
                 start={{ x: 0, y: 0 }}
                 end={{ x: 1, y: 1 }}
-                colors={["rgba(91,49,72,0.5)", "rgba(255,255,255,0.1)"]}
+                colors={["rgba(111,94,73,0.5)", "rgba(48,42,34,0.3)"]}
               >
                 <Image
                   source={chevronDown}
@@ -68,42 +63,54 @@ export default function Modal({ firstLine, textForInput }) {
                 <View
                   style={{
                     alignSelf: "center",
-                    width: "80%",
+                    width: "70%",
                   }}
                 >
-                  <Small fontSmall={firstLine}></Small>
+                  <Small fontSmall={"Change Password"}></Small>
                 </View>
-                <TouchableOpacity>
+                <TouchableOpacity style={styles.textContainer}>
                   <TextInput
                     // onChangeText={(text) => validate(text)}
                     style={styles.userInput}
                     theme={{ colors: { text: "rgba(255, 255, 255, 0.6)" } }}
-                  >
-                    {textForInput}
-                  </TextInput>
+                    secureTextEntry={passwordVisible}
+                    right={
+                      <TextInput.Icon
+                        name={passwordVisible ? "eye" : "eye-off"}
+                        onPress={() => setPasswordVisible(!passwordVisible)}
+                        // onChangeText={setPassword}
+                      />
+                    }
+                  ></TextInput>
                 </TouchableOpacity>
                 <View
                   style={{
                     alignSelf: "center",
-                    width: "80%",
+                    width: "70%",
                     paddingTop: "3%",
                   }}
                 >
                   <Small fontSmall={"Enter your password to confirm"}></Small>
                 </View>
 
-                <TouchableOpacity>
+                <TouchableOpacity style={styles.textContainer}>
                   <TextInput
                     // onChangeText={(text) => validate(text)}
                     style={styles.userInput}
-                    keyboardType="email-address"
-                    textContentType="emailAddress"
                     theme={{ colors: { text: "rgba(255, 255, 255, 0.6)" } }}
+                    secureTextEntry={passwordVisible}
+                    right={
+                      <TextInput.Icon
+                        name={passwordVisible ? "eye" : "eye-off"}
+                        onPress={() => setPasswordVisible(!passwordVisible)}
+                        // onChangeText={setPassword}
+                      />
+                    }
                   ></TextInput>
                 </TouchableOpacity>
                 <TouchableOpacity
                   style={{
-                    paddingTop: "3%",
+                    paddingTop: "5%",
                     width: "85%",
                     alignSelf: "center",
                   }}
@@ -133,16 +140,20 @@ const styles = StyleSheet.create({
     borderTopRightRadius: 30,
     height: 270,
   },
+  textContainer: {
+    overflow: "hidden",
+    height: 40,
+    borderColor: "rgba(255,255,255, 0.4)",
+    backgroundColor: "rgba(31,29,28,0.3)",
+    borderWidth: 1,
+    width: "70%",
+    borderRadius: 16,
+    alignSelf: "center",
+  },
+
   userInput: {
     height: 40,
-    backgroundColor: "rgba(31,29,28,0.3)",
-    borderColor: "rgba(255, 255, 255, 0.2)",
-    borderWidth: 1,
-    borderRadius: 16,
-    borderTopEndRadius: 16,
-    borderTopStartRadius: 16,
-    paddingHorizontal: 10,
-    width: "80%",
-    alignSelf: "center",
+    backgroundColor: "rgba(31,29,28,0.1)",
+    overflow: "hidden",
   },
 });
