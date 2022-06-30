@@ -48,10 +48,11 @@ export default function VideoScreen({ navigation, route }) {
         if (videos[i].videoid === currentVideo) {
           setList(videos[i - 1].url);
           setCurrentVideo(videos[i - 1].videoid);
+          endOfLineCheck();
         }
       }
     } catch (err) {
-      alert('Unable to previous.');
+      alert('Unable to previous' + err);
     }
   }
 
@@ -65,7 +66,7 @@ export default function VideoScreen({ navigation, route }) {
         }
       }
     } catch (err) {
-      alert('Unable to next.');
+      console.log('Unable to next' + err);
     }
   }
 
