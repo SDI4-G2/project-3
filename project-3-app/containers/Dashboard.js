@@ -1,23 +1,13 @@
-import {
-  StyleSheet,
-  Text,
-  View,
-  ScrollView,
-  ImageBackground,
-  RefreshControl,
-  ActivityIndicator,
-  TouchableOpacity,
-  Image,
-} from "react-native";
-import { Card, Title } from "react-native-paper";
-import React, { useState, useEffect } from "react";
-import * as SecureStore from "expo-secure-store";
-import HeaderDashboard from "../components/HeaderDashboard";
-import Small from "../assets/Poppins_Small";
+import { StyleSheet, Text, View, ScrollView, ImageBackground, RefreshControl, ActivityIndicator, TouchableOpacity, Image } from 'react-native';
+import { Card, Title } from 'react-native-paper';
+import React, { useState, useEffect } from 'react';
+import * as SecureStore from 'expo-secure-store';
+import HeaderDashboard from '../components/HeaderDashboard';
+import Small from '../assets/Poppins_Small';
 
-import { PulseIndicator } from "react-native-indicators";
-import books from "../assets/books.png";
-import * as Progress from "react-native-progress";
+import { PulseIndicator } from 'react-native-indicators';
+import books from '../assets/books.png';
+import * as Progress from 'react-native-progress';
 
 export default function Dashboard({ navigation }) {
   const [videos, setVideos] = useState([]);
@@ -26,13 +16,13 @@ export default function Dashboard({ navigation }) {
   const [isLoading, setIsLoading] = useState(true);
 
   async function fetch_all_videos() {
-    let result = await SecureStore.getItemAsync("token");
-    
-    const response = await fetch("https://sdi4-g2.herokuapp.com/video", {
-      method: "GET",
+    let result = await SecureStore.getItemAsync('token');
+
+    const response = await fetch('https://sdi4-g2.herokuapp.com/video', {
+      method: 'GET',
       headers: {
-        "Content-Type": "application/json",
-        Authorization: "Bearer " + result,
+        'Content-Type': 'application/json',
+        Authorization: 'Bearer ' + result,
       },
     });
     const list = await response.json();
@@ -41,13 +31,13 @@ export default function Dashboard({ navigation }) {
   }
 
   async function fetch_all_articles() {
-    let result = await SecureStore.getItemAsync("token");
+    let result = await SecureStore.getItemAsync('token');
 
-    const response = await fetch("https://sdi4-g2.herokuapp.com/article", {
-      method: "GET",
+    const response = await fetch('https://sdi4-g2.herokuapp.com/article', {
+      method: 'GET',
       headers: {
-        "Content-Type": "application/json",
-        Authorization: "Bearer " + result,
+        'Content-Type': 'application/json',
+        Authorization: 'Bearer ' + result,
       },
     });
     const list = await response.json();
@@ -72,55 +62,49 @@ export default function Dashboard({ navigation }) {
   }, []);
 
   return (
-    <ScrollView
-      refreshControl={
-        <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
-      }
-    >
+    <ScrollView refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}>
       <HeaderDashboard />
       <View style={styles.container}>
-        <View style={{ paddingTop: "5%" }}>
+        <View style={{ paddingTop: '5%' }}>
           <Small fontSmall="Let's get started" />
         </View>
         <View style={{ marginBottom: 20 }}>
-          <View style={{ paddingTop: "5%" }}>
-            <Small fontSmall={"Videos"}></Small>
+          <View style={{ paddingTop: '5%' }}>
+            <Small fontSmall={'Videos'}></Small>
           </View>
           <ScrollView
             horizontal={true}
             contentContainerStyle={{
-              justifyContent: "center",
-              flexDirection: "row",
+              justifyContent: 'center',
+              flexDirection: 'row',
             }}
           >
-            {isLoading === true && (
-              <PulseIndicator color={"rgba(255,255,255,0.5)"} />
-            )}
+            {isLoading === true && <PulseIndicator color={'rgba(255,255,255,0.5)'} />}
             {videos.map((item) => {
               return (
                 <Card
                   style={styles.cardDashboard}
                   key={item.videoid}
                   onPress={() => {
-                    navigation.navigate("VideoScreen", {
+                    navigation.navigate('VideoScreen', {
                       videoid: item.videoid,
                     });
                   }}
                 >
                   <ImageBackground
-                    source={books}
+                    source={{ uri: item.thumbnails }}
                     // source={{ uri: item.thumb }}
                     style={styles.cardImage}
                     imageStyle={{
                       borderRadius: 15,
                       opacity: 0.5,
-                      backgroundColor: "#000",
+                      backgroundColor: '#000',
                     }}
                     onLoadEnd={() => setIsLoading(false)}
                   >
                     <Card.Content>
-                      <Title style={styles.cardTitle}>
-                        {item.Category.description}
+                      <Title style={styles.cardTitle} numberOfLines={3}>
+                        {item.title}
                       </Title>
                       <Progress.Circle
                         progress={0.4}
@@ -131,7 +115,7 @@ export default function Dashboard({ navigation }) {
                         borderWidth={0}
                         unfilledColor="#0F0E47"
                         color="teal"
-                        style={{ alignSelf: "center", padding: 10 }}
+                        style={{ alignSelf: 'center', padding: 10 }}
                       />
                     </Card.Content>
                   </ImageBackground>
@@ -142,23 +126,21 @@ export default function Dashboard({ navigation }) {
         </View>
 
         <View style={{ marginBottom: 20 }}>
-          <Small fontSmall={"Articles"}></Small>
+          <Small fontSmall={'Articles'}></Small>
           <ScrollView
             horizontal={true}
             contentContainerStyle={{
-              justifyContent: "center",
-              flexDirection: "row",
+              justifyContent: 'center',
+              flexDirection: 'row',
             }}
           >
-            {isLoading === true && (
-              <PulseIndicator color={"rgba(255,255,255,0.5)"} />
-            )}
+            {isLoading === true && <PulseIndicator color={'rgba(255,255,255,0.5)'} />}
             {articles.map((item, index) => (
               <Card
                 style={styles.cardDashboard}
                 key={item.articleid}
                 onPress={() => {
-                  navigation.navigate("ArticleScreen", {
+                  navigation.navigate('ArticleScreen', {
                     articleid: item.articleid,
                   });
                 }}
@@ -170,14 +152,12 @@ export default function Dashboard({ navigation }) {
                   imageStyle={{
                     borderRadius: 15,
                     opacity: 0.5,
-                    backgroundColor: "#000",
+                    backgroundColor: '#000',
                   }}
                   onLoadEnd={() => setIsLoading(false)}
                 >
                   <Card.Content>
-                    <Title style={styles.cardTitle}>
-                      {item.Category.description}
-                    </Title>
+                    <Title style={styles.cardTitle}>{item.Category.description}</Title>
                     <Progress.Circle
                       progress={0.8}
                       size={80}
@@ -187,7 +167,7 @@ export default function Dashboard({ navigation }) {
                       borderWidth={0}
                       unfilledColor="#0F0E47"
                       color="teal"
-                      style={{ alignSelf: "center", padding: 10 }}
+                      style={{ alignSelf: 'center', padding: 10 }}
                     />
                   </Card.Content>
                 </ImageBackground>
@@ -208,13 +188,13 @@ const styles = StyleSheet.create({
     bottom: 35,
   },
   mediumText: {
-    fontStyle: "normal",
-    fontWeight: "400",
+    fontStyle: 'normal',
+    fontWeight: '400',
     fontSize: 14,
     lineHeight: 30,
-    display: "flex",
-    alignItems: "center",
-    color: "rgba(255, 255, 255, 0.7)",
+    display: 'flex',
+    alignItems: 'center',
+    color: 'rgba(255, 255, 255, 0.7)',
   },
   cardDashboard: {
     width: 200,
@@ -222,26 +202,26 @@ const styles = StyleSheet.create({
     marginTop: 10,
     marginBottom: 10,
     marginRight: 15,
-    borderColor: "rgba(102, 112, 128, 0.3)",
+    borderColor: 'rgba(102, 112, 128, 0.3)',
     borderRadius: 15,
-    backgroundColor: "#d2d5db",
+    backgroundColor: '#d2d5db',
     borderWidth: 1,
     fontWeight: 700,
   },
   cardTitle: {
-    fontStyle: "normal",
-    fontWeight: "400",
+    fontStyle: 'normal',
+    fontWeight: '400',
     fontSize: 20,
     lineHeight: 30,
-    display: "flex",
-    alignSelf: "center",
-    color: "rgba(255, 255, 255, 0.7)",
+    display: 'flex',
+    alignSelf: 'center',
+    color: 'rgba(255, 255, 255, 0.7)',
   },
   cardImage: {
     width: 200,
     height: 200,
-    alignItems: "center",
-    justifyContent: "center",
-    alignSelf: "center",
+    alignItems: 'center',
+    justifyContent: 'center',
+    alignSelf: 'center',
   },
 });
