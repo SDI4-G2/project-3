@@ -31,7 +31,10 @@ export default function VideoScreen({ navigation, route }) {
   function endOfLineCheck() {
     if (videos) {
       let last = videos.length - 1;
-      if (currentVideo === videos[0].videoid) {
+      if (currentVideo === videos[0].videoid && currentVideo === videos[last].videoid) {
+        setEndOfFrontLine(true);
+        setEndOfEndLine(true);
+      } else if (currentVideo === videos[0].videoid) {
         setEndOfFrontLine(true);
       } else if (currentVideo === videos[last].videoid) {
         setEndOfEndLine(true);
