@@ -106,9 +106,12 @@ export default function Dashboard({ navigation }) {
                       <Title style={styles.cardTitle} numberOfLines={3}>
                         {item.title}
                       </Title>
+                      <Text style={styles.cardText} numberOfLines={1}>
+                        {item.Category.description}
+                      </Text>
                       <Progress.Circle
                         progress={0.4}
-                        size={80}
+                        size={50}
                         indeterminate={false}
                         thickness={12}
                         strokeCap="round"
@@ -160,7 +163,7 @@ export default function Dashboard({ navigation }) {
                     <Title style={styles.cardTitle}>{item.Category.description}</Title>
                     <Progress.Circle
                       progress={0.8}
-                      size={80}
+                      size={50}
                       indeterminate={false}
                       thickness={12}
                       strokeCap="round"
@@ -210,6 +213,15 @@ const styles = StyleSheet.create({
   },
   cardTitle: {
     fontStyle: 'normal',
+    fontWeight: '400',
+    fontSize: 20,
+    lineHeight: 30,
+    display: 'flex',
+    alignSelf: 'center',
+    color: 'rgba(255, 255, 255, 0.7)',
+  },
+  cardText: {
+    fontStyle: 'italic',
     fontWeight: '400',
     fontSize: 20,
     lineHeight: 30,
