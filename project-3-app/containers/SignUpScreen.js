@@ -32,31 +32,47 @@ export default function SignUpScreen({ navigation }) {
         <View style={styles.padding}>
           <Bold fontBold="Join Us"></Bold>
           <View style={styles.fieldsInput}>
+            <Small fontSmall="Username"></Small>
             <TouchableOpacity style={styles.textContainer}>
-              <Small fontSmall="Username"></Small>
               <TextInput
                 style={styles.userInput}
-                theme={{ colors: { text: "rgba(255, 255, 255, 0.6)" } }}
+                theme={{
+                  colors: {
+                    text: "rgba(255, 255, 255, 0.6)",
+                  },
+                }}
                 value={username}
                 onChangeText={setUsername}
               ></TextInput>
             </TouchableOpacity>
-            <TouchableOpacity style={[styles.textContainer]}>
+            <View style={{ paddingTop: "5%" }}>
               <Small fontSmall="Email"></Small>
+            </View>
+            <TouchableOpacity style={[styles.textContainer]}>
               <TextInput
                 style={styles.userInput}
-                theme={{ colors: { text: "rgba(255, 255, 255, 0.6)" } }}
+                theme={{
+                  colors: {
+                    text: "rgba(255, 255, 255, 0.6)",
+                  },
+                }}
                 value={email}
                 onChangeText={setEmail}
               ></TextInput>
             </TouchableOpacity>
-            <TouchableOpacity style={styles.textContainer}>
+            <View style={{ paddingTop: "5%" }}>
               <Small fontSmall="Password"></Small>
+            </View>
+            <TouchableOpacity style={styles.textContainer}>
               <TextInput
                 onPress={() => setPasswordVisible(!passwordVisible)}
                 onChangeText={setPassword}
                 style={styles.userInput}
-                theme={{ colors: { text: "rgba(255, 255, 255, 0.6)" } }}
+                theme={{
+                  colors: {
+                    text: "rgba(255, 255, 255, 0.6)",
+                  },
+                }}
                 secureTextEntry={passwordVisible}
                 right={
                   <TextInput.Icon
@@ -104,11 +120,12 @@ const styles = StyleSheet.create({
     padding: "10%",
   },
 
-  fieldsInput: {
-    top: "3%",
-  },
   textContainer: {
-    paddingTop: "5%",
+    overflow: "hidden",
+    height: 55,
+    borderColor: "rgba(255,255,255, 0.4)",
+    borderWidth: 1,
+    borderRadius: 16,
   },
 
   buttonsbottom: {
@@ -126,10 +143,6 @@ const styles = StyleSheet.create({
 
     backgroundColor: "rgba(255,255,255, 0.05)",
     borderColor: "rgba(255,255,255, 0.3)",
-    borderWidth: 1,
-    borderRadius: 16,
-    borderTopEndRadius: 16,
-    borderTopStartRadius: 16,
     paddingHorizontal: 10,
     width: "100%",
     alignSelf: "center",
