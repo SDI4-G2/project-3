@@ -33,7 +33,7 @@ export default function ForgetPwScreen({ navigation, props }) {
           {/* <Med fontMed={"No worries,"}></Med> */}
 
           <Med
-            fontMed={"We will send you an email to reset your password."}
+            fontMed={"We will send you an email to get your password reset."}
           ></Med>
         </View>
         <Formik
@@ -48,24 +48,28 @@ export default function ForgetPwScreen({ navigation, props }) {
             <>
               <View style={{ paddingBottom: "15%", paddingTop: "5%" }}>
                 <Small fontSmall="Enter your registered email below"></Small>
-                <Pressable>
+                <Pressable
+                  style={[
+                    styles.textContainer,
+                    {
+                      borderColor:
+                        values.email.length < 1 ||
+                        Validator.validate(values.email)
+                          ? "rgba(255, 255, 255, 0.4)"
+                          : "rgba(244, 107, 107, 0.4)",
+                    },
+                  ]}
+                >
                   <TextInput
                     style={[
                       styles.userInput,
-                      {
-                        borderColor:
-                          values.email.length < 1 ||
-                          Validator.validate(values.email)
-                            ? "rgba(255, 255, 255, 0.4)"
-                            : "rgba(244, 107, 107, 0.4)",
-                      },
-                      {
-                        borderWidth:
-                          values.email.length < 1 ||
-                          Validator.validate(values.email)
-                            ? 1
-                            : 3,
-                      },
+                      // {
+                      //   borderColor:
+                      //     values.email.length < 1 ||
+                      //     Validator.validate(values.email)
+                      //       ? "rgba(255, 255, 255, 0.4)"
+                      //       : "rgba(244, 107, 107, 0.4)",
+                      // },
                     ]}
                     keyboardType="email-address"
                     textContentType="emailAddress"
@@ -97,12 +101,20 @@ const styles = StyleSheet.create({
     padding: "10%",
   },
 
+  textContainer: {
+    overflow: "hidden",
+    height: 55,
+    borderColor: "rgba(255,255,255, 0.4)",
+    borderWidth: 1,
+    borderRadius: 16,
+  },
+
   userInput: {
     height: 55,
     backgroundColor: "rgba(255, 255,255, 0.05)",
-    borderColor: "rgba(255, 255, 255, 0.3)",
-    borderWidth: 1,
-    borderRadius: 16,
+    // borderColor: "rgba(255, 255, 255, 0.3)",
+    // borderWidth: 1,
+    // borderRadius: 16,
     borderTopEndRadius: 16,
     borderTopStartRadius: 16,
     paddingHorizontal: 10,
