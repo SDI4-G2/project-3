@@ -42,12 +42,19 @@ export default function WelcomeScreen({ navigation, props }) {
         <Small fontSmall="Username / E-mail"></Small>
         <TouchableOpacity style={styles.textContainer}>
           <TextInput
+            underlineColorAndroid="transparent"
+            spellCheck={false}
+            autoCorrect={false}
             onChangeText={(text) => validate(text)}
             style={styles.userInput}
             keyboardType="email-address"
             textContentType="emailAddress"
             autoFocus={true}
-            theme={{ colors: { text: "rgba(255, 255, 255, 0.6)" } }}
+            theme={{
+              colors: {
+                text: "rgba(255, 255, 255, 0.6)",
+              },
+            }}
           ></TextInput>
         </TouchableOpacity>
         <View style={{ paddingTop: "5%" }}>
@@ -58,7 +65,11 @@ export default function WelcomeScreen({ navigation, props }) {
               onPress={() => setPasswordVisible(!passwordVisible)}
               onChangeText={setPassword}
               style={styles.userInput}
-              theme={{ colors: { text: "rgba(255, 255, 255, 0.6)" } }}
+              theme={{
+                colors: {
+                  text: "rgba(255, 255, 255, 0.6)",
+                },
+              }}
               secureTextEntry={passwordVisible}
               right={
                 <TextInput.Icon
@@ -131,12 +142,18 @@ const styles = StyleSheet.create({
   normal: {
     opacity: 1,
   },
+
+  textContainer: {
+    overflow: "hidden",
+    height: 55,
+    borderRadius: 16,
+    borderWidth: 1,
+    borderColor: "rgba(255, 255, 255, 0.3)",
+  },
+
   userInput: {
     height: 55,
     backgroundColor: "rgba(255, 255,255, 0.05)",
-    borderColor: "rgba(255, 255, 255, 0.3)",
-    borderWidth: 1,
-    borderRadius: 16,
     borderTopEndRadius: 16,
     borderTopStartRadius: 16,
     paddingHorizontal: 10,
