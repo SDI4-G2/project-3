@@ -1,4 +1,4 @@
-import { View, Text, Image, Pressable, TouchableOpacity } from "react-native";
+import { View, Text, Image } from "react-native";
 import React from "react";
 import { useFonts } from "expo-font";
 import { Poppins_300Light } from "@expo-google-fonts/poppins";
@@ -14,7 +14,7 @@ export default function PreviousAndNext({ wording }) {
   } else
     return (
       <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
-        <TouchableOpacity style={{ flexDirection: "row", alignSelf: "center" }}>
+        <View style={{ flexDirection: "row", alignSelf: "center" }}>
           <Image
             source={arrow}
             style={{
@@ -38,8 +38,8 @@ export default function PreviousAndNext({ wording }) {
               Previous {wording}
             </Text>
           </View>
-        </TouchableOpacity>
-        <TouchableOpacity
+        </View>
+        {/* <TouchableOpacity
           style={{
             flexDirection: "row",
             alignSelf: "center",
@@ -65,7 +65,7 @@ export default function PreviousAndNext({ wording }) {
             </Text>
           </View>
           <Image source={arrow} style={{ opacity: 0.6 }} />
-        </TouchableOpacity>
+        </TouchableOpacity> */}
       </View>
     );
 }
