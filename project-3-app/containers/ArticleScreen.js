@@ -1,10 +1,18 @@
 import React, { useState, useEffect } from "react";
-import { Text, View, StyleSheet, ScrollView, Image } from "react-native";
+import {
+  Text,
+  View,
+  StyleSheet,
+  ScrollView,
+  Image,
+  TouchableOpacity,
+} from "react-native";
 import HeaderBar from "../components/Headers";
 import { Card, Title, Paragraph, Button } from "react-native-paper";
 import MedCenter from "../assets/Poppins_CenterTitle";
 import bitcoinPic from "../assets/bitcoin3.5.png";
-import PreviousAndNext from "../components/PreviousAndNext";
+import PreviousButton from "../components/PreviousButton";
+import NextButton from "../components/NextButton";
 
 export default function VideoScreen({ wording }) {
   return (
@@ -55,8 +63,15 @@ export default function VideoScreen({ wording }) {
               </ScrollView>
             </Card.Content>
           </Card>
-          <View style={{ top: 10 }}>
-            <PreviousAndNext wording={"Article"} />
+          <View
+            style={{ flexDirection: "row", justifyContent: "space-between" }}
+          >
+            <TouchableOpacity>
+              <PreviousButton wording={"Article"} />
+            </TouchableOpacity>
+            <TouchableOpacity>
+              <NextButton wording={"Article"} />
+            </TouchableOpacity>
           </View>
         </View>
       </View>
