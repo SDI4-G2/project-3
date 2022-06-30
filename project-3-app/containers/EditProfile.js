@@ -1,11 +1,4 @@
-import {
-  Text,
-  TouchableOpacity,
-  StyleSheet,
-  View,
-  Button,
-  Image,
-} from "react-native";
+import { Text, TouchableOpacity, StyleSheet, View, Image } from "react-native";
 
 import React, { useState, useEffect } from "react";
 
@@ -15,30 +8,23 @@ import editingIconSeven from "../assets/editingiconseven.png";
 import { useFonts } from "expo-font";
 import { Poppins_300Light } from "@expo-google-fonts/poppins";
 import { Poppins_500Medium } from "@expo-google-fonts/poppins";
-import { BottomSheet } from "react-native-btr";
-import chevronDown from "../assets/chevronDown.png";
-import Small from "../assets/Poppins_Small";
-import { TextInput } from "react-native-paper";
-import LogOutButton from "../components/LogOutButton";
-import { LinearGradient } from "expo-linear-gradient";
+import ModalEditUsername from "../components/ModalEditUsername";
+import ModalEditPassword from "../components/ModalEditPassword";
 
 import Jwt from "../api/Jwt";
 
-export default function EditProfile({ firstLine, textForInput }) {
-  const [visible, setVisible] = useState(false);
+export default function EditProfile() {
   const [username, setUsername] = useState([]);
   const [useremail, setUseremail] = useState([]);
+
+  const [modalUsernameVisible, setModalUsernameVisible] = useState(false);
+  const [modalPasswordVisible, setModalPasswordVisible] = useState(false);
 
   async function getJwt() {
     const list = await Jwt();
     setUsername(list.username);
     setUseremail(list.email);
   }
-
-  const toggleBottomNavigationView = () => {
-    //Toggling the visibility state of the bottom sheet
-    setVisible(!visible);
-  };
 
   useEffect(() => {
     getJwt();
@@ -65,7 +51,8 @@ export default function EditProfile({ firstLine, textForInput }) {
                 </View>
                 <TouchableOpacity
                   style={styles.editingIcon}
-                  onPress={toggleBottomNavigationView}
+                  // onPress={toggleBottomNavigationView}
+                  onPress={() => setModalUsernameVisible(!modalUsernameVisible)}
                 >
                   <Image
                     source={editingIconSeven}
@@ -84,7 +71,10 @@ export default function EditProfile({ firstLine, textForInput }) {
                   <Text style={styles.buttonText}>Password</Text>
                   <Text style={styles.buttonTextTwo}>******</Text>
                 </View>
-                <TouchableOpacity style={styles.editingIcon}>
+                <TouchableOpacity
+                  style={styles.editingIcon}
+                  onPress={() => setModalPasswordVisible(!modalPasswordVisible)}
+                >
                   <Image
                     source={editingIconSeven}
                     style={{ height: 45, width: 45, opacity: 0.8 }}
@@ -93,88 +83,10 @@ export default function EditProfile({ firstLine, textForInput }) {
               </View>
             </View>
           </View>
-
-          <BottomSheet
-            visible={visible}
-            //setting the visibility state of the bottom sheet
-            onBackButtonPress={toggleBottomNavigationView}
-            //Toggling the visibility state on the click of the back botton
-            onBackdropPress={toggleBottomNavigationView}
-            //Toggling the visibility state on the clicking out side of the sheet
-          >
-            {/*Bottom Sheet inner View*/}
-            <View style={styles.bottomNavigationView}>
-              <View
-                style={{
-                  // flex: 1,
-                  flexDirection: "column",
-                  justifyContent: "space-around",
-                }}
-              >
-                <LinearGradient
-                  style={styles.gradient}
-                  start={{ x: 0, y: 0 }}
-                  end={{ x: 1, y: 1 }}
-                  colors={["rgba(203,179,132,0.5)", "rgba(125,114,93,0.1)"]}
-                >
-                  <Image
-                    source={chevronDown}
-                    style={{
-                      height: 50,
-                      width: 50,
-                      opacity: 0.8,
-
-                      alignSelf: "center",
-                    }}
-                  />
-                  <View
-                    style={{
-                      alignSelf: "center",
-                      width: "70%",
-                    }}
-                  >
-                    <Small fontSmall={"Edit Username"}></Small>
-                  </View>
-                  <TouchableOpacity style={styles.textContainer}>
-                    <TextInput
-                      // onChangeText={(text) => validate(text)}
-                      style={styles.userInput}
-                      theme={{ colors: { text: "rgba(255, 255, 255, 0.6)" } }}
-                      defaultValue={username}
-                    ></TextInput>
-                  </TouchableOpacity>
-                  <View
-                    style={{
-                      alignSelf: "center",
-                      width: "70%",
-                      paddingTop: "3%",
-                    }}
-                  >
-                    <Small fontSmall={"Enter your password to confirm"}></Small>
-                  </View>
-
-                  <TouchableOpacity style={styles.textContainer}>
-                    <TextInput
-                      // onChangeText={(text) => validate(text)}
-                      style={styles.userInput}
-                      keyboardType="email-address"
-                      textContentType="emailAddress"
-                      theme={{ colors: { text: "rgba(255, 255, 255, 0.6)" } }}
-                    ></TextInput>
-                  </TouchableOpacity>
-                  <TouchableOpacity
-                    style={{
-                      paddingTop: "5%",
-                      width: "85%",
-                      alignSelf: "center",
-                    }}
-                  >
-                    <LogOutButton naming="Save Changes"></LogOutButton>
-                  </TouchableOpacity>
-                </LinearGradient>
-              </View>
-            </View>
-          </BottomSheet>
+          {modalUsernameVisible ? (
+            <ModalEditUsername usernameInput={username} />
+          ) : null}
+          {modalPasswordVisible ? <ModalEditPassword /> : null}
         </View>
       </View>
     );
@@ -226,65 +138,5 @@ const styles = StyleSheet.create({
   },
   normal: {
     opacity: 1,
-  },
-
-  userInput: {
-    height: 55,
-    backgroundColor: "rgba(255,255,255, 0.05)",
-    borderColor: "rgba(255,255,255, 0.3)",
-    borderWidth: 1,
-    borderRadius: 16,
-    borderTopEndRadius: 16,
-    borderTopStartRadius: 16,
-    paddingHorizontal: 10,
-    width: "100%",
-    alignSelf: "center",
-  },
-  noInput: {
-    height: 55,
-    backgroundColor: "rgba(186, 192, 202, 0.6)",
-    borderColor: "rgba(102, 112, 128, 0.4)",
-    borderWidth: 1,
-    borderRadius: 16,
-    borderTopEndRadius: 16,
-    borderTopStartRadius: 16,
-    paddingHorizontal: 10,
-    textAlign: "center",
-    color: "white",
-    opacity: 0.4,
-    width: "100%",
-    alignSelf: "center",
-  },
-  bottomNavigationView: {
-    // backgroundColor: "rgba(000,000,000,0.5)",
-    height: 280,
-    borderTopEndRadius: 30,
-    borderTopStartRadius: 30,
-    borderTopWidth: 1,
-    borderLeftWidth: 1,
-    borderRightWidth: 1,
-    borderColor: "rgba(255,255,255,0.4)",
-  },
-  gradient: {
-    borderTopLeftRadius: 30,
-    borderTopRightRadius: 30,
-    height: 280,
-  },
-
-  textContainer: {
-    overflow: "hidden",
-    height: 40,
-    borderColor: "rgba(255,255,255, 0.4)",
-    backgroundColor: "rgba(31,29,28,0.3)",
-    borderWidth: 1,
-    width: "70%",
-    borderRadius: 16,
-    alignSelf: "center",
-  },
-
-  userInput: {
-    height: 40,
-    backgroundColor: "rgba(31,29,28,0.3)",
-    overflow: "hidden",
   },
 });

@@ -43,6 +43,7 @@ export default function SignUpScreen({ navigation }) {
                 }}
                 value={username}
                 onChangeText={setUsername}
+                autoFocus={true}
               ></TextInput>
             </TouchableOpacity>
             <View style={{ paddingTop: "5%" }}>
