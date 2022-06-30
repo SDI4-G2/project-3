@@ -46,7 +46,7 @@ export default function WelcomeScreen({ navigation, props }) {
             spellCheck={false}
             autoCorrect={false}
             onChangeText={(text) => validate(text)}
-            style={styles.userInput}
+            style={[styles.userInput]}
             keyboardType="email-address"
             textContentType="emailAddress"
             autoFocus={true}

@@ -1,17 +1,32 @@
-import React, { useState, useEffect } from 'react';
-import { Text, TouchableOpacity, View, Button, StyleSheet, useWindowDimensions, ScrollView, SafeAreaView, StatusBar } from 'react-native';
-import WebView from 'react-native-webview';
-import IframeRenderer, { iframeModel } from '@native-html/iframe-plugin';
-import RenderHTML from 'react-native-render-html';
-import { useFonts } from 'expo-font';
-import { Poppins_300Light } from '@expo-google-fonts/poppins';
-import { Poppins_500Medium } from '@expo-google-fonts/poppins';
-import HeaderBar from '../components/Headers';
+
+import React, { useState, useEffect } from "react";
+import {
+  Text,
+  TouchableOpacity,
+  View,
+  Button,
+  StyleSheet,
+  useWindowDimensions,
+  ScrollView,
+  SafeAreaView,
+  StatusBar,
+} from "react-native";
+import WebView from "react-native-webview";
+import IframeRenderer, { iframeModel } from "@native-html/iframe-plugin";
+import RenderHTML from "react-native-render-html";
+import { useFonts } from "expo-font";
+import { Poppins_300Light } from "@expo-google-fonts/poppins";
+import { Poppins_500Medium } from "@expo-google-fonts/poppins";
+import HeaderBar from "../components/Headers";
+import PreviousAndNext from "../components/PreviousAndNext";
 
 import GetVideo from '../api/GetVideo';
 
-export default function VideoScreen({ navigation, route }) {
+
+export default function VideoScreen({ navigation, route, wording }) {
+
   const [videos, setVideos] = useState(null);
+
   const [list, setList] = useState(undefined);
   const [currentVideo, setCurrentVideo] = useState(undefined);
   const [endOfFrontLine, setEndOfFrontLine] = useState(false);
@@ -131,6 +146,9 @@ export default function VideoScreen({ navigation, route }) {
             orci. Praesent finibus mi bibendum, rhoncus felis vel, iaculis purus. Integer aliquam eros nunc, a posuere nibh pulvinar a.
           </Text>
         </ScrollView>
+        <View style={{ top: 50 }}>
+          <PreviousAndNext wording={"Video"} />
+        </View>
       </SafeAreaView>
     );
   }
@@ -147,14 +165,16 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
   },
   border: {
-    borderWidth: 3,
-    borderColor: 'rgba(102, 112, 128, 0.4)',
+
+    borderWidth: 1,
+    borderColor: "rgba(255, 255, 255, 0.4)",
     borderRadius: 18,
-    backgroundColor: 'rgba(27, 27, 54, 0.3)',
-    height: '40%',
-    width: '90%',
-    alignSelf: 'center',
-    top: '5%',
+    backgroundColor: "rgba(255, 255, 255, 0.1)",
+    height: "40%",
+    width: "90%",
+    alignSelf: "center",
+    top: "5%",
+
   },
   text: {
     textAlign: 'left',

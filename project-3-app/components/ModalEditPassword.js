@@ -66,7 +66,7 @@ export default function ModalEditPassword() {
                     width: "70%",
                   }}
                 >
-                  <Small fontSmall={"Change Password"}></Small>
+                  <Small fontSmall={"New Password"}></Small>
                 </View>
                 <TouchableOpacity style={styles.textContainer}>
                   <TextInput
@@ -90,7 +90,9 @@ export default function ModalEditPassword() {
                     paddingTop: "3%",
                   }}
                 >
-                  <Small fontSmall={"Enter your password to confirm"}></Small>
+                  <Small
+                    fontSmall={"Enter your old password to confirm"}
+                  ></Small>
                 </View>
 
                 <TouchableOpacity style={styles.textContainer}>
