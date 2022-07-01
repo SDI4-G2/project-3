@@ -16,6 +16,7 @@ import SecondHeaderBar from "../components/SecondHeader";
 import Bold from "../assets/Poppins_Bold";
 import Small from "../assets/Poppins_Small";
 import Underline from "../assets/Poppins_Underline";
+import Validator from "email-validator";
 
 export default function SignUpScreen({ navigation }) {
   const [email, setEmail] = useState(undefined);
@@ -33,7 +34,19 @@ export default function SignUpScreen({ navigation }) {
           <Bold fontBold="Join Us"></Bold>
           <View style={styles.fieldsInput}>
             <Small fontSmall="Username"></Small>
-            <TouchableOpacity style={styles.textContainer}>
+            <TouchableOpacity
+              style={[
+                styles.textContainer,
+                {
+                  borderColor:
+                    username === undefined ||
+                    username.length < 1 ||
+                    username.length > 5
+                      ? "rgba(255, 255, 255, 0.4)"
+                      : "rgba(244, 107, 107, 0.4)",
+                },
+              ]}
+            >
               <TextInput
                 style={styles.userInput}
                 theme={{
@@ -49,7 +62,19 @@ export default function SignUpScreen({ navigation }) {
             <View style={{ paddingTop: "5%" }}>
               <Small fontSmall="Email"></Small>
             </View>
-            <TouchableOpacity style={[styles.textContainer]}>
+            <TouchableOpacity
+              style={[
+                styles.textContainer,
+                {
+                  borderColor:
+                    email === undefined ||
+                    email.length < 1 ||
+                    Validator.validate(email)
+                      ? "rgba(255, 255, 255, 0.4)"
+                      : "rgba(244, 107, 107, 0.4)",
+                },
+              ]}
+            >
               <TextInput
                 style={styles.userInput}
                 theme={{
@@ -64,7 +89,19 @@ export default function SignUpScreen({ navigation }) {
             <View style={{ paddingTop: "5%" }}>
               <Small fontSmall="Password"></Small>
             </View>
-            <TouchableOpacity style={styles.textContainer}>
+            <TouchableOpacity
+              style={[
+                styles.textContainer,
+                {
+                  borderColor:
+                    password === undefined ||
+                    password.length < 1 ||
+                    password.length > 5
+                      ? "rgba(255, 255, 255, 0.4)"
+                      : "rgba(244, 107, 107, 0.4)",
+                },
+              ]}
+            >
               <TextInput
                 onPress={() => setPasswordVisible(!passwordVisible)}
                 onChangeText={setPassword}
