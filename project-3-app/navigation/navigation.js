@@ -10,7 +10,7 @@ import VideoScreen from "../containers/VideoScreen";
 import ForgetPwScreen from "../containers/ForgetPwScreen";
 import SubscriptionScreen from "../containers/SubscriptionScreen";
 // import HistoryScreen from "../containers/HistoryScreen";
-// import SupportScreen from "../containers/SupportScreen";
+import SupportScreen from "../containers/SupportScreen";
 // import BookmarkScreen from "../containers/BookmarksScreen";
 // import LibraryScreen from "../containers/LibraryScreen";
 // import SubMainScreen from "../containers/SubMainScreen";
@@ -93,11 +93,11 @@ const Navigation = () => {
             component={HistoryScreen}
             options={{ headerShown: false }}
           /> */}
-          {/* <Stack.Screen
+          <Stack.Screen
             name="SupportScreen"
             component={SupportScreen}
             options={{ headerShown: false }}
-          /> */}
+          />
           {/* <Stack.Screen
             name="BookmarkScreen"
             component={BookmarkScreen}

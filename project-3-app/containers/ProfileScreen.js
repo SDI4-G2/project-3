@@ -41,7 +41,10 @@ export default function ProfileScreen({ navigation }) {
         {/* <TouchableOpacity style={styles.padding}>
           <ProfileButton naming="Saved Content"></ProfileButton>
         </TouchableOpacity> */}
-        <TouchableOpacity style={styles.padding}>
+        <TouchableOpacity
+          style={styles.padding}
+          onPress={() => navigation.navigate("SupportScreen")}
+        >
           <ProfileButton naming="Help and Support"></ProfileButton>
         </TouchableOpacity>
       </View>
