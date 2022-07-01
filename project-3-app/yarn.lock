@@ -1392,13 +1392,6 @@
   "resolved" "https://registry.npmjs.org/@gar/promisify/-/promisify-1.1.3.tgz"
   "version" "1.1.3"
 
-"@gorhom/portal@1.0.13":
-  "integrity" "sha512-ViClKPkyGnj8HVMW45OGQSnGbWBVh8i3tgMOkGqpm6Cv0WVcDfUL7SER6zyGQy8Wdoj3GUDpAJFMqVOxpmRpzw=="
-  "resolved" "https://registry.npmjs.org/@gorhom/portal/-/portal-1.0.13.tgz"
-  "version" "1.0.13"
-  dependencies:
-    "nanoid" "^3.3.1"
-
 "@graphql-typed-document-node/core@^3.1.0", "@graphql-typed-document-node/core@^3.1.1":
   "integrity" "sha512-NQ17ii0rK1b34VZonlmT2QMJFI70m0TRwbknO/ihlbatXyaktDhN/98vBiUU6kNBPljqGqyIrl2T4nY2RpFANg=="
   "resolved" "https://registry.npmjs.org/@graphql-typed-document-node/core/-/core-3.1.1.tgz"
@@ -2001,11 +1994,6 @@
   "version" "3.0.0"
   dependencies:
     "event-target-shim" "^5.0.0"
-
-"abs-svg-path@^0.1.1":
-  "integrity" "sha512-d8XPSGjfyzlXC3Xx891DJRyZfqk5JU0BJrDQcsWomFIV1/BIzPW5HDH5iDdWpqWaav0YVIEzT1RHTwWr0FFshA=="
-  "resolved" "https://registry.npmjs.org/abs-svg-path/-/abs-svg-path-0.1.1.tgz"
-  "version" "0.1.1"
 
 "absolute-path@^0.0.0":
   "integrity" "sha512-HQiug4c+/s3WOvEnDRxXVmNtSG5s2gJM9r19BTcqjp7BWcE48PB+Y2G6jE65kqI0LpsQeMZygt/b60Gi4KxGyA=="
@@ -5289,7 +5277,7 @@
   "resolved" "https://registry.npmjs.org/nanoclone/-/nanoclone-0.2.1.tgz"
   "version" "0.2.1"
 
-"nanoid@^3.1.23", "nanoid@^3.3.1", "nanoid@^3.3.3":
+"nanoid@^3.1.23":
   "integrity" "sha512-MqBkQh/OHTS2egovRtLk45wEyNXwF+cokD+1YPf9u5VfJiRdAiRwB2froX5Co9Rh20xs4siNPm8naNotSD6RBw=="
   "resolved" "https://registry.npmjs.org/nanoid/-/nanoid-3.3.4.tgz"
   "version" "3.3.4"
@@ -5384,13 +5372,6 @@
   "integrity" "sha512-6eZs5Ls3WtCisHWp9S2GUy8dqkpGi4BVSz3GaqiE6ezub0512ESztXUwUB6C6IKbQkY2Pnb/mD4WYojCRwcwLA=="
   "resolved" "https://registry.npmjs.org/normalize-path/-/normalize-path-3.0.0.tgz"
   "version" "3.0.0"
-
-"normalize-svg-path@^1.0.1":
-  "integrity" "sha512-r9KHKG2UUeB5LoTouwDzBy2VxXlHsiM6fyLQvnJa0S5hrhzqElH/CH7TUGhT1fVvIYBIKf3OpY4YJ4CK+iaqHg=="
-  "resolved" "https://registry.npmjs.org/normalize-svg-path/-/normalize-svg-path-1.1.0.tgz"
-  "version" "1.1.0"
-  dependencies:
-    "svg-arc-to-cubic-bezier" "^3.0.0"
 
 "npm-package-arg@^7.0.0":
   "integrity" "sha512-xXxr8y5U0kl8dVkz2oK7yZjPBvqM2fwaO5l3Yg13p03v8+E3qQcD0JNhHzjL1vyGgxcKkD0cco+NLR72iuPk3g=="
@@ -5645,11 +5626,6 @@
   "version" "2.1.0"
   dependencies:
     "pngjs" "^3.3.0"
-
-"parse-svg-path@^0.1.2":
-  "integrity" "sha512-JyPSBnkTJ0AI8GGJLfMXvKq42cj5c006fnLz6fXy6zfoVjJizi8BNTpu8on8ziI1cKy9d9DGNuY17Ce7wuejpQ=="
-  "resolved" "https://registry.npmjs.org/parse-svg-path/-/parse-svg-path-0.1.2.tgz"
-  "version" "0.1.2"
 
 "parseurl@~1.3.3":
   "integrity" "sha512-CiyeOxFT/JZyN5m0z9PfXw4SCBJ6Sygz1Dpl0wqjlhDEGGBP1GnsUVEL0p63hoG1fcj3fHynXi9NYO4nWOL+qQ=="
@@ -5980,7 +5956,7 @@
     "jscodeshift" "^0.13.1"
     "nullthrows" "^1.1.1"
 
-"react-native-gesture-handler@*", "react-native-gesture-handler@>=1.10.1":
+"react-native-gesture-handler@*":
   "integrity" "sha512-djZdcprFf08PZC332D+AeG5wcGeAPhzfCJtB3otUgOgTlvjVXmg/SLFdPJSpzLBqkRAmrC77tM79QgKbuLxkfw=="
   "resolved" "https://registry.npmjs.org/react-native-gesture-handler/-/react-native-gesture-handler-2.5.0.tgz"
   "version" "2.5.0"
@@ -6046,11 +6022,12 @@
   dependencies:
     "lodash" "^4.17.15"
 
-"react-native-reanimated@*", "react-native-reanimated@>=2.0.0", "react-native-reanimated@>=2.2.0":
-  "integrity" "sha512-kJvf/UWLBMaGCs9X66MKq5zdFMgwx8D0nHnolbHR7s8ZnbLdb7TlQ/yuzIXqn/9wABfnwtNRI3CyaP1aHWMmZg=="
-  "resolved" "https://registry.npmjs.org/react-native-reanimated/-/react-native-reanimated-2.8.0.tgz"
-  "version" "2.8.0"
+"react-native-reanimated@*", "react-native-reanimated@^2.9.0", "react-native-reanimated@>=2.2.0":
+  "integrity" "sha512-UuUQDIYv0F4cKGcwQN3c9PfVd5+dgXqDZ9S97JQCOfrU2JlfhR6MLurpOyW0GxgLy/TIFPPvHRBW4oL674kaSQ=="
+  "resolved" "https://registry.npmjs.org/react-native-reanimated/-/react-native-reanimated-2.9.0.tgz"
+  "version" "2.9.0"
   dependencies:
+    "@babel/plugin-proposal-export-namespace-from" "^7.17.12"
     "@babel/plugin-transform-object-assign" "^7.16.7"
     "@babel/preset-typescript" "^7.16.7"
     "@types/invariant" "^2.2.35"
@@ -6058,15 +6035,6 @@
     "lodash.isequal" "^4.5.0"
     "setimmediate" "^1.0.5"
     "string-hash-64" "^1.0.3"
-
-"react-native-redash@^16.1.1":
-  "integrity" "sha512-dhmeYbQ/usGzxZSGZmzmRuIFF2LrtJUKqgseKgf9Jdj0JQ7VM20m/LqTg60+wjxeiyAh2D/vKsQ2U7rMkuoplQ=="
-  "resolved" "https://registry.npmjs.org/react-native-redash/-/react-native-redash-16.3.0.tgz"
-  "version" "16.3.0"
-  dependencies:
-    "abs-svg-path" "^0.1.1"
-    "normalize-svg-path" "^1.0.1"
-    "parse-svg-path" "^0.1.2"
 
 "react-native-render-html@>= 6.0.0-beta.0 || 6.x", "react-native-render-html@>= 6.1.0 < 7":
   "integrity" "sha512-H2jSMzZjidE+Wo3qCWPUMU1nm98Vs2SGCvQCz/i6xf0P3Y9uVtG/b0sDbG/cYFir2mSYBYCIlS1Dv0WC1LjYig=="
