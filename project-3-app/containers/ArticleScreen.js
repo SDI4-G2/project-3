@@ -8,7 +8,7 @@ import {
   TouchableOpacity,
 } from "react-native";
 import HeaderBar from "../components/Headers";
-import { Card, Title, Paragraph, Button } from "react-native-paper";
+import { Card } from "react-native-paper";
 import MedCenter from "../assets/Poppins_CenterTitle";
 import bitcoinPic from "../assets/bitcoin3.5.png";
 import PreviousButton from "../components/PreviousButton";
@@ -16,7 +16,7 @@ import NextButton from "../components/NextButton";
 
 export default function VideoScreen({ wording }) {
   return (
-    <View style={{ flex: 1 }}>
+    <View>
       <HeaderBar />
       <View>
         <View style={styles.card}>
@@ -114,6 +114,7 @@ const styles = StyleSheet.create({
     lineHeight: 30,
     // width: "90%",
     alignSelf: "center",
+    height: "100%",
   },
 
   image: {

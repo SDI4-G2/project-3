@@ -40,7 +40,19 @@ export default function WelcomeScreen({ navigation, props }) {
       <Bold fontBold="Welcome!"></Bold>
       <View style={styles.fieldsInput}>
         <Small fontSmall="Username / E-mail"></Small>
-        <TouchableOpacity style={styles.textContainer}>
+        <TouchableOpacity
+          style={[
+            styles.textContainer,
+            {
+              borderColor:
+                username === undefined ||
+                username.length < 1 ||
+                username.length > 5
+                  ? "rgba(255, 255, 255, 0.4)"
+                  : "rgba(244, 107, 107, 0.4)",
+            },
+          ]}
+        >
           <TextInput
             underlineColorAndroid="transparent"
             spellCheck={false}
@@ -59,12 +71,24 @@ export default function WelcomeScreen({ navigation, props }) {
         </TouchableOpacity>
         <View style={{ paddingTop: "5%" }}>
           <Small fontSmall="Password"></Small>
-          <TouchableOpacity style={styles.textContainer}>
+          <TouchableOpacity
+            style={[
+              styles.textContainer,
+              {
+                borderColor:
+                  password === undefined ||
+                  password.length < 1 ||
+                  password.length > 5
+                    ? "rgba(255, 255, 255, 0.4)"
+                    : "rgba(244, 107, 107, 0.4)",
+              },
+            ]}
+          >
             <TextInput
               value={password}
               onPress={() => setPasswordVisible(!passwordVisible)}
               onChangeText={setPassword}
-              style={styles.userInput}
+              style={[styles.userInput]}
               theme={{
                 colors: {
                   text: "rgba(255, 255, 255, 0.6)",
