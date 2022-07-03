@@ -1,24 +1,19 @@
-import React, { useState } from "react";
-import {
-  SafeAreaView,
-  StyleSheet,
-  View,
-  Text,
-  Pressable,
-  Image,
-  TouchableOpacity,
-} from "react-native";
-import { BottomSheet } from "react-native-btr";
-import chevronDown from "../assets/chevronDown.png";
-import Small from "../assets/Poppins_Small";
-import { TextInput } from "react-native-paper";
-import LogOutButton from "./LogOutButton";
-import { LinearGradient } from "expo-linear-gradient";
+import React, { useState } from 'react';
+import { SafeAreaView, StyleSheet, View, Text, Pressable, Image, TouchableOpacity } from 'react-native';
+import { BottomSheet } from 'react-native-btr';
+import chevronDown from '../assets/chevronDown.png';
+import Small from '../assets/Poppins_Small';
+import { TextInput } from 'react-native-paper';
+import LogOutButton from './LogOutButton';
+import { LinearGradient } from 'expo-linear-gradient';
+import EditPassword from '../api/EditPassword';
 
-export default function ModalEditPassword() {
+export default function ModalEditPassword({ useremailInput, navigation }) {
   const [visible, setVisible] = useState(true);
-
   const [passwordVisible, setPasswordVisible] = useState(true);
+  const [email, setEmail] = useState(useremailInput);
+  const [newpassword, setNewpassword] = useState('');
+  const [password, setPassword] = useState('');
 
   const toggleBottomNavigationView = () => {
     //Toggling the visibility state of the bottom sheet
@@ -40,15 +35,15 @@ export default function ModalEditPassword() {
             <View
               style={{
                 // flex: 1,
-                flexDirection: "column",
-                justifyContent: "space-around",
+                flexDirection: 'column',
+                justifyContent: 'space-around',
               }}
             >
               <LinearGradient
                 style={styles.gradient}
                 start={{ x: 0, y: 0 }}
                 end={{ x: 1, y: 1 }}
-                colors={["rgba(111,94,73,0.5)", "rgba(48,42,34,0.3)"]}
+                colors={['rgba(111,94,73,0.5)', 'rgba(48,42,34,0.3)']}
               >
                 <Image
                   source={chevronDown}
@@ -57,26 +52,26 @@ export default function ModalEditPassword() {
                     width: 50,
                     opacity: 0.8,
 
-                    alignSelf: "center",
+                    alignSelf: 'center',
                   }}
                 />
                 <View
                   style={{
-                    alignSelf: "center",
-                    width: "70%",
+                    alignSelf: 'center',
+                    width: '70%',
                   }}
                 >
-                  <Small fontSmall={"New Password"}></Small>
+                  <Small fontSmall={'New Password'}></Small>
                 </View>
                 <TouchableOpacity style={styles.textContainer}>
                   <TextInput
-                    // onChangeText={(text) => validate(text)}
+                    onChangeText={setNewpassword}
                     style={styles.userInput}
-                    theme={{ colors: { text: "rgba(255, 255, 255, 0.6)" } }}
+                    theme={{ colors: { text: 'rgba(255, 255, 255, 0.6)' } }}
                     secureTextEntry={passwordVisible}
                     right={
                       <TextInput.Icon
-                        name={passwordVisible ? "eye" : "eye-off"}
+                        name={passwordVisible ? 'eye' : 'eye-off'}
                         onPress={() => setPasswordVisible(!passwordVisible)}
                         // onChangeText={setPassword}
                       />
@@ -85,25 +80,23 @@ export default function ModalEditPassword() {
                 </TouchableOpacity>
                 <View
                   style={{
-                    alignSelf: "center",
-                    width: "70%",
-                    paddingTop: "3%",
+                    alignSelf: 'center',
+                    width: '70%',
+                    paddingTop: '3%',
                   }}
                 >
-                  <Small
-                    fontSmall={"Enter your old password to confirm"}
-                  ></Small>
+                  <Small fontSmall={'Enter your old password to confirm'}></Small>
                 </View>
 
                 <TouchableOpacity style={styles.textContainer}>
                   <TextInput
-                    // onChangeText={(text) => validate(text)}
+                    onChangeText={setPassword}
                     style={styles.userInput}
-                    theme={{ colors: { text: "rgba(255, 255, 255, 0.6)" } }}
+                    theme={{ colors: { text: 'rgba(255, 255, 255, 0.6)' } }}
                     secureTextEntry={passwordVisible}
                     right={
                       <TextInput.Icon
-                        name={passwordVisible ? "eye" : "eye-off"}
+                        name={passwordVisible ? 'eye' : 'eye-off'}
                         onPress={() => setPasswordVisible(!passwordVisible)}
                         // onChangeText={setPassword}
                       />
@@ -111,11 +104,9 @@ export default function ModalEditPassword() {
                   ></TextInput>
                 </TouchableOpacity>
                 <TouchableOpacity
-                  style={{
-                    paddingTop: "5%",
-                    width: "85%",
-                    alignSelf: "center",
-                  }}
+                  style={!newpassword || !email || !password ? styles.disabled : styles.normal}
+                  disabled={newpassword.length < 6 || email.length < 6 || password.length < 6}
+                  onPress={async () => await EditPassword({ newpassword, email, password, navigation }).then((res) => setVisible(res))}
                 >
                   <LogOutButton naming="Save Changes"></LogOutButton>
                 </TouchableOpacity>
@@ -130,12 +121,12 @@ export default function ModalEditPassword() {
 
 const styles = StyleSheet.create({
   bottomNavigationView: {
-    backgroundColor: "rgba(000,000,000,0.4)",
+    backgroundColor: 'rgba(000,000,000,0.4)',
     height: 280,
     borderTopEndRadius: 30,
     borderTopStartRadius: 30,
     borderWidth: 1,
-    borderColor: "rgba(255,255,255,0.4)",
+    borderColor: 'rgba(255,255,255,0.4)',
   },
   gradient: {
     borderTopLeftRadius: 30,
@@ -143,19 +134,30 @@ const styles = StyleSheet.create({
     height: 280,
   },
   textContainer: {
-    overflow: "hidden",
+    overflow: 'hidden',
     height: 40,
-    borderColor: "rgba(255,255,255, 0.4)",
-    backgroundColor: "rgba(31,29,28,0.3)",
+    borderColor: 'rgba(255,255,255, 0.4)',
+    backgroundColor: 'rgba(31,29,28,0.3)',
     borderWidth: 1,
-    width: "70%",
+    width: '70%',
     borderRadius: 16,
-    alignSelf: "center",
+    alignSelf: 'center',
   },
 
   userInput: {
     height: 40,
-    backgroundColor: "rgba(31,29,28,0.1)",
-    overflow: "hidden",
+    backgroundColor: 'rgba(31,29,28,0.1)',
+    overflow: 'hidden',
+  },
+  disabled: {
+    opacity: 0.5,
+    paddingTop: '5%',
+    width: '85%',
+    alignSelf: 'center',
+  },
+  normal: {
+    paddingTop: '5%',
+    width: '85%',
+    alignSelf: 'center',
   },
 });

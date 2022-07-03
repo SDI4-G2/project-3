@@ -75,7 +75,7 @@ export default function EditProfile() {
             </View>
           </View>
           {modalUsernameVisible ? <ModalEditUsername usernameInput={username} useremailInput={useremail} /> : null}
-          {modalPasswordVisible ? <ModalEditPassword /> : null}
+          {modalPasswordVisible ? <ModalEditPassword useremailInput={useremail} /> : null}
         </View>
       </View>
     );
