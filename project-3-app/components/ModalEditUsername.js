@@ -110,16 +110,16 @@ export default function Modal({ usernameInput, useremailInput, textForInput, nav
 const styles = StyleSheet.create({
   bottomNavigationView: {
     backgroundColor: 'rgba(000,000,000,0.4)',
-    height: 270,
+    height: 280,
     borderTopEndRadius: 30,
     borderTopStartRadius: 30,
-    borderWidth: 2,
+    borderWidth: 1,
     borderColor: 'rgba(255,255,255,0.4)',
   },
   gradient: {
     borderTopLeftRadius: 30,
     borderTopRightRadius: 30,
-    height: 270,
+    height: 280,
   },
   textContainer: {
     overflow: 'hidden',
