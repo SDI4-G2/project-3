@@ -14,7 +14,7 @@ import bitcoinPic from "../assets/bitcoin3.5.png";
 import PreviousButton from "../components/PreviousButton";
 import NextButton from "../components/NextButton";
 
-export default function VideoScreen({ wording }) {
+export default function ArticleScreen({ wording }) {
   return (
     <View>
       <HeaderBar />
