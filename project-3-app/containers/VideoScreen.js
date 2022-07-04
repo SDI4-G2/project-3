@@ -18,8 +18,8 @@ export default function VideoScreen({ navigation, route, wording }) {
   const [text, setText] = useState(null);
   const [list, setList] = useState(undefined);
   const [currentVideo, setCurrentVideo] = useState(undefined);
-  const [endOfFrontLine, setEndOfFrontLine] = useState(false);
-  const [endOfEndLine, setEndOfEndLine] = useState(false);
+  const [endOfFrontLine, setEndOfFrontLine] = useState(true);
+  const [endOfEndLine, setEndOfEndLine] = useState(true);
   const { videoid, url } = route.params;
 
   async function get() {
@@ -60,7 +60,7 @@ export default function VideoScreen({ navigation, route, wording }) {
           setTitle(videos[i - 1].title);
           setText(videos[i - 1].text);
           endOfLineCheck();
-          console.log(title);
+          // console.log(title);
         }
       }
     } catch (err) {
