@@ -1,6 +1,6 @@
-import { Text, TouchableOpacity, StyleSheet, View, Button, Alert, ActivityIndicator } from "react-native";
+import { Text, TouchableOpacity, StyleSheet, View, Button, Alert, ActivityIndicator, ScrollView, RefreshControl } from "react-native";
 import { TextInput, RadioButton } from "react-native-paper";
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { CardField, useConfirmPayment } from "@stripe/stripe-react-native";
 import * as SecureStore from "expo-secure-store";
 import Jwt from '../api/Jwt';
@@ -11,10 +11,11 @@ import SecondHeaderBar from "../components/SecondHeader";
 import Bold from "../assets/Poppins_Bold";
 import Small from "../assets/Poppins_Small";
 import Underline from "../assets/Poppins_Underline";
+import { PulseIndicator } from 'react-native-indicators';
 
 export default function SubscriptionScreen({ navigation }) {
     const [userdata, setUserdata] = useState('');
-    const [subscribed, setSubscribed] = useState(false);
+    const [subscribed, setSubscribed] = useState('false');
     const [checked, setChecked] = useState(true);
     const [cardDetails, setCardDetails] = useState();
     const { confirmPayment, loading } = useConfirmPayment();
@@ -22,7 +23,7 @@ export default function SubscriptionScreen({ navigation }) {
     async function getJwt() {
         const list = await Jwt();
         setUserdata(list.email);
-        setSubscribed(list.subscription);
+        subscriptionStatus(list.email);
     }
     
     async function expiryTimeout() {
@@ -40,7 +41,25 @@ export default function SubscriptionScreen({ navigation }) {
         getJwt();
     }, []);
 
-    const fetchPaymentIntentClientSecret = async () => {
+    const subscriptionStatus = async (cur_email) => {
+      let result = await SecureStore.getItemAsync("token");
+      const response = await fetch("https://sdi4-g2.herokuapp.com/status-subscription", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + result,
+        },
+        body: JSON.stringify({
+          email: cur_email
+        }),
+      });
+      const res_data = await response.json();
+      const currentStatus = res_data.data.subscription;
+      setSubscribed(currentStatus);
+      return { res_data };
+    };
+
+      const fetchPaymentIntentClientSecret = async () => {
         let result = await SecureStore.getItemAsync("token");
         const response = await fetch("https://sdi4-g2.herokuapp.com/create-payment-intent", {
           method: "POST",
