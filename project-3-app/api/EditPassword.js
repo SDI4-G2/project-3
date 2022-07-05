@@ -1,3 +1,5 @@
+import * as SecureStore from 'expo-secure-store';
+
 export default async function EditPassword({ email, newpassword, password, navigation }) {
   return await fetch('https://sdi4-g2.herokuapp.com/editpassword', {
     method: 'PUT',
@@ -14,6 +16,7 @@ export default async function EditPassword({ email, newpassword, password, navig
     .then((res) => {
       if (res.data) {
         alert('Password updated successfully.');
+        SecureStore.setItemAsync('token', res.data);
         return false;
       } else {
         alert(res.message);

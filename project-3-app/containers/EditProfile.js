@@ -27,8 +27,11 @@ export default function EditProfile() {
   }
 
   useEffect(() => {
-    getJwt();
-  }, []);
+    const interval = setInterval(() => {
+      getJwt();
+    }, 3000);
+    return () => clearInterval(interval);
+  });
 
   let [fontsLoaded] = useFonts({
     Poppins_300Light,
