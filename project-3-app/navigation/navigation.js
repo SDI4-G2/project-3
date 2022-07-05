@@ -1,5 +1,8 @@
 import { NavigationContainer, DefaultTheme } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { createMaterialBottomTabNavigator } from "@react-navigation/material-bottom-tabs";
+import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
+
 import WelcomeScreen from "../containers/WelcomeScreen";
 import SignUpScreen from "../containers/SignUpScreen";
 import Dashboard from "../containers/Dashboard";
@@ -9,11 +12,11 @@ import ArticleScreen from "../containers/ArticleScreen";
 import VideoScreen from "../containers/VideoScreen";
 import ForgetPwScreen from "../containers/ForgetPwScreen";
 import SubscriptionScreen from "../containers/SubscriptionScreen";
-// import HistoryScreen from "../containers/HistoryScreen";
+import HistoryScreen from "../containers/HistoryScreen";
 import SupportScreen from "../containers/SupportScreen";
-// import BookmarkScreen from "../containers/BookmarksScreen";
-// import LibraryScreen from "../containers/LibraryScreen";
-// import SubMainScreen from "../containers/SubMainScreen";
+import BookmarksScreen from "../containers/BookmarksScreen";
+import LibraryScreen from "../containers/LibraryScreen";
+import SubMainScreen from "../containers/SubMainScreen";
 import background from "../assets/background.png";
 import {
   StyleSheet,
@@ -25,6 +28,89 @@ import {
 import Feather from "react-native-vector-icons/Feather";
 
 const Stack = createNativeStackNavigator();
+const Tab = createMaterialBottomTabNavigator();
+
+const HomeStack = () => {
+  return (
+    <Stack.Navigator>
+      <Stack.Screen
+        name="Dashboard"
+        component={Dashboard}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="ArticleScreen"
+        component={ArticleScreen}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="VideoScreen"
+        component={VideoScreen}
+        options={{ headerShown: false }}
+      />
+    </Stack.Navigator>
+  );
+};
+const MainTabs = () => {
+  return (
+    <Tab.Navigator
+      initialRouteName="Home"
+      activeColor="#fff"
+      inactiveColor="#632646"
+      barStyle={{
+        backgroundColor: "rgba(222,222,222,0.1)",
+      }}
+      shifting={true}
+    >
+      <Tab.Screen
+        name="Home"
+        options={{
+          tabBarLabel: "Home",
+          tabBarIcon: ({ color }) => (
+            <MaterialCommunityIcons name="home" color={color} size={26} />
+          ),
+          headerShown: false,
+          tabBarColor: "rgba(252,228,166,0.3)",
+        }}
+        component={HomeStack}
+      />
+      <Tab.Screen
+        name="Library"
+        options={{
+          tabBarLabel: "Library",
+          tabBarIcon: ({ color }) => (
+            <MaterialCommunityIcons
+              name="table-multiple"
+              color={color}
+              size={26}
+            />
+          ),
+          headerShown: false,
+          tabBarColor: "rgba(252,228,166,0.3)",
+        }}
+        component={LibraryScreen}
+        tabBarLabel="Library"
+      />
+      <Tab.Screen
+        name="Bookmark"
+        options={{
+          tabBarLabel: "Bookmark",
+          tabBarIcon: ({ color }) => (
+            <MaterialCommunityIcons
+              name="bookmark-multiple"
+              color={color}
+              size={26}
+            />
+          ),
+          headerShown: false,
+          tabBarColor: "rgba(252,228,166,0.3)",
+        }}
+        component={BookmarksScreen}
+        tabBarLabel="Bookmark"
+      />
+    </Tab.Navigator>
+  );
+};
 
 const Navigation = () => {
   const MyTheme = {
@@ -54,10 +140,9 @@ const Navigation = () => {
           />
           <Stack.Screen
             name="Dashboard"
-            component={Dashboard}
+            component={MainTabs}
             options={{ headerShown: false }}
           />
-
           <Stack.Screen
             name="ProfileScreen"
             component={ProfileScreen}
@@ -66,16 +151,6 @@ const Navigation = () => {
           <Stack.Screen
             name="EditProfile"
             component={EditProfile}
-            options={{ headerShown: false }}
-          />
-          <Stack.Screen
-            name="ArticleScreen"
-            component={ArticleScreen}
-            options={{ headerShown: false }}
-          />
-          <Stack.Screen
-            name="VideoScreen"
-            component={VideoScreen}
             options={{ headerShown: false }}
           />
           <Stack.Screen
@@ -98,16 +173,16 @@ const Navigation = () => {
             component={SupportScreen}
             options={{ headerShown: false }}
           />
-          {/* <Stack.Screen
+          <Stack.Screen
             name="BookmarkScreen"
-            component={BookmarkScreen}
+            component={BookmarksScreen}
             options={{ headerShown: false }}
-          /> */}
-          {/* <Stack.Screen
+          />
+          <Stack.Screen
             name="LibraryScreen"
             component={LibraryScreen}
             options={{ headerShown: false }}
-          /> */}
+          />
           {/* <Stack.Screen
             name="SubMainScreen"
             component={SubMainScreen}
