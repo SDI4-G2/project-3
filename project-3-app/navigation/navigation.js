@@ -2,6 +2,7 @@ import { NavigationContainer, DefaultTheme } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { createMaterialBottomTabNavigator } from "@react-navigation/material-bottom-tabs";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
+import OctiIcons from "react-native-vector-icons/Octicons";
 
 import WelcomeScreen from "../containers/WelcomeScreen";
 import SignUpScreen from "../containers/SignUpScreen";
@@ -16,7 +17,8 @@ import HistoryScreen from "../containers/HistoryScreen";
 import SupportScreen from "../containers/SupportScreen";
 import BookmarksScreen from "../containers/BookmarksScreen";
 import LibraryScreen from "../containers/LibraryScreen";
-import SubMainScreen from "../containers/SubMainScreen";
+import SearchScreen from "../containers/SearchScreen";
+
 import background from "../assets/background.png";
 import {
   StyleSheet,
@@ -92,21 +94,17 @@ const MainTabs = () => {
         tabBarLabel="Library"
       />
       <Tab.Screen
-        name="Bookmark"
+        name="Search"
         options={{
-          tabBarLabel: "Bookmark",
+          tabBarLabel: "Search",
           tabBarIcon: ({ color }) => (
-            <MaterialCommunityIcons
-              name="bookmark-multiple"
-              color={color}
-              size={26}
-            />
+            <OctiIcons name="search" color={color} size={26} />
           ),
           headerShown: false,
           tabBarColor: "rgba(252,228,166,0.3)",
         }}
-        component={BookmarksScreen}
-        tabBarLabel="Bookmark"
+        component={SearchScreen}
+        tabBarLabel="Search"
       />
     </Tab.Navigator>
   );

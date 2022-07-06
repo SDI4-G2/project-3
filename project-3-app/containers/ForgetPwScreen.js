@@ -24,7 +24,7 @@ export default function ForgetPwScreen({ navigation, props }) {
   });
   return (
     <SafeAreaView>
-      <SecondHeaderBar />
+      <SecondHeaderBar backScreen="WelcomeScreen" />
       <View style={styles.container}>
         <View style={{ paddingBottom: "5%" }}>
           <Bold fontBold="No worries,"></Bold>

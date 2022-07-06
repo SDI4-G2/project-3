@@ -12,7 +12,7 @@ import {
 import { Card, Title } from "react-native-paper";
 import React, { useState, useEffect } from "react";
 import * as SecureStore from "expo-secure-store";
-import Jwt from '../api/Jwt';
+import Jwt from "../api/Jwt";
 import HeaderDashboard from "../components/HeaderDashboard";
 import Small from "../assets/Poppins_Small";
 
@@ -64,8 +64,8 @@ export default function Dashboard({ navigation }) {
     const timer = setTimeout(() => {
       getJwt();
       fetch_all_videos();
-      fetch_all_articles();      
-    }, 3000);
+      fetch_all_articles();
+    }, 1000);
   }, []);
 
   const wait = (timeout) => {

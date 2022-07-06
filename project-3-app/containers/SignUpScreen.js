@@ -28,7 +28,7 @@ export default function SignUpScreen({ navigation }) {
 
   return (
     <SafeAreaView>
-      <SecondHeaderBar />
+      <SecondHeaderBar backScreen="WelcomeScreen" />
       <View style={styles.container}>
         <View style={styles.padding}>
           <Bold fontBold="Join Us"></Bold>
@@ -114,9 +114,10 @@ export default function SignUpScreen({ navigation }) {
                 secureTextEntry={passwordVisible}
                 right={
                   <TextInput.Icon
-                    name={passwordVisible ? "eye" : "eye-off"}
+                    name={passwordVisible ? "eye-off" : "eye"}
                     onPress={() => setPasswordVisible(!passwordVisible)}
                     onChangeText={setPassword}
+                    color={"rgba(255,255,255,0.5)"}
                   />
                 }
               />

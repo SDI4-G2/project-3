@@ -97,7 +97,8 @@ export default function WelcomeScreen({ navigation, props }) {
               secureTextEntry={passwordVisible}
               right={
                 <TextInput.Icon
-                  name={passwordVisible ? "eye" : "eye-off"}
+                  name={passwordVisible ? "eye-off" : "eye"}
+                  color={"rgba(255,255,255,0.5)"}
                   onPress={() => setPasswordVisible(!passwordVisible)}
                   onChangeText={setPassword}
                 />
