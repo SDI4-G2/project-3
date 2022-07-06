@@ -20,7 +20,7 @@ export default function ProfileScreen({ navigation }) {
   }
   return (
     <View>
-      <SecondHeaderBar></SecondHeaderBar>
+      <SecondHeaderBar backScreen="Dashboard"></SecondHeaderBar>
       <Image style={styles.avatar} source={Avatar} />
       <View style={styles.container}>
         <TouchableOpacity

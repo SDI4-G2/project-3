@@ -11,7 +11,6 @@ import SecondHeaderBar from "../components/SecondHeader";
 import Bold from "../assets/Poppins_Bold";
 import Small from "../assets/Poppins_Small";
 import Underline from "../assets/Poppins_Underline";
-import { PulseIndicator } from 'react-native-indicators';
 
 export default function SubscriptionScreen({ navigation }) {
     const [userdata, setUserdata] = useState('');
@@ -23,7 +22,7 @@ export default function SubscriptionScreen({ navigation }) {
     async function getJwt() {
         const list = await Jwt();
         setUserdata(list.email);
-        subscriptionStatus(list.email);
+        setSubscribed(list.subscription);
     }
     
     async function expiryTimeout() {
@@ -40,24 +39,6 @@ export default function SubscriptionScreen({ navigation }) {
     useEffect(() => {
         getJwt();
     }, []);
-
-    const subscriptionStatus = async (cur_email) => {
-      let result = await SecureStore.getItemAsync("token");
-      const response = await fetch("https://sdi4-g2.herokuapp.com/status-subscription", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: "Bearer " + result,
-        },
-        body: JSON.stringify({
-          email: cur_email
-        }),
-      });
-      const res_data = await response.json();
-      const currentStatus = res_data.data.subscription;
-      setSubscribed(currentStatus);
-      return { res_data };
-    };
 
       const fetchPaymentIntentClientSecret = async () => {
         let result = await SecureStore.getItemAsync("token");
@@ -103,6 +84,9 @@ export default function SubscriptionScreen({ navigation }) {
           }),
         });
         const res_data = await response.json();
+
+        SecureStore.setItemAsync('token', res_data.data);
+
         return { res_data };
       };
     
@@ -141,7 +125,7 @@ export default function SubscriptionScreen({ navigation }) {
                 "Payment Successful",
                 "subscribed to our Premium Content",
                 [
-                  { text: "OK", onPress: () => navigation.navigate("Dashboard") }
+                  { text: "OK", onPress: () => navigation.push("Dashboard") }
                 ]
               );
             }
@@ -158,14 +142,14 @@ export default function SubscriptionScreen({ navigation }) {
           "Subscription Cancel",
           "You are no longer subscribe to our Premium Content",
           [
-            { text: "OK", onPress: () => navigation.navigate("Dashboard") }
+            { text: "OK", onPress: () => navigation.push("Dashboard") }
           ]
         );
       };
 
   return (
     <View>
-      <SecondHeaderBar />
+      <SecondHeaderBar backScreen="ProfileScreen"/>
       <View style={styles.container}>
         <View style={styles.padding}>
           <Bold fontBold="Subscription"></Bold>

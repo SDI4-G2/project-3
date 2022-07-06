@@ -23,7 +23,7 @@ export default async function ForgetPassword({
         SecureStore.setItemAsync("token", serverResponse.data);
         // console.log(serverResponse);
 
-        navigation.navigate("Dashboard");
+        navigation.push("Dashboard");
       } else {
         Alert.alert(
           "Please enter valid email"[

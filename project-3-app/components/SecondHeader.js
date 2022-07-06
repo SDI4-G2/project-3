@@ -4,14 +4,14 @@ import profileIcon from "../assets/profileicon.png";
 import arrow from "../assets/chevron-left.png";
 import { useNavigation } from "@react-navigation/native";
 
-export default function SecondHeaderBar() {
+export default function SecondHeaderBar({backScreen}) {
   const navigation = useNavigation();
   return (
     <Header
       backgroundColor="transparent"
       leftComponent={
         <View>
-          <TouchableOpacity onPress={() => navigation.goBack()}>
+          <TouchableOpacity onPress={() => navigation.push(backScreen)}>
             <Image source={arrow} />
           </TouchableOpacity>
         </View>

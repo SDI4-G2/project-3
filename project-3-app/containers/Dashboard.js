@@ -12,6 +12,7 @@ import {
 import { Card, Title } from "react-native-paper";
 import React, { useState, useEffect } from "react";
 import * as SecureStore from "expo-secure-store";
+import Jwt from '../api/Jwt';
 import HeaderDashboard from "../components/HeaderDashboard";
 import Small from "../assets/Poppins_Small";
 
@@ -24,6 +25,10 @@ export default function Dashboard({ navigation }) {
   const [articles, setArticles] = useState([]);
   const [refreshing, setRefreshing] = React.useState(false);
   const [isLoading, setIsLoading] = useState(true);
+
+  async function getJwt() {
+    const list = await Jwt();
+  }
 
   async function fetch_all_videos() {
     let result = await SecureStore.getItemAsync("token");
@@ -57,8 +62,9 @@ export default function Dashboard({ navigation }) {
 
   useEffect(() => {
     const timer = setTimeout(() => {
+      getJwt();
       fetch_all_videos();
-      fetch_all_articles();
+      fetch_all_articles();      
     }, 3000);
   }, []);
 

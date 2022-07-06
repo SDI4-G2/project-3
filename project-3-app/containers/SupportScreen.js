@@ -44,7 +44,7 @@ export default function SupportScreen() {
   } else {
     return (
       <View style={styles.container}>
-        <SecondHeaderBar></SecondHeaderBar>
+        <SecondHeaderBar backScreen="ProfileScreen"></SecondHeaderBar>
         {FaqData.map(({ question, answer }, index) => {
           return (
             <TouchableOpacity

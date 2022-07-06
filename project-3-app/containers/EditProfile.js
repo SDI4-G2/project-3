@@ -42,7 +42,7 @@ export default function EditProfile() {
   } else
     return (
       <View>
-        <SecondHeaderBar />
+        <SecondHeaderBar backScreen="ProfileScreen"/>
         <View style={styles.container}>
           <Bold fontBold="Edit Profile"></Bold>
           <View style={styles.padding}>
