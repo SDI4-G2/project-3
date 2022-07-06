@@ -29,7 +29,7 @@ export default function EditProfile() {
   useEffect(() => {
     const interval = setInterval(() => {
       getJwt();
-    }, 3000);
+    }, 10);
     return () => clearInterval(interval);
   });
 
@@ -42,7 +42,7 @@ export default function EditProfile() {
   } else
     return (
       <View>
-        <SecondHeaderBar backScreen="ProfileScreen"/>
+        <SecondHeaderBar backScreen="ProfileScreen" />
         <View style={styles.container}>
           <Bold fontBold="Edit Profile"></Bold>
           <View style={styles.padding}>
