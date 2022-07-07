@@ -47,19 +47,30 @@ export default function SearchScreen() {
   }
 
   function textSearch() {
-    const data = videos;
+    const vid = videos;
+    const art = articles;
     const keys = ['description', 'text', 'title'];
     const values = [search];
     const regex = new RegExp(values, 'i');
 
-    const filtereddata = data.filter((e) => {
+    const filteredVid = vid.filter((e) => {
       return keys.some(function (a) {
         return regex.test(e[a]);
       });
     });
 
-    setVidResult(filtereddata);
-    console.log(filtereddata);
+    setVidResult(filteredVid);
+    // console.log(filteredVid);
+
+    const filteredArt = art.filter((e) => {
+      return keys.some(function (a) {
+        return regex.test(e[a]);
+      });
+    });
+
+    setArtResult(filteredArt);
+    // console.log(filteredArt);
+
     // setVidResult(filtereddata);
     // if (videos.some((o) => regex.test(o.description) || regex.test(o.title) || regex.test(o.text))) {
     //   setVidResult(i);
@@ -83,6 +94,13 @@ export default function SearchScreen() {
   useEffect(() => {
     get();
   }, []);
+
+  // useEffect(() => {
+  //   const interval = setInterval(() => {
+  //     textSearch();
+  //   }, 3000);
+  //   return () => clearInterval(interval);
+  // },[search]);
 
   return (
     <View>
