@@ -5,7 +5,7 @@ import {
   StyleSheet,
   ScrollView,
   Image,
-  TouchableOpacity,
+  TouchableOpacity
 } from "react-native";
 import HeaderBar from "../components/Headers";
 import { Card } from "react-native-paper";
@@ -13,6 +13,9 @@ import MedCenter from "../assets/Poppins_CenterTitle";
 import bitcoinPic from "../assets/bitcoin3.5.png";
 import PreviousButton from "../components/PreviousButton";
 import NextButton from "../components/NextButton";
+import { WebView } from 'react-native-webview';
+
+const PdfReader = ({ url: uri }) => <WebView style={{ flex: 1 }} source={{ uri }} />
 
 export default function ArticleScreen({ wording }) {
   return (
@@ -43,7 +46,10 @@ export default function ArticleScreen({ wording }) {
 
             <Card.Content>
               <ScrollView style={styles.content}>
-                <Text style={styles.text}>
+                <View style={{height: 750, paddingVertical:15}}>
+                <PdfReader url="https://drive.google.com/file/d/1pULV4WNtSLZYuBEi2hetq8bqFen9MtAR/view" />
+                </View>
+                {/* <Text style={styles.text}>
                   Lorem ipsum dolor sit amet, consectetur adipiscing elit. In a
                   massa enim. Sed arcu erat, facilisis a libero at, ultricies
                   sagittis orci. Nam consectetur cursus tellus. Proin commodo,
@@ -59,7 +65,7 @@ export default function ArticleScreen({ wording }) {
                   suscipit rutrum. Praesent sodales nulla vitae tortor
                   vestibulum consequat eu ut felis. Ut tincidunt dolor quis elit
                   molestie tincidunt.
-                </Text>
+                </Text> */}
               </ScrollView>
             </Card.Content>
           </Card>

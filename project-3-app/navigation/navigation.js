@@ -12,6 +12,9 @@ import EditProfile from "../containers/EditProfile";
 import ArticleScreen from "../containers/ArticleScreen";
 import VideoScreen from "../containers/VideoScreen";
 import ForgetPwScreen from "../containers/ForgetPwScreen";
+import VerificationScreen from "../containers/VerificationScreen";
+import ResetPwScreen from "../containers/ResetPwScreen";
+import ResetPwSuccessScreen from "../containers/ResetPwSuccessScreen";
 import SubscriptionScreen from "../containers/SubscriptionScreen";
 import HistoryScreen from "../containers/HistoryScreen";
 import SupportScreen from "../containers/SupportScreen";
@@ -154,6 +157,21 @@ const Navigation = () => {
           <Stack.Screen
             name="ForgetPwScreen"
             component={ForgetPwScreen}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="VerificationScreen"
+            component={VerificationScreen}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="ResetPwScreen"
+            component={ResetPwScreen}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="ResetPwSuccessScreen"
+            component={ResetPwSuccessScreen}
             options={{ headerShown: false }}
           />
           <Stack.Screen
