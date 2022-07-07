@@ -1,35 +1,95 @@
-import {
-  View,
-  Text,
-  TouchableOpacity,
-  StyleSheet,
-  ScrollView,
-  ActivityIndicator,
-} from "react-native";
-import { React, useState } from "react";
-import { TextInput } from "react-native-paper";
-import { Card, Title } from "react-native-paper";
+import { View, Text, TouchableOpacity, StyleSheet, ScrollView, Button, ActivityIndicator } from 'react-native';
+import { React, useState, useEffect } from 'react';
+import { TextInput } from 'react-native-paper';
+import { Card, Title } from 'react-native-paper';
 
-import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
-import OctiIcons from "react-native-vector-icons/Octicons";
-import HeaderBar from "../components/Headers";
-import Small from "../assets/Poppins_Small";
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import OctiIcons from 'react-native-vector-icons/Octicons';
+import HeaderBar from '../components/Headers';
+import Small from '../assets/Poppins_Small';
 
-import { PulseIndicator } from "react-native-indicators";
+import { PulseIndicator } from 'react-native-indicators';
+
+import GetVideo from '../api/GetVideo';
+import GetArticle from '../api/GetArticle';
 
 export default function SearchScreen() {
   const [isLoading, setIsLoading] = useState(true);
+  const [videos, setVideos] = useState([]);
+  const [articles, setArticles] = useState([]);
+  const [search, setSearch] = useState([]);
+  const [vidResult, setVidResult] = useState([]);
+  const [artResult, setArtResult] = useState([]);
+
+  async function get() {
+    const video = await GetVideo();
+    const article = await GetArticle();
+    for (let i = 0; i < video.length; i++) {
+      let vid = video[i];
+      for (var key in vid) {
+        if (key !== 'Category' && vid.Category) {
+          vid.Category[key] = vid[key];
+        }
+      }
+      video[i] = vid.Category || vid;
+    }
+    for (let i = 0; i < article.length; i++) {
+      let art = article[i];
+      for (var key in art) {
+        if (key !== 'Category' && art.Category) {
+          art.Category[key] = art[key];
+        }
+      }
+      article[i] = art.Category || art;
+    }
+    setVideos(video);
+    setArticles(article);
+  }
+
+  async function textSearch() {
+    const keys = ['description', 'text', 'title'];
+    const values = [search];
+    const regex = new RegExp(values, 'i');
+
+    for await (const i of videos) {
+      if (videos.some((o) => regex.test(o.description) || regex.test(o.title) || regex.test(o.text))) {
+        setVidResult(i);
+        // console.log(i);
+      } else {
+        setVidResult('');
+        // console.log('Null');
+      }
+    }
+    for await (const i of articles) {
+      if (videos.some((o) => regex.test(o.description) || regex.test(o.title) || regex.test(o.text))) {
+        setArtResult(i);
+        // console.log(i);
+      } else {
+        setArtResult('');
+        // console.log('Null');
+      }
+    }
+  }
+
+  useEffect(() => {
+    get();
+  }, []);
+
+  useEffect(() => {
+    textSearch();
+  });
+
   return (
     <View>
       <HeaderBar />
-      <View style={{ width: "70%", alignSelf: "center", top: "10%" }}>
+      <View style={{ width: '70%', alignSelf: 'center', top: '10%' }}>
         {/* <Text style={{ color: "rgba(255,255,255, 0.7)" }}>Search</Text> */}
         <TouchableOpacity style={styles.textContainer}>
           <TextInput
             underlineColorAndroid="transparent"
             spellCheck={false}
             autoCorrect={false}
-            // onChangeText={(text) => validate(text)}
+            onChangeText={setSearch}
             style={[styles.userInput]}
             keyboardType="email-address"
             textContentType="emailAddress"
@@ -37,37 +97,31 @@ export default function SearchScreen() {
             autoFocus={true}
             theme={{
               colors: {
-                text: "rgba(255, 255, 255, 0.6)",
+                text: 'rgba(255, 255, 255, 0.6)',
               },
             }}
-            right={
-              <TextInput.Icon
-                name={() => (
-                  <OctiIcons
-                    name={"search"}
-                    size={20}
-                    color={"rgba(255,255,255,0.5)"}
-                  />
-                )}
-              />
-            }
+            right={<TextInput.Icon name={() => <OctiIcons name={'search'} size={20} color={'rgba(255,255,255,0.5)'} />} />}
           ></TextInput>
         </TouchableOpacity>
+        <Button
+          title="Test"
+          onPress={() => {
+            console.log(videos.some((o) => console.log(o.description == 'Hist')));
+          }}
+        ></Button>
 
         <View style={{ marginBottom: 20 }}>
-          <View style={{ paddingTop: "5%" }}>
-            <Small fontSmall={"Videos"}></Small>
+          <View style={{ paddingTop: '5%' }}>
+            <Small fontSmall={'Videos'}></Small>
           </View>
           <ScrollView
             horizontal={true}
             contentContainerStyle={{
-              justifyContent: "center",
-              flexDirection: "row",
+              justifyContent: 'center',
+              flexDirection: 'row',
             }}
           >
-            {isLoading === true && (
-              <PulseIndicator color={"rgba(255,255,255,0.5)"} />
-            )}
+            {isLoading === true && <PulseIndicator color={'rgba(255,255,255,0.5)'} />}
             {/* {videos.map((item) => {
               return ( */}
             <Card
@@ -117,17 +171,15 @@ export default function SearchScreen() {
         </View>
 
         <View style={{ marginBottom: 20 }}>
-          <Small fontSmall={"Articles"}></Small>
+          <Small fontSmall={'Articles'}></Small>
           <ScrollView
             horizontal={true}
             contentContainerStyle={{
-              justifyContent: "center",
-              flexDirection: "row",
+              justifyContent: 'center',
+              flexDirection: 'row',
             }}
           >
-            {isLoading === true && (
-              <PulseIndicator color={"rgba(255,255,255,0.5)"} />
-            )}
+            {isLoading === true && <PulseIndicator color={'rgba(255,255,255,0.5)'} />}
             {/* {articles.map((item, index) => ( */}
             <Card
               style={styles.cardDashboard}
@@ -150,9 +202,7 @@ export default function SearchScreen() {
                   onLoadEnd={() => setIsLoading(false)}
                 > */}
               <Card.Content>
-                <Title style={styles.cardTitle}>
-                  {/* {item.Category.description} */} testing
-                </Title>
+                <Title style={styles.cardTitle}>{/* {item.Category.description} */} testing</Title>
                 {/* <Progress.Circle
                       progress={0.8}
                       size={50}
@@ -177,21 +227,21 @@ export default function SearchScreen() {
 
 const styles = StyleSheet.create({
   textContainer: {
-    overflow: "hidden",
+    overflow: 'hidden',
     height: 40,
     borderRadius: 16,
     borderWidth: 1,
-    borderColor: "rgba(255, 255, 255, 0.3)",
+    borderColor: 'rgba(255, 255, 255, 0.3)',
   },
 
   userInput: {
     height: 40,
-    backgroundColor: "rgba(255, 255,255, 0.05)",
+    backgroundColor: 'rgba(255, 255,255, 0.05)',
     borderTopEndRadius: 16,
     borderTopStartRadius: 16,
     paddingHorizontal: 10,
-    width: "100%",
-    alignSelf: "center",
-    color: "rgba(255,255,255,0.7)",
+    width: '100%',
+    alignSelf: 'center',
+    color: 'rgba(255,255,255,0.7)',
   },
 });
