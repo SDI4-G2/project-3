@@ -46,38 +46,43 @@ export default function SearchScreen() {
     setArticles(article);
   }
 
-  async function textSearch() {
+  function textSearch() {
+    const data = videos;
     const keys = ['description', 'text', 'title'];
     const values = [search];
     const regex = new RegExp(values, 'i');
 
-    for await (const i of videos) {
-      if (videos.some((o) => regex.test(o.description) || regex.test(o.title) || regex.test(o.text))) {
-        setVidResult(i);
-        // console.log(i);
-      } else {
-        setVidResult('');
-        // console.log('Null');
-      }
-    }
-    for await (const i of articles) {
-      if (videos.some((o) => regex.test(o.description) || regex.test(o.title) || regex.test(o.text))) {
-        setArtResult(i);
-        // console.log(i);
-      } else {
-        setArtResult('');
-        // console.log('Null');
-      }
-    }
+    const filtereddata = data.filter((e) => {
+      return keys.some(function (a) {
+        return regex.test(e[a]);
+      });
+    });
+
+    setVidResult(filtereddata);
+    console.log(filtereddata);
+    // setVidResult(filtereddata);
+    // if (videos.some((o) => regex.test(o.description) || regex.test(o.title) || regex.test(o.text))) {
+    //   setVidResult(i);
+    //   // console.log(i);
+    // } else {
+    //   setVidResult('');
+    //   // console.log('Null');
+    // }
+
+    // for await (const i of articles) {
+    //   if (videos.some((o) => regex.test(o.description) || regex.test(o.title) || regex.test(o.text))) {
+    //     setArtResult(i);
+    //     // console.log(i);
+    //   } else {
+    //     setArtResult('');
+    //     // console.log('Null');
+    //   }
+    // }
   }
 
   useEffect(() => {
     get();
   }, []);
-
-  useEffect(() => {
-    textSearch();
-  });
 
   return (
     <View>
@@ -100,13 +105,15 @@ export default function SearchScreen() {
                 text: 'rgba(255, 255, 255, 0.6)',
               },
             }}
-            right={<TextInput.Icon name={() => <OctiIcons name={'search'} size={20} color={'rgba(255,255,255,0.5)'} />} />}
+            right={
+              <TextInput.Icon name={() => <OctiIcons name={'search'} size={20} color={'rgba(255,255,255,0.5)'} onPress={() => textSearch()} />} />
+            }
           ></TextInput>
         </TouchableOpacity>
         <Button
           title="Test"
           onPress={() => {
-            console.log(videos.some((o) => console.log(o.description == 'Hist')));
+            console.log(vidResult);
           }}
         ></Button>
 
