@@ -17,8 +17,12 @@ import SecondHeaderBar from "../components/SecondHeader";
 import Bold from "../assets/Poppins_Bold";
 import Small from "../assets/Poppins_Small";
 import Med from "../assets/Poppins_Medium";
+import ForgetPassword from "../api/ForgetPassword";
 
 export default function ForgetPwScreen({ navigation, props }) {
+  const [isLoading, setIsLoading] = useState(false);
+  const [email, setEmail] = useState('');
+
   const EmailSchema = Yup.object().shape({
     email: Yup.string().email().required("Please enter your email"),
   });
@@ -31,57 +35,46 @@ export default function ForgetPwScreen({ navigation, props }) {
         </View>
         <View style={{ paddingBottom: "5%" }}>
           {/* <Med fontMed={"No worries,"}></Med> */}
-
           <Med
             fontMed={"We will send you an email to get your password reset."}
           ></Med>
         </View>
-        <Formik
-          initialValues={{ email: "" }}
-          onSubmit={(values) => {
-            console.log(values);
-          }}
-          validationSchema={EmailSchema}
-          validateOnMount={true}
-        >
-          {({ handleChange, handleBlur, handleSubmit, values, isValid }) => (
-            <>
               <View style={{ paddingBottom: "15%", paddingTop: "5%" }}>
                 <Small fontSmall="Enter your registered email below"></Small>
-                <Pressable
-                  style={[
-                    styles.textContainer,
-                    {
-                      borderColor:
-                        values.email.length < 1 ||
-                        Validator.validate(values.email)
-                          ? "rgba(255, 255, 255, 0.4)"
-                          : "rgba(244, 107, 107, 0.4)",
-                    },
-                  ]}
-                >
+                <TouchableOpacity
+                    style={[
+                      styles.textContainer,
+                      {
+                        borderColor:
+                          email === undefined ||
+                          email.length < 1 ||
+                          email.length > 5
+                            ? "rgba(255, 255, 255, 0.4)"
+                            : "rgba(244, 107, 107, 0.4)",
+                      },
+                    ]}
+                  >
                   <TextInput
                     style={[styles.userInput]}
+                    onChangeText={setEmail}
                     keyboardType="email-address"
                     textContentType="emailAddress"
                     autoFocus={true}
                     theme={{ colors: { text: "rgba(255, 255, 255, 0.6)" } }}
-                    onChangeText={handleChange("email")}
-                    onBlur={handleBlur("email")}
-                    value={values.email}
                   ></TextInput>
-                </Pressable>
+                  </TouchableOpacity>
               </View>
 
-              <Pressable
-                onPress={handleSubmit}
-                style={styles.sendEmail(isValid)}
-              >
+              <TouchableOpacity
+                 style={!email ? styles.disabled : styles.normal}
+                 disabled={email.length < 6}
+                  onPress={() =>
+                    ForgetPassword({ email, navigation }, setIsLoading(true))
+                      .then(() => setIsLoading(false))
+                  }
+                >
                 <Buttons naming="Send Email"></Buttons>
-              </Pressable>
-            </>
-          )}
-        </Formik>
+              </TouchableOpacity>
       </View>
     </SafeAreaView>
   );
@@ -113,7 +106,18 @@ const styles = StyleSheet.create({
     alignSelf: "center",
   },
 
-  sendEmail: (isValid) => ({
-    opacity: isValid ? 1 : 0.4,
-  }),
+  disabled: {
+    opacity: 0.5,
+  },
+  normal: {
+    opacity: 1,
+  },
+  loading: {
+    position: "absolute",
+    zIndex: 10000,
+    top: 0,
+    bottom: 0,
+    right: 0,
+    left: 0,
+  },
 });
