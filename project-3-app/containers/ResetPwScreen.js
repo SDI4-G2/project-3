@@ -55,7 +55,7 @@ export default function ResetPwScreen({ navigation, props }) {
 
   return (
     <SafeAreaView>
-      <SecondHeaderBar backScreen="VerificationScreen" />
+      <SecondHeaderBar backScreen="ForgetPwScreen" />
       <View style={styles.container}>
         <View style={{ paddingBottom: "5%" }}>
           <Bold fontBold="Reset Password"></Bold>

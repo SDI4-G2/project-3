@@ -34,6 +34,8 @@
     "react-native-btr": "^2.2.0",
     "react-native-circular-progress-indicator": "^4.2.0",
     "react-native-indicators": "^0.17.0",
+    "react-native-otp-form": "^1.0.2",
+    "react-native-otp-input": "^1.0.12",
     "react-native-paper": "^4.12.1",
     "react-native-progress": "^5.0.0",
     "react-native-reanimated": "^2.9.0",
@@ -44,6 +46,7 @@
     "react-native-web": "^0.18.0",
     "react-native-webview": "^11.22.2",
     "reanimated-bottom-sheet": "^1.0.0-alpha.22",
+    "styled-components": "^5.3.5",
     "yup": "^0.32.11"
   },
   "devDependencies": {

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import {
   Text,
   TouchableOpacity,
@@ -25,6 +25,9 @@ export default function SignUpScreen({ navigation }) {
   const [disabled, setDisabled] = useState(true);
   const [passwordVisible, setPasswordVisible] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
+
+  const emailRef = useRef(null);
+  const pwRef = useRef(null);
 
   return (
     <SafeAreaView>
@@ -55,6 +58,11 @@ export default function SignUpScreen({ navigation }) {
                 value={username}
                 onChangeText={setUsername}
                 autoFocus={true}
+                returnKeyType="next"
+                onSubmitEditing={() => {
+                  emailRef.current.focus();
+                }}
+                blurOnSubmit={false}
               ></TextInput>
             </TouchableOpacity>
             <Text
@@ -89,6 +97,12 @@ export default function SignUpScreen({ navigation }) {
                 }}
                 value={email}
                 onChangeText={setEmail}
+                returnKeyType="next"
+                ref={emailRef}
+                onSubmitEditing={() => {
+                  pwRef.current.focus();
+                }}
+                blurOnSubmit={false}
               ></TextInput>
             </TouchableOpacity>
             <Text
@@ -118,6 +132,15 @@ export default function SignUpScreen({ navigation }) {
                 onPress={() => setPasswordVisible(!passwordVisible)}
                 onChangeText={setPassword}
                 style={styles.userInput}
+                returnKeyType="next"
+                blurOnSubmit={false}
+                ref={pwRef}
+                onSubmitEditing={() => {
+                  Register(
+                    { email, username, password, navigation },
+                    setIsLoading(true)
+                  ).then(() => setIsLoading(false));
+                }}
                 theme={{
                   colors: {
                     text: "rgba(255, 255, 255, 0.6)",

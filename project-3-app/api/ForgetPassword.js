@@ -8,7 +8,7 @@ export default async function ForgetPassword({
 
   navigation,
 }) {
-  await fetch("https://sdi4-g2.herokuapp.com/forgotpw", {
+  return await fetch("https://sdi4-g2.herokuapp.com/forgotpw", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -25,14 +25,12 @@ export default async function ForgetPassword({
 
         navigation.push("VerificationScreen");
       } else {
-
-        console.log("Invalid email");
-        alert("Please enter valid email");
+        return serverResponse.message;
+        // console.log(serverResponse.message);
       }
     })
     .catch((err) => {
       console.log("2");
-      alert("Please enter valid email");
-
+      alert("Please enter a valid email");
     });
 }
