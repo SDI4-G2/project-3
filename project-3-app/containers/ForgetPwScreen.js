@@ -6,8 +6,7 @@ import {
   SafeAreaView,
   Pressable,
   Text,
-  ActivityIndicator
-
+  ActivityIndicator,
 } from "react-native";
 import { TextInput } from "react-native-paper";
 
@@ -24,7 +23,7 @@ import ForgetPassword from "../api/ForgetPassword";
 
 export default function ForgetPwScreen({ navigation, props }) {
   const [isLoading, setIsLoading] = useState(false);
-  const [email, setEmail] = useState('');
+  const [email, setEmail] = useState("");
 
   const EmailSchema = Yup.object().shape({
     email: Yup.string().email().required("Please enter your email"),
@@ -42,55 +41,50 @@ export default function ForgetPwScreen({ navigation, props }) {
             fontMed={"We will send you an email to get your password reset."}
           ></Med>
         </View>
-              <View style={{ paddingBottom: "15%", paddingTop: "5%" }}>
-                <Small fontSmall="Enter your registered email below"></Small>
-                <TouchableOpacity
-                    style={[
-                      styles.textContainer,
-                      {
-                        borderColor:
-                          email === undefined ||
-                          email.length < 1 ||
-                          email.length > 5
-                            ? "rgba(255, 255, 255, 0.4)"
-                            : "rgba(244, 107, 107, 0.4)",
-                      },
-                    ]}
-                  >
-                  <TextInput
-                    style={[styles.userInput]}
-                    onChangeText={setEmail}
-                    keyboardType="email-address"
-                    textContentType="emailAddress"
-                    autoFocus={true}
-                    theme={{ colors: { text: "rgba(255, 255, 255, 0.6)" } }}
-                  ></TextInput>
+        <View style={{ paddingBottom: "15%", paddingTop: "5%" }}>
+          <Small fontSmall="Enter your registered email below"></Small>
+          <Pressable
+            style={[
+              styles.textContainer,
+              {
+                borderColor:
+                  email === undefined || email.length < 1 || email.length > 5
+                    ? "rgba(255, 255, 255, 0.4)"
+                    : "rgba(244, 107, 107, 0.4)",
+              },
+            ]}
+          >
+            <TextInput
+              style={[styles.userInput]}
+              onChangeText={setEmail}
+              keyboardType="email-address"
+              textContentType="emailAddress"
+              autoFocus={true}
+              theme={{ colors: { text: "rgba(255, 255, 255, 0.6)" } }}
+            ></TextInput>
+          </Pressable>
+          <Text
+            style={[
+              values.email.length < 1 || Validator.validate(values.email)
+                ? styles.normalTwo
+                : styles.disabledTwo,
+            ]}
+          >
+            Please provide a valid email
+          </Text>
+        </View>
 
-                </Pressable>
-                <Text
-                  style={[
-                    values.email.length < 1 || Validator.validate(values.email)
-                      ? styles.normalTwo
-                      : styles.disabledTwo,
-                  ]}
-                >
-                  Please provide a valid email
-                </Text>
-
-                  </TouchableOpacity>
-
-              </View>
-
-              <TouchableOpacity
-                 style={!email ? styles.disabled : styles.normal}
-                 disabled={email.length < 6}
-                  onPress={() =>
-                    ForgetPassword({ email, navigation }, setIsLoading(true))
-                      .then(() => setIsLoading(false))
-                  }
-                >
-                <Buttons naming="Send Email"></Buttons>
-              </TouchableOpacity>
+        <TouchableOpacity
+          style={!email ? styles.disabled : styles.normal}
+          disabled={email.length < 6}
+          onPress={() =>
+            ForgetPassword({ email, navigation }, setIsLoading(true)).then(() =>
+              setIsLoading(false)
+            )
+          }
+        >
+          <Buttons naming="Send Email"></Buttons>
+        </TouchableOpacity>
       </View>
     </SafeAreaView>
   );
@@ -122,7 +116,6 @@ const styles = StyleSheet.create({
     alignSelf: "center",
   },
 
-
   sendEmail: (isValid) => ({
     opacity: isValid ? 1 : 0.4,
   }),
@@ -145,5 +138,4 @@ const styles = StyleSheet.create({
     right: 0,
     left: 0,
   },
-
 });
