@@ -16,7 +16,6 @@ import VerificationScreen from "../containers/VerificationScreen";
 import ResetPwScreen from "../containers/ResetPwScreen";
 import ResetPwSuccessScreen from "../containers/ResetPwSuccessScreen";
 import SubscriptionScreen from "../containers/SubscriptionScreen";
-import HistoryScreen from "../containers/HistoryScreen";
 import SupportScreen from "../containers/SupportScreen";
 import BookmarksScreen from "../containers/BookmarksScreen";
 import LibraryScreen from "../containers/LibraryScreen";
@@ -180,11 +179,6 @@ const Navigation = () => {
             component={SubscriptionScreen}
             options={{ headerShown: false }}
           />
-          {/* <Stack.Screen
-            name="HistoryScreen"
-            component={HistoryScreen}
-            options={{ headerShown: false }}
-          /> */}
           <Stack.Screen
             name="SupportScreen"
             component={SupportScreen}
