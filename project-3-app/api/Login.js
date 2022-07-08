@@ -1,10 +1,10 @@
-import * as SecureStore from 'expo-secure-store';
+import * as SecureStore from "expo-secure-store";
 
 export default async function Login({ email, username, password, navigation }) {
-  await fetch('https://sdi4-g2.herokuapp.com/login', {
-    method: 'POST',
+  return await fetch("https://sdi4-g2.herokuapp.com/login", {
+    method: "POST",
     headers: {
-      'Content-Type': 'application/json',
+      "Content-Type": "application/json",
     },
     body: JSON.stringify({
       email: email,
@@ -15,15 +15,16 @@ export default async function Login({ email, username, password, navigation }) {
     .then((response) => response.json())
     .then((serverResponse) => {
       if (serverResponse.data) {
-        SecureStore.setItemAsync('token', serverResponse.data);
-        // console.log(serverResponse);
+        SecureStore.setItemAsync("token", serverResponse.data);
+        console.log(serverResponse);
         // alert('Login Successful');
-        navigation.navigate('Dashboard');
+        navigation.navigate("Dashboard");
       } else {
-        alert('Please enter valid email/username and password');
+        return serverResponse.message;
       }
     })
     .catch((err) => {
-      alert('Please enter valid email/username and password');
+      // alert("Something went wrong. Please try again.");
+      return "Something went wrong. Please try again.";
     });
 }

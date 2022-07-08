@@ -19,7 +19,7 @@ export default function SubscriptionSuccessfulScreen({ navigation, props }) {
       <View>
         {/* <HeaderBar /> */}
 
-        <View style={{ bottom: "10%", width: "80%", alignSelf: "center" }}>
+        <View style={{ top: "5%", width: "80%", alignSelf: "center" }}>
           <Image
             source={star}
             style={{
@@ -49,7 +49,7 @@ export default function SubscriptionSuccessfulScreen({ navigation, props }) {
               fontSize: 15,
             }}
           >
-            You are now subscribed!
+            You are now subscribed to us!
           </Text>
           <Text
             style={{

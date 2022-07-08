@@ -5,6 +5,7 @@ import {
   View,
   SafeAreaView,
   Pressable,
+  Text,
 } from "react-native";
 import { TextInput } from "react-native-paper";
 
@@ -71,6 +72,15 @@ export default function ForgetPwScreen({ navigation, props }) {
                     value={values.email}
                   ></TextInput>
                 </Pressable>
+                <Text
+                  style={[
+                    values.email.length < 1 || Validator.validate(values.email)
+                      ? styles.normalTwo
+                      : styles.disabledTwo,
+                  ]}
+                >
+                  Please provide a valid email
+                </Text>
               </View>
 
               <Pressable
@@ -116,4 +126,8 @@ const styles = StyleSheet.create({
   sendEmail: (isValid) => ({
     opacity: isValid ? 1 : 0.4,
   }),
+  disabledTwo: {
+    color: "rgba(226,91,91,0.6)",
+  },
+  normalTwo: { color: "transparent" },
 });

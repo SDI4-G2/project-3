@@ -97,11 +97,20 @@ export default function Modal({
                     onChangeText={setUsername}
                   ></TextInput>
                 </TouchableOpacity>
+                <Text
+                  style={[
+                    username.length < 1 || username.length > 5
+                      ? styles.normalTwo
+                      : styles.disabledTwo,
+                  ]}
+                >
+                  Username must be 6 characters long
+                </Text>
                 <View
                   style={{
                     alignSelf: "center",
                     width: "70%",
-                    paddingTop: "3%",
+                    paddingTop: "0%",
                   }}
                 >
                   <Small fontSmall={"Enter your password to confirm"}></Small>
@@ -134,14 +143,24 @@ export default function Modal({
                     }
                   ></TextInput>
                 </TouchableOpacity>
+                <Text
+                  style={[
+                    password.length < 1 || password.length > 5
+                      ? styles.normalTwo
+                      : styles.disabledTwo,
+                  ]}
+                >
+                  Password must be 6 characters long
+                </Text>
                 <TouchableOpacity
-                  style={
+                  style={[
                     username.length < 6 ||
                     email.length < 6 ||
                     password.length < 6
                       ? styles.disabled
-                      : styles.normal
-                  }
+                      : styles.normal,
+                    styles.position,
+                  ]}
                   disabled={
                     username.length < 6 ||
                     email.length < 6 ||
@@ -207,5 +226,14 @@ const styles = StyleSheet.create({
     paddingTop: "5%",
     width: "85%",
     alignSelf: "center",
+  },
+  disabledTwo: {
+    color: "rgba(226,91,91,0.6)",
+
+    textAlign: "center",
+  },
+  normalTwo: { color: "transparent", textAlign: "center" },
+  position: {
+    bottom: "6%",
   },
 });
