@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import {
   Text,
   TouchableOpacity,
@@ -24,6 +24,8 @@ export default function WelcomeScreen({ navigation, props }) {
   const [passwordVisible, setPasswordVisible] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
   const [ErrMsg, setErrMsg] = useState(null);
+
+  const passwordRef = useRef();
 
   function validate(text) {
     let reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w\w+)+$/;
@@ -76,6 +78,11 @@ export default function WelcomeScreen({ navigation, props }) {
               keyboardType="email-address"
               textContentType="emailAddress"
               autoFocus={true}
+              returnKeyType="next"
+              onSubmitEditing={() => {
+                passwordRef.current.focus();
+              }}
+              blurOnSubmit={false}
               theme={{
                 colors: {
                   text: "rgba(255, 255, 255, 0.6)",
@@ -110,6 +117,16 @@ export default function WelcomeScreen({ navigation, props }) {
                 onPress={() => setPasswordVisible(!passwordVisible)}
                 onChangeText={setPassword}
                 style={[styles.userInput]}
+                ref={passwordRef}
+                onSubmitEditing={() => {
+                  Login(
+                    { email, username, password, navigation },
+                    setIsLoading(true)
+                  )
+                    .then((res) => setErrMsg(res))
+                    .then(() => setIsLoading(false))
+                    .then(() => setPassword(""));
+                }}
                 theme={{
                   colors: {
                     text: "rgba(255, 255, 255, 0.6)",

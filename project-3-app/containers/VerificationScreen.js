@@ -5,7 +5,9 @@ import {
   View,
   SafeAreaView,
   Pressable,
-  ActivityIndicator
+  ActivityIndicator,
+  Keyboard,
+  Image,
 } from "react-native";
 import { TextInput } from "react-native-paper";
 import * as SecureStore from "expo-secure-store";
@@ -15,111 +17,136 @@ import SecondHeaderBar from "../components/SecondHeader";
 import Bold from "../assets/Poppins_Bold";
 import Small from "../assets/Poppins_Small";
 import Med from "../assets/Poppins_Medium";
-import jwt_decode from 'jwt-decode';
+import jwt_decode from "jwt-decode";
+import OTPInput from "../components/OTPInput";
+import emailSent from "../assets/emailSent.png";
 
 export default function VerificationScreen({ navigation, props }) {
   const [isLoading, setIsLoading] = useState(false);
-  const [code, setCode] = useState(undefined);
+  const [code, setCode] = useState("");
   const [codeToken, setCodeToken] = useState(undefined);
 
+  const [pinReady, setPinReady] = useState(false);
+  const MAX_CODE_LENGTH = 6;
+
   async function expiryTimeout() {
-    const token = await SecureStore.getItemAsync('tokenForgotPw');
+    const token = await SecureStore.getItemAsync("tokenForgotPw");
     const time = new Date().getTime() / 1000;
     if (token.exp < time) {
-      alert('Verification timeout. Please get a new verification code again.');
-      navigation.navigate('WelcomeScreen');
+      alert("Verification timeout. Please get a new verification code.");
+      navigation.navigate("WelcomeScreen");
     }
   }
   expiryTimeout();
 
   async function getJwt() {
-    const token = await SecureStore.getItemAsync('tokenForgotPw');
+    const token = await SecureStore.getItemAsync("tokenForgotPw");
     const decoded = jwt_decode(token);
 
     const code = decoded.code;
     const newCode = code.toString();
-    setCodeToken(newCode)
+    setCodeToken(newCode);
     console.log(newCode);
   }
 
   useEffect(() => {
     const timer = setTimeout(() => {
-      getJwt();     
+      getJwt();
     }, 1000);
   }, []);
 
   const VerifyCode = async () => {
     if (codeToken == code) {
-      navigation.navigate('ResetPwScreen');
-    }else{
-      alert('Invalid code. Please try again.')
+      navigation.navigate("ResetPwScreen");
+    } else {
+      alert("Invalid code. Please try again.");
     }
   };
 
   return (
     <SafeAreaView>
-      <SecondHeaderBar backScreen="ForgetPwScreen"/>
-      <View style={styles.container}>
-        <View style={{ paddingBottom: "5%" }}>
-          <Bold fontBold="Verification"></Bold>
-        </View>
-        <View style={{ paddingBottom: "5%" }}>
-          {/* <Med fontMed={"No worries,"}></Med> */}
+      <SecondHeaderBar backScreen="ForgetPwScreen" />
+      <Pressable onPress={Keyboard.dismiss}>
+        <View style={styles.container}>
+          <View
+            style={{
+              alignSelf: "center",
+              bottom: "5%",
+            }}
+          >
+            <Image
+              source={emailSent}
+              style={{
+                height: 200,
+                width: 200,
+                alignSelf: "center",
 
-          <Med
-            fontMed={"Please enter the 6-digit code sent to your email."}
-          ></Med>
-        </View>
-              <View style={{ paddingBottom: "15%", paddingTop: "5%" }}>
-                  <TouchableOpacity
-                    style={[
-                      styles.textContainer,
-                      {
-                        borderColor:
-                          code === undefined ||
-                          code.length < 1 ||
-                          code.length > 5
-                            ? "rgba(255, 255, 255, 0.4)"
-                            : "rgba(244, 107, 107, 0.4)",
-                      },
-                    ]}
-                  >
-                  <TextInput
-                    style={[styles.userInput]}
-                    onChangeText={setCode}
-                    keyboardType="number-pad"
-                    autoFocus={true}
-                    theme={{ colors: { text: "rgba(255, 255, 255, 0.6)" } }}
-                  ></TextInput>
-                  </TouchableOpacity>
-              </View>
+                right: "2%",
+              }}
+            />
 
-              <TouchableOpacity
-                style={
-                  !(code) ? styles.disabled : styles.normal
-                }
-                onPress={() =>
-                  VerifyCode({ code }, setIsLoading(true))
-                    .then(() => setIsLoading(false))
-                }
-                disabled={!(code)}
-              >
-                <Buttons naming="Verify"></Buttons>
-                {isLoading === true && (
-                  <ActivityIndicator
-                    style={styles.loading}
-                    color={"rgba(255,255,255,0.5)"}
-                  />
-                )}
-            </TouchableOpacity>
-      </View>
+            <Bold fontBold="Email Sent"></Bold>
+          </View>
+          <View style={{ bottom: "7%" }}>
+            <Med
+              fontMed={"Please enter the 6-digit code sent to your email."}
+            ></Med>
+          </View>
+          <View style={{ paddingBottom: "10%", bottom: "5%" }}>
+            {/* <TouchableOpacity
+              style={[
+                styles.textContainer,
+                {
+                  borderColor:
+                    code === undefined || code.length < 1 || code.length > 5
+                      ? "rgba(255, 255, 255, 0.4)"
+                      : "rgba(244, 107, 107, 0.4)",
+                },
+              ]}
+            >
+              <TextInput
+                style={[styles.userInput]}
+                onChangeText={setCode}
+                keyboardType="number-pad"
+                autoFocus={true}
+                theme={{ colors: { text: "rgba(255, 255, 255, 0.6)" } }}
+              ></TextInput>
+            </TouchableOpacity> */}
+
+            <OTPInput
+              setPinReady={setPinReady}
+              code={code}
+              setCode={setCode}
+              maxLength={MAX_CODE_LENGTH}
+            />
+          </View>
+
+          <TouchableOpacity
+            style={!pinReady ? styles.disabled : styles.normal}
+            onPress={() =>
+              VerifyCode({ code }, setIsLoading(true)).then(() =>
+                setIsLoading(false)
+              )
+            }
+            disabled={!pinReady}
+          >
+            <Buttons naming="Verify"></Buttons>
+            {isLoading === true && (
+              <ActivityIndicator
+                style={styles.loading}
+                color={"rgba(255,255,255,0.5)"}
+              />
+            )}
+          </TouchableOpacity>
+        </View>
+      </Pressable>
     </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    padding: "10%",
+    paddingHorizontal: "10%",
   },
 
   textContainer: {

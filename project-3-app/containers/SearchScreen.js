@@ -134,7 +134,6 @@ export default function SearchScreen({ navigation }) {
               keyboardType="email-address"
               textContentType="emailAddress"
               returnKeyType="search"
-              autoFocus={true}
               onSubmitEditing={textSearch}
               theme={{
                 colors: {

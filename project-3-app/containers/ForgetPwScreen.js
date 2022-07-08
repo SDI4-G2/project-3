@@ -24,6 +24,7 @@ import ForgetPassword from "../api/ForgetPassword";
 export default function ForgetPwScreen({ navigation, props }) {
   const [isLoading, setIsLoading] = useState(false);
   const [email, setEmail] = useState("");
+  const [errorMsg, setErrorMsg] = useState(null);
 
   const EmailSchema = Yup.object().shape({
     email: Yup.string().email().required("Please enter your email"),
@@ -41,7 +42,14 @@ export default function ForgetPwScreen({ navigation, props }) {
             fontMed={"We will send you an email to get your password reset."}
           ></Med>
         </View>
-        <View style={{ paddingBottom: "15%", paddingTop: "5%" }}>
+        {errorMsg ? (
+          <Text style={{ color: "rgba(226,91,91,0.6)", textAlign: "center" }}>
+            {errorMsg}, please try again.
+          </Text>
+        ) : (
+          <Text style={{ color: "transparent" }}>word</Text>
+        )}
+        <View style={{ paddingBottom: "15%", paddingTop: "0%" }}>
           <Small fontSmall="Enter your registered email below"></Small>
           <Pressable
             style={[
@@ -60,6 +68,7 @@ export default function ForgetPwScreen({ navigation, props }) {
               keyboardType="email-address"
               textContentType="emailAddress"
               autoFocus={true}
+              onChange={() => setErrorMsg(null)}
               theme={{ colors: { text: "rgba(255, 255, 255, 0.6)" } }}
             ></TextInput>
           </Pressable>
@@ -78,9 +87,10 @@ export default function ForgetPwScreen({ navigation, props }) {
           style={Validator.validate(email) ? styles.normal : styles.disabled}
           disabled={!Validator.validate(email)}
           onPress={() =>
-            ForgetPassword({ email, navigation }, setIsLoading(true)).then(() =>
-              setIsLoading(false)
-            )
+            ForgetPassword({ email, navigation }, setIsLoading(true))
+              .then((res) => setErrorMsg(res))
+
+              .then(() => setIsLoading(false))
           }
         >
           <Buttons naming="Send Email"></Buttons>

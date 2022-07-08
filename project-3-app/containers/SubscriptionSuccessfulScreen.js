@@ -65,7 +65,7 @@ export default function SubscriptionSuccessfulScreen({ navigation, props }) {
           </Text>
           <TouchableOpacity
             style={{ top: "10%" }}
-            onPress={() => navigation.navigate("Dashboard")}
+            onPress={() => navigation.push("Dashboard")}
           >
             <Buttons naming={"Return to Dashboard"} />
           </TouchableOpacity>
