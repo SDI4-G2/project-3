@@ -217,6 +217,7 @@ const styles = StyleSheet.create({
   },
   disabledTwo: {
     color: "rgba(226,91,91,0.6)",
+    textAlign: "center",
   },
   normalTwo: { color: "transparent" },
 });

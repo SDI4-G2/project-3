@@ -20,15 +20,17 @@ export default async function EditUsername({
     .then((response) => response.json())
     .then((res) => {
       if (res.data) {
-        alert(res.data);
+        // alert(res.data);
+        res.data;
         SecureStore.setItemAsync("token", res.data);
         return false;
       } else {
-        alert(res.message);
+        alert(`test ${res.message}`);
+        // res.message;
         return true;
       }
     })
     .catch((err) => {
-      alert(err);
+      alert("hello", err);
     });
 }
