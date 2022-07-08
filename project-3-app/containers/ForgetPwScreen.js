@@ -65,7 +65,7 @@ export default function ForgetPwScreen({ navigation, props }) {
           </Pressable>
           <Text
             style={[
-              values.email.length < 1 || Validator.validate(values.email)
+              email.length < 1 || Validator.validate(email)
                 ? styles.normalTwo
                 : styles.disabledTwo,
             ]}
@@ -75,8 +75,8 @@ export default function ForgetPwScreen({ navigation, props }) {
         </View>
 
         <TouchableOpacity
-          style={!email ? styles.disabled : styles.normal}
-          disabled={email.length < 6}
+          style={Validator.validate(email) ? styles.normal : styles.disabled}
+          disabled={!Validator.validate(email)}
           onPress={() =>
             ForgetPassword({ email, navigation }, setIsLoading(true)).then(() =>
               setIsLoading(false)
@@ -121,6 +121,7 @@ const styles = StyleSheet.create({
   }),
   disabledTwo: {
     color: "rgba(226,91,91,0.6)",
+    textAlign: "center",
   },
   normalTwo: { color: "transparent" },
 

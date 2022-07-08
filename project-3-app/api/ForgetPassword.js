@@ -20,22 +20,22 @@ export default async function ForgetPassword({
     .then((response) => response.json())
     .then((serverResponse) => {
       if (serverResponse.data) {
-        
         SecureStore.setItemAsync("tokenForgotPw", serverResponse.data);
         // console.log(serverResponse);
 
         navigation.push("VerificationScreen");
       } else {
-        Alert.alert(
-          "Please enter valid email"[
-            {
-              text: "OK",
-            }
-          ]
+        alert(
+          "Please enter a valid email"
+          // [
+          //   {
+          //     text: "OK",
+          //   }
+          // ]
         );
       }
     })
     .catch((err) => {
-      alert("Please enter valid email");
+      alert("Please enter a valid email");
     });
 }
