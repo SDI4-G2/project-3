@@ -65,7 +65,7 @@ export default function ForgetPwScreen({ navigation, props }) {
           </Pressable>
           <Text
             style={[
-              values.email.length < 1 || Validator.validate(values.email)
+              email.length < 1 || Validator.validate(email)
                 ? styles.normalTwo
                 : styles.disabledTwo,
             ]}

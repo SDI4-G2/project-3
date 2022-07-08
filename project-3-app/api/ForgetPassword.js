@@ -26,6 +26,8 @@ export default async function ForgetPassword({
 
         navigation.push("VerificationScreen");
       } else {
+        console.log("Unvalid email")
+        alert("Please enter valid email");
         Alert.alert(
           "Please enter valid email"[
             {
@@ -36,6 +38,7 @@ export default async function ForgetPassword({
       }
     })
     .catch((err) => {
+      console.log("2")
       alert("Please enter valid email");
     });
 }
