@@ -19,9 +19,9 @@ import Underline from "../assets/Poppins_Underline";
 import Validator from "email-validator";
 
 export default function SignUpScreen({ navigation }) {
-  const [email, setEmail] = useState(undefined);
-  const [username, setUsername] = useState(undefined);
-  const [password, setPassword] = useState(undefined);
+  const [email, setEmail] = useState("");
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
   const [disabled, setDisabled] = useState(true);
   const [passwordVisible, setPasswordVisible] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
@@ -39,9 +39,7 @@ export default function SignUpScreen({ navigation }) {
                 styles.textContainer,
                 {
                   borderColor:
-                    username === undefined ||
-                    username.length < 1 ||
-                    username.length > 5
+                    username.length < 1 || username.length > 5
                       ? "rgba(255, 255, 255, 0.4)"
                       : "rgba(244, 107, 107, 0.4)",
                 },
@@ -59,7 +57,16 @@ export default function SignUpScreen({ navigation }) {
                 autoFocus={true}
               ></TextInput>
             </TouchableOpacity>
-            <View style={{ paddingTop: "5%" }}>
+            <Text
+              style={[
+                username.length < 1 || username.length > 5
+                  ? styles.normalTwo
+                  : styles.disabledTwo,
+              ]}
+            >
+              Username must be 6 characters long
+            </Text>
+            <View style={{ paddingTop: "0%" }}>
               <Small fontSmall="Email"></Small>
             </View>
             <TouchableOpacity
@@ -67,9 +74,7 @@ export default function SignUpScreen({ navigation }) {
                 styles.textContainer,
                 {
                   borderColor:
-                    email === undefined ||
-                    email.length < 1 ||
-                    Validator.validate(email)
+                    email.length < 1 || Validator.validate(email)
                       ? "rgba(255, 255, 255, 0.4)"
                       : "rgba(244, 107, 107, 0.4)",
                 },
@@ -86,7 +91,16 @@ export default function SignUpScreen({ navigation }) {
                 onChangeText={setEmail}
               ></TextInput>
             </TouchableOpacity>
-            <View style={{ paddingTop: "5%" }}>
+            <Text
+              style={[
+                email.length < 1 || Validator.validate(email)
+                  ? styles.normalTwo
+                  : styles.disabledTwo,
+              ]}
+            >
+              Please provide a valid email
+            </Text>
+            <View style={{ paddingTop: "0%" }}>
               <Small fontSmall="Password"></Small>
             </View>
             <TouchableOpacity
@@ -94,9 +108,7 @@ export default function SignUpScreen({ navigation }) {
                 styles.textContainer,
                 {
                   borderColor:
-                    password === undefined ||
-                    password.length < 1 ||
-                    password.length > 5
+                    password.length < 1 || password.length > 5
                       ? "rgba(255, 255, 255, 0.4)"
                       : "rgba(244, 107, 107, 0.4)",
                 },
@@ -122,6 +134,15 @@ export default function SignUpScreen({ navigation }) {
                 }
               />
             </TouchableOpacity>
+            <Text
+              style={[
+                password.length < 1 || password.length > 5
+                  ? styles.normalTwo
+                  : styles.disabledTwo,
+              ]}
+            >
+              Password must be 6 characters long
+            </Text>
           </View>
         </View>
         <View style={styles.buttonsbottom}>
@@ -194,4 +215,8 @@ const styles = StyleSheet.create({
     right: 0,
     left: 0,
   },
+  disabledTwo: {
+    color: "rgba(226,91,91,0.6)",
+  },
+  normalTwo: { color: "transparent" },
 });

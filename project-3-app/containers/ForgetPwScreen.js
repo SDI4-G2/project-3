@@ -5,7 +5,9 @@ import {
   View,
   SafeAreaView,
   Pressable,
+  Text,
   ActivityIndicator
+
 } from "react-native";
 import { TextInput } from "react-native-paper";
 
@@ -63,7 +65,20 @@ export default function ForgetPwScreen({ navigation, props }) {
                     autoFocus={true}
                     theme={{ colors: { text: "rgba(255, 255, 255, 0.6)" } }}
                   ></TextInput>
+
+                </Pressable>
+                <Text
+                  style={[
+                    values.email.length < 1 || Validator.validate(values.email)
+                      ? styles.normalTwo
+                      : styles.disabledTwo,
+                  ]}
+                >
+                  Please provide a valid email
+                </Text>
+
                   </TouchableOpacity>
+
               </View>
 
               <TouchableOpacity
@@ -107,6 +122,15 @@ const styles = StyleSheet.create({
     alignSelf: "center",
   },
 
+
+  sendEmail: (isValid) => ({
+    opacity: isValid ? 1 : 0.4,
+  }),
+  disabledTwo: {
+    color: "rgba(226,91,91,0.6)",
+  },
+  normalTwo: { color: "transparent" },
+
   disabled: {
     opacity: 0.5,
   },
@@ -121,4 +145,5 @@ const styles = StyleSheet.create({
     right: 0,
     left: 0,
   },
+
 });
