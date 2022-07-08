@@ -25,17 +25,14 @@ export default async function ForgetPassword({
 
         navigation.push("VerificationScreen");
       } else {
-        alert(
-          "Please enter a valid email"
-          // [
-          //   {
-          //     text: "OK",
-          //   }
-          // ]
-        );
+
+        console.log("Invalid email");
+        alert("Please enter valid email");
       }
     })
     .catch((err) => {
-      alert("Please enter a valid email");
+      console.log("2");
+      alert("Please enter valid email");
+
     });
 }
