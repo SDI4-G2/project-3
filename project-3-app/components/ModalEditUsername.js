@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import {
   SafeAreaView,
   StyleSheet,
@@ -28,8 +28,11 @@ export default function Modal({
   const [username, setUsername] = useState(usernameInput);
   const [password, setPassword] = useState("");
 
+  const pwRef = useRef();
+
   const toggleBottomNavigationView = () => {
     //Toggling the visibility state of the bottom sheet
+
     setVisible(!visible);
   };
   return (
@@ -90,11 +93,17 @@ export default function Modal({
                   ]}
                 >
                   <TextInput
-                    // onChangeText={(text) => validate(text)}
                     style={styles.userInput}
                     theme={{ colors: { text: "rgba(255, 255, 255, 0.6)" } }}
                     defaultValue={usernameInput}
                     onChangeText={setUsername}
+                    returnKeyType="next"
+                    onSubmitEditing={() => {
+                      {
+                        username.length > 5 ? pwRef.current.focus() : null;
+                      }
+                    }}
+                    blurOnSubmit={false}
                   ></TextInput>
                 </TouchableOpacity>
                 <Text
@@ -134,6 +143,7 @@ export default function Modal({
                     style={styles.userInput}
                     theme={{ colors: { text: "rgba(255, 255, 255, 0.6)" } }}
                     secureTextEntry={passwordVisible}
+                    ref={pwRef}
                     right={
                       <TextInput.Icon
                         name={passwordVisible ? "eye-off" : "eye"}

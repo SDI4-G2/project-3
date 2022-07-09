@@ -33,11 +33,11 @@ export default function WelcomeScreen({ navigation, props }) {
     let reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w\w+)+$/;
     if (reg.test(text) === true) {
       setEmail(text);
-      setUsername(undefined);
+      // setUsername(undefined);
       // console.log("email" + email);
     } else {
       setUsername(text);
-      setEmail(undefined);
+      // setEmail(undefined);
       // console.log("username" + username);
     }
   }
