@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import {
   TouchableOpacity,
   StyleSheet,
@@ -6,6 +6,8 @@ import {
   SafeAreaView,
   Pressable,
   ActivityIndicator,
+  Text,
+  Keyboard,
 } from "react-native";
 import { TextInput } from "react-native-paper";
 
@@ -27,6 +29,9 @@ export default function ResetPwScreen({ navigation, props }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const [errorMessage, setErrorMessage] = useState(null);
+
+  const newPwRef = useRef();
 
   async function expiryTimeout() {
     const token = await SecureStore.getItemAsync("tokenForgotPw");
@@ -57,7 +62,7 @@ export default function ResetPwScreen({ navigation, props }) {
     <SafeAreaView>
       <SecondHeaderBar backScreen="ForgetPwScreen" />
       <View style={styles.container}>
-        <View style={{ paddingBottom: "5%" }}>
+        <View style={{ paddingBottom: "0%" }}>
           <Bold fontBold="Reset Password"></Bold>
         </View>
         <View style={{ paddingBottom: "5%" }}>
@@ -65,15 +70,20 @@ export default function ResetPwScreen({ navigation, props }) {
         </View>
         <View style={{ paddingBottom: "15%", paddingTop: "5%" }}>
           <View style={{ paddingTop: "5%" }}>
+            {errorMessage ? (
+              <Text style={{ color: "rgba(226,91,91,0.6)", bottom: "5%" }}>
+                {errorMessage}
+              </Text>
+            ) : (
+              <Text style={{ color: "transparent" }}>hello</Text>
+            )}
             <Small fontSmall="New Password"></Small>
             <TouchableOpacity
               style={[
                 styles.textContainer,
                 {
                   borderColor:
-                    password === undefined ||
-                    password.length < 1 ||
-                    password.length > 5
+                    password.length < 1 || password.length > 5
                       ? "rgba(255, 255, 255, 0.4)"
                       : "rgba(244, 107, 107, 0.4)",
                 },
@@ -86,19 +96,34 @@ export default function ResetPwScreen({ navigation, props }) {
                 autoFocus={true}
                 theme={{ colors: { text: "rgba(255, 255, 255, 0.6)" } }}
                 secureTextEntry={true}
+                returnKeyType="next"
+                onChange={() => setErrorMessage(null)}
+                onSubmitEditing={() => {
+                  {
+                    password.length > 5 ? newPwRef.current.focus() : null;
+                  }
+                }}
+                blurOnSubmit={false}
               ></TextInput>
             </TouchableOpacity>
+            <Text
+              style={[
+                password.length < 1 || password.length > 5
+                  ? styles.normalTwo
+                  : styles.disabledTwo,
+              ]}
+            >
+              Password must be 6 characters long
+            </Text>
           </View>
-          <View style={{ paddingTop: "5%" }}>
+          <View>
             <Small fontSmall="Confirm New Password"></Small>
             <TouchableOpacity
               style={[
                 styles.textContainer,
                 {
                   borderColor:
-                    password === undefined ||
-                    password.length < 1 ||
-                    password.length > 5
+                    confirmPassword.length < 1 || confirmPassword.length > 5
                       ? "rgba(255, 255, 255, 0.4)"
                       : "rgba(244, 107, 107, 0.4)",
                 },
@@ -114,23 +139,37 @@ export default function ResetPwScreen({ navigation, props }) {
                   },
                 }}
                 secureTextEntry={true}
+                onChange={() => setErrorMessage(null)}
+                ref={newPwRef}
+                onSubmitEditing={() => {
+                  password.length > 5 && confirmPassword.length > 5
+                    ? ResetPassword(
+                        { email, password, confirmPassword, navigation },
+                        setIsLoading(true)
+                      )
+                        .then((res) => setErrorMessage(res))
+                        .then(() => setIsLoading(false))
+                    : null;
+                }}
               />
             </TouchableOpacity>
           </View>
         </View>
 
         <TouchableOpacity
-          style={!password || !email ? styles.disabled : styles.normal}
-          disabled={
-            password.length < 6 ||
-            email.length < 6 ||
-            confirmPassword.length < 6
+          style={
+            password.length < 6 || confirmPassword.length < 6
+              ? styles.disabled
+              : styles.normal
           }
+          disabled={password.length < 6 || confirmPassword.length < 6}
           onPress={() =>
             ResetPassword(
               { email, password, confirmPassword, navigation },
               setIsLoading(true)
-            ).then(() => setIsLoading(false))
+            )
+              .then((res) => setErrorMessage(res))
+              .then(() => setIsLoading(false))
           }
         >
           <Buttons naming="Save"></Buttons>
@@ -186,4 +225,9 @@ const styles = StyleSheet.create({
     right: 0,
     left: 0,
   },
+  disabledTwo: {
+    color: "rgba(226,91,91,0.6)",
+    textAlign: "center",
+  },
+  normalTwo: { color: "transparent", textAlign: "center" },
 });

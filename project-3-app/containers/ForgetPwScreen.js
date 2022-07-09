@@ -7,6 +7,7 @@ import {
   Pressable,
   Text,
   ActivityIndicator,
+  Keyboard,
 } from "react-native";
 import { TextInput } from "react-native-paper";
 
@@ -32,70 +33,85 @@ export default function ForgetPwScreen({ navigation, props }) {
   return (
     <SafeAreaView>
       <SecondHeaderBar backScreen="WelcomeScreen" />
-      <View style={styles.container}>
-        <View style={{ paddingBottom: "5%" }}>
-          <Bold fontBold="No worries,"></Bold>
-        </View>
-        <View style={{ paddingBottom: "5%" }}>
-          {/* <Med fontMed={"No worries,"}></Med> */}
-          <Med
-            fontMed={"We will send you an email to get your password reset."}
-          ></Med>
-        </View>
-        {errorMsg ? (
-          <Text style={{ color: "rgba(226,91,91,0.6)", textAlign: "center" }}>
-            {errorMsg}, please try again.
-          </Text>
-        ) : (
-          <Text style={{ color: "transparent" }}>word</Text>
-        )}
-        <View style={{ paddingBottom: "15%", paddingTop: "0%" }}>
-          <Small fontSmall="Enter your registered email below"></Small>
-          <Pressable
-            style={[
-              styles.textContainer,
-              {
-                borderColor:
-                  email === undefined || email.length < 1 || email.length > 5
-                    ? "rgba(255, 255, 255, 0.4)"
-                    : "rgba(244, 107, 107, 0.4)",
-              },
-            ]}
-          >
-            <TextInput
-              style={[styles.userInput]}
-              onChangeText={setEmail}
-              keyboardType="email-address"
-              textContentType="emailAddress"
-              autoFocus={true}
-              onChange={() => setErrorMsg(null)}
-              theme={{ colors: { text: "rgba(255, 255, 255, 0.6)" } }}
-            ></TextInput>
-          </Pressable>
-          <Text
-            style={[
-              email.length < 1 || Validator.validate(email)
-                ? styles.normalTwo
-                : styles.disabledTwo,
-            ]}
-          >
-            Please provide a valid email
-          </Text>
-        </View>
+      <Pressable onPress={Keyboard.dismiss}>
+        <View style={styles.container}>
+          <View style={{ paddingBottom: "5%" }}>
+            <Bold fontBold="No worries,"></Bold>
+          </View>
+          <View style={{ paddingBottom: "5%" }}>
+            {/* <Med fontMed={"No worries,"}></Med> */}
+            <Med
+              fontMed={"We will send you an email to get your password reset."}
+            ></Med>
+          </View>
+          {errorMsg ? (
+            <Text style={{ color: "rgba(226,91,91,0.6)", textAlign: "center" }}>
+              {errorMsg}, please try again.
+            </Text>
+          ) : (
+            <Text style={{ color: "transparent" }}>word</Text>
+          )}
+          <View style={{ paddingBottom: "15%", paddingTop: "0%" }}>
+            <Small fontSmall="Enter your registered email below"></Small>
+            <Pressable
+              style={[
+                styles.textContainer,
+                {
+                  borderColor:
+                    email.length < 1 || Validator.validate(email)
+                      ? "rgba(255, 255, 255, 0.4)"
+                      : "rgba(244, 107, 107, 0.4)",
+                },
+              ]}
+            >
+              <TextInput
+                style={[styles.userInput]}
+                onChangeText={setEmail}
+                keyboardType="email-address"
+                textContentType="emailAddress"
+                autoFocus={true}
+                onChange={() => setErrorMsg(null)}
+                theme={{ colors: { text: "rgba(255, 255, 255, 0.6)" } }}
+                onSubmitEditing={() => {
+                  {
+                    Validator.validate(email)
+                      ? ForgetPassword(
+                          { email, navigation },
+                          setIsLoading(true)
+                        )
+                          .then((res) => setErrorMsg(res))
 
-        <TouchableOpacity
-          style={Validator.validate(email) ? styles.normal : styles.disabled}
-          disabled={!Validator.validate(email)}
-          onPress={() =>
-            ForgetPassword({ email, navigation }, setIsLoading(true))
-              .then((res) => setErrorMsg(res))
+                          .then(() => setIsLoading(false))
+                      : null;
+                  }
+                }}
+              ></TextInput>
+            </Pressable>
+            <Text
+              style={[
+                email.length < 1 || Validator.validate(email)
+                  ? styles.normalTwo
+                  : styles.disabledTwo,
+              ]}
+            >
+              Please provide a valid email
+            </Text>
+          </View>
 
-              .then(() => setIsLoading(false))
-          }
-        >
-          <Buttons naming="Send Email"></Buttons>
-        </TouchableOpacity>
-      </View>
+          <TouchableOpacity
+            style={Validator.validate(email) ? styles.normal : styles.disabled}
+            disabled={!Validator.validate(email)}
+            onPress={() =>
+              ForgetPassword({ email, navigation }, setIsLoading(true))
+                .then((res) => setErrorMsg(res))
+
+                .then(() => setIsLoading(false))
+            }
+          >
+            <Buttons naming="Send Email"></Buttons>
+          </TouchableOpacity>
+        </View>
+      </Pressable>
     </SafeAreaView>
   );
 }

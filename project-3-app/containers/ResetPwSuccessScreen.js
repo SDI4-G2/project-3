@@ -5,7 +5,8 @@ import {
   View,
   SafeAreaView,
   Pressable,
-  ActivityIndicator
+  ActivityIndicator,
+  Image,
 } from "react-native";
 import { TextInput } from "react-native-paper";
 
@@ -14,14 +15,28 @@ import SecondHeaderBar from "../components/SecondHeader";
 import Bold from "../assets/Poppins_Bold";
 import Small from "../assets/Poppins_Small";
 import Med from "../assets/Poppins_Medium";
+import tickSuccess from "../assets/tickSuccess.png";
 
 export default function ResetPwSuccessScreen({ navigation, props }) {
-  
   return (
     <SafeAreaView>
-      <SecondHeaderBar backScreen="WelcomeScreen"/>
+      <SecondHeaderBar backScreen="WelcomeScreen" />
       <View style={styles.container}>
-        <View style={{ paddingBottom: "5%" }}>
+        <Image
+          source={tickSuccess}
+          style={{
+            height: 200,
+            width: 200,
+            alignSelf: "center",
+          }}
+        />
+        <View
+          style={{
+            paddingBottom: "8%",
+
+            alignSelf: "center",
+          }}
+        >
           <Bold fontBold="Password Changed!"></Bold>
         </View>
         <View style={{ paddingBottom: "5%" }}>
@@ -29,14 +44,13 @@ export default function ResetPwSuccessScreen({ navigation, props }) {
             fontMed={"Continue learning by logging in with your new password!"}
           ></Med>
         </View>
-                    
-              <TouchableOpacity
-                 style={styles.normal}
-                  onPress={() => navigation.navigate('WelcomeScreen')}
-                >
-                  <Buttons naming="Log In"></Buttons>
-                </TouchableOpacity>
-              
+
+        <TouchableOpacity
+          style={styles.normal}
+          onPress={() => navigation.navigate("WelcomeScreen")}
+        >
+          <Buttons naming="Log In"></Buttons>
+        </TouchableOpacity>
       </View>
     </SafeAreaView>
   );
@@ -44,7 +58,7 @@ export default function ResetPwSuccessScreen({ navigation, props }) {
 
 const styles = StyleSheet.create({
   container: {
-    padding: "10%",
+    paddingHorizontal: "10%",
   },
 
   textContainer: {

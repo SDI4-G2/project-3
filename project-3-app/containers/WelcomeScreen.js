@@ -6,6 +6,8 @@ import {
   View,
   Button,
   ActivityIndicator,
+  Pressable,
+  Keyboard,
 } from "react-native";
 import { TextInput } from "react-native-paper";
 
@@ -49,153 +51,163 @@ export default function WelcomeScreen({ navigation, props }) {
   } else
     return (
       <View style={styles.container}>
-        <Bold fontBold="Welcome!"></Bold>
-        <View style={styles.fieldsInput}>
-          {ErrMsg ? (
-            <Text style={{ color: "rgba(226,91,91,0.6)", bottom: "5%" }}>
-              {ErrMsg}
-            </Text>
-          ) : null}
+        <Pressable onPress={Keyboard.dismiss}>
+          <Bold fontBold="Welcome!"></Bold>
+          <View style={styles.fieldsInput}>
+            {ErrMsg ? (
+              <Text style={{ color: "rgba(226,91,91,0.6)", bottom: "5%" }}>
+                {ErrMsg}
+              </Text>
+            ) : null}
 
-          <Small fontSmall="Username / E-mail"></Small>
-          <TouchableOpacity
-            style={[
-              styles.textContainer,
-              {
-                borderColor:
-                  username.length < 1 || username.length > 5
-                    ? "rgba(255, 255, 255, 0.4)"
-                    : "rgba(244, 107, 107, 0.4)",
-              },
-            ]}
-          >
-            <TextInput
-              underlineColorAndroid="transparent"
-              spellCheck={false}
-              autoCorrect={false}
-              onChangeText={(text) => validate(text)}
-              style={[styles.userInput]}
-              keyboardType="email-address"
-              textContentType="emailAddress"
-              autoFocus={true}
-              returnKeyType="next"
-              onSubmitEditing={() => {
-                passwordRef.current.focus();
-              }}
-              blurOnSubmit={false}
-              theme={{
-                colors: {
-                  text: "rgba(255, 255, 255, 0.6)",
-                },
-              }}
-            ></TextInput>
-          </TouchableOpacity>
-          <Text
-            style={[
-              username.length < 1 || username.length > 5
-                ? styles.normalTwo
-                : styles.disabledTwo,
-            ]}
-          >
-            Username must be 6 characters long
-          </Text>
-          <View style={{ paddingTop: "0%" }}>
-            <Small fontSmall="Password"></Small>
+            <Small fontSmall="Username / E-mail"></Small>
             <TouchableOpacity
               style={[
                 styles.textContainer,
                 {
                   borderColor:
-                    password.length < 1 || password.length > 5
+                    username.length < 1 || username.length > 5
                       ? "rgba(255, 255, 255, 0.4)"
                       : "rgba(244, 107, 107, 0.4)",
                 },
               ]}
             >
               <TextInput
-                value={password}
-                onPress={() => setPasswordVisible(!passwordVisible)}
-                onChangeText={setPassword}
+                underlineColorAndroid="transparent"
+                spellCheck={false}
+                autoCorrect={false}
+                onChangeText={(text) => validate(text)}
                 style={[styles.userInput]}
-                ref={passwordRef}
+                keyboardType="email-address"
+                textContentType="emailAddress"
+                autoFocus={true}
+                returnKeyType="next"
+                onChange={() => setErrMsg(null)}
                 onSubmitEditing={() => {
-                  Login(
-                    { email, username, password, navigation },
-                    setIsLoading(true)
-                  )
-                    .then((res) => setErrMsg(res))
-                    .then(() => setIsLoading(false))
-                    .then(() => setPassword(""));
+                  {
+                    username.length > 5 ? passwordRef.current.focus() : null;
+                  }
                 }}
+                blurOnSubmit={false}
                 theme={{
                   colors: {
                     text: "rgba(255, 255, 255, 0.6)",
                   },
                 }}
-                secureTextEntry={passwordVisible}
-                right={
-                  <TextInput.Icon
-                    name={passwordVisible ? "eye-off" : "eye"}
-                    color={"rgba(255,255,255,0.5)"}
-                    onPress={() => setPasswordVisible(!passwordVisible)}
-                    onChangeText={setPassword}
-                  />
-                }
-              />
+              ></TextInput>
             </TouchableOpacity>
             <Text
               style={[
-                password.length < 1 || password.length > 5
+                username.length < 1 || username.length > 5
                   ? styles.normalTwo
                   : styles.disabledTwo,
               ]}
             >
-              Password must be 6 characters long
+              Username must be 6 characters long
             </Text>
+            <View style={{ paddingTop: "0%" }}>
+              <Small fontSmall="Password"></Small>
+              <TouchableOpacity
+                style={[
+                  styles.textContainer,
+                  {
+                    borderColor:
+                      password.length < 1 || password.length > 5
+                        ? "rgba(255, 255, 255, 0.4)"
+                        : "rgba(244, 107, 107, 0.4)",
+                  },
+                ]}
+              >
+                <TextInput
+                  value={password}
+                  onPress={() => setPasswordVisible(!passwordVisible)}
+                  onChangeText={setPassword}
+                  style={[styles.userInput]}
+                  onChange={() => setErrMsg(null)}
+                  ref={passwordRef}
+                  onSubmitEditing={() => {
+                    {
+                      username.length > 5 && password.length > 5
+                        ? Login(
+                            { email, username, password, navigation },
+                            setIsLoading(true)
+                          )
+                            .then((res) => setErrMsg(res))
+                            .then(() => setIsLoading(false))
+                            .then(() => setPassword(""))
+                        : null;
+                    }
+                  }}
+                  theme={{
+                    colors: {
+                      text: "rgba(255, 255, 255, 0.6)",
+                    },
+                  }}
+                  secureTextEntry={passwordVisible}
+                  right={
+                    <TextInput.Icon
+                      name={passwordVisible ? "eye-off" : "eye"}
+                      color={"rgba(255,255,255,0.5)"}
+                      onPress={() => setPasswordVisible(!passwordVisible)}
+                      onChangeText={setPassword}
+                    />
+                  }
+                />
+              </TouchableOpacity>
+              <Text
+                style={[
+                  password.length < 1 || password.length > 5
+                    ? styles.normalTwo
+                    : styles.disabledTwo,
+                ]}
+              >
+                Password must be 6 characters long
+              </Text>
+            </View>
           </View>
-        </View>
-        <View style={styles.buttonsbottom}>
-          <TouchableOpacity
-            style={
-              username.length < 6 || password.length < 6
-                ? styles.disabled
-                : styles.normal
-            }
-            onPress={() => {
-              Login(
-                { email, username, password, navigation },
-                setIsLoading(true)
-              )
-                .then((res) => setErrMsg(res))
-                .then(() => setIsLoading(false))
-                .then(() => setPassword(""));
-            }}
-            disabled={username.length < 6 || password.length < 6}
-          >
-            <Buttons naming="Log In"></Buttons>
-            {isLoading === true && (
-              <ActivityIndicator
-                style={styles.loading}
-                color={"rgba(255,255,255,0.5)"}
-              />
-            )}
-          </TouchableOpacity>
-          <View style={styles.bottomButtons}>
+          <View style={styles.buttonsbottom}>
             <TouchableOpacity
-              style={styles.flexSpacing}
-              onPress={() => navigation.navigate("SignUpScreen")}
+              style={
+                username.length < 6 || password.length < 6
+                  ? styles.disabled
+                  : styles.normal
+              }
+              onPress={() => {
+                Login(
+                  { email, username, password, navigation },
+                  setIsLoading(true)
+                )
+                  .then((res) => setErrMsg(res))
+                  .then(() => setIsLoading(false))
+                  .then(() => setPassword(""));
+              }}
+              disabled={username.length < 6 || password.length < 6}
             >
-              <Small fontSmall="Or "></Small>
+              <Buttons naming="Log In"></Buttons>
+              {isLoading === true && (
+                <ActivityIndicator
+                  style={styles.loading}
+                  color={"rgba(255,255,255,0.5)"}
+                />
+              )}
+            </TouchableOpacity>
+            <View style={styles.bottomButtons}>
+              <TouchableOpacity
+                style={styles.flexSpacing}
+                onPress={() => navigation.navigate("SignUpScreen")}
+              >
+                <Small fontSmall="Or "></Small>
 
-              <Underline fontUnderline="Sign Up"></Underline>
-            </TouchableOpacity>
-            <TouchableOpacity
-              onPress={() => navigation.navigate("ForgetPwScreen")}
-            >
-              <Underline fontUnderline="Forgot Password?"></Underline>
-            </TouchableOpacity>
+                <Underline fontUnderline="Sign Up"></Underline>
+              </TouchableOpacity>
+              <TouchableOpacity
+                onPress={() => navigation.navigate("ForgetPwScreen")}
+              >
+                <Underline fontUnderline="Forgot Password?"></Underline>
+              </TouchableOpacity>
+            </View>
           </View>
-        </View>
+        </Pressable>
       </View>
     );
 }

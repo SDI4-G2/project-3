@@ -42,7 +42,7 @@ export const OTPInputFocused = styled(OTPInputOne)`
   background-color: rgba(154, 152, 205, 0.2);
 `;
 
-const OTPInput = ({ setPinReady, code, setCode, maxLength }) => {
+const OTPInput = ({ setPinReady, code, setCode, maxLength, VerifyCode }) => {
   const codeDigitsArray = new Array(maxLength).fill(0);
 
   const textInputRef = useRef(null);
@@ -95,6 +95,7 @@ const OTPInput = ({ setPinReady, code, setCode, maxLength }) => {
         keyboardType="number-pad"
         returnKeyType="done"
         textContentType="oneTimeCode"
+        autoFocus={true}
         ref={textInputRef}
         onBlur={handleOnBlur}
       />

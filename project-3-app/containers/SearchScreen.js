@@ -131,8 +131,6 @@ export default function SearchScreen({ navigation }) {
               autoCorrect={false}
               onChangeText={setSearch}
               style={[styles.userInput]}
-              keyboardType="email-address"
-              textContentType="emailAddress"
               returnKeyType="search"
               onSubmitEditing={textSearch}
               theme={{
@@ -199,10 +197,10 @@ export default function SearchScreen({ navigation }) {
                     return (
                       <Card
                         style={styles.cardDashboard}
-                        key={item.vidResultid}
+                        key={item.videoid}
                         onPress={() => {
                           navigation.navigate("VideoScreen", {
-                            vidResultid: item.vidResultid,
+                            videoid: item.videoid,
                           });
                         }}
                       >
