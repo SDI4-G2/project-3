@@ -27,6 +27,7 @@ export default async function EditUsername({
       } else {
         alert(` ${res.message}`);
         // res.message;
+        // return true;
         return true;
       }
     })

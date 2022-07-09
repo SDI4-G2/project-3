@@ -113,7 +113,7 @@ export default function ResetPwScreen({ navigation, props }) {
                   : styles.disabledTwo,
               ]}
             >
-              Password must be 6 characters long
+              New password must be 6 characters long
             </Text>
           </View>
           <View>

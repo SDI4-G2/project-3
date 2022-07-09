@@ -71,6 +71,7 @@ export default function SignUpScreen({ navigation }) {
                   onChangeText={setUsername}
                   autoFocus={true}
                   returnKeyType="next"
+                  onChange={() => setErrorMessage(null)}
                   onSubmitEditing={() => {
                     {
                       username.length > 5 ? emailRef.current.focus() : null;
@@ -113,6 +114,7 @@ export default function SignUpScreen({ navigation }) {
                   onChangeText={setEmail}
                   returnKeyType="next"
                   ref={emailRef}
+                  onChange={() => setErrorMessage(null)}
                   onSubmitEditing={() => {
                     {
                       Validator.validate(email) ? pwRef.current.focus() : null;
@@ -151,6 +153,7 @@ export default function SignUpScreen({ navigation }) {
                   returnKeyType="next"
                   blurOnSubmit={false}
                   ref={pwRef}
+                  onChange={() => setErrorMessage(null)}
                   onSubmitEditing={() => {
                     {
                       username.length > 5 &&

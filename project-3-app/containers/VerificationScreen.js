@@ -8,6 +8,7 @@ import {
   ActivityIndicator,
   Keyboard,
   Image,
+  Text,
 } from "react-native";
 import { TextInput } from "react-native-paper";
 import * as SecureStore from "expo-secure-store";
@@ -28,6 +29,8 @@ export default function VerificationScreen({ navigation, props }) {
 
   const [pinReady, setPinReady] = useState(false);
   const MAX_CODE_LENGTH = 6;
+
+  const [OTPErrMsg, setOTPErrMsg] = useState(null);
 
   async function expiryTimeout() {
     const token = await SecureStore.getItemAsync("tokenForgotPw");
@@ -59,7 +62,7 @@ export default function VerificationScreen({ navigation, props }) {
     if (codeToken == code) {
       navigation.navigate("ResetPwScreen");
     } else {
-      alert("Invalid code. Please try again.");
+      setOTPErrMsg("6-digit code does not match. Please try again.");
     }
   };
 
@@ -92,6 +95,11 @@ export default function VerificationScreen({ navigation, props }) {
               fontMed={"Please enter the 6-digit code sent to your email."}
             ></Med>
           </View>
+          {OTPErrMsg ? (
+            <Text style={{ color: "rgba(226,91,91,0.6)", bottom: "7%" }}>
+              {OTPErrMsg}
+            </Text>
+          ) : null}
           <View style={{ paddingBottom: "10%", bottom: "5%" }}>
             {/* <TouchableOpacity
               style={[

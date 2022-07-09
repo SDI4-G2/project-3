@@ -76,7 +76,7 @@ const MainTabs = () => {
             <MaterialCommunityIcons name="home" color={color} size={26} />
           ),
           headerShown: false,
-          tabBarColor: "rgba(252,228,166,0.3)",
+          tabBarColor: "rgba(255,255,255,0.2)",
         }}
         component={HomeStack}
       />
@@ -92,7 +92,7 @@ const MainTabs = () => {
             />
           ),
           headerShown: false,
-          tabBarColor: "rgba(252,228,166,0.3)",
+          tabBarColor: "rgba(255,255,255,0.2)",
         }}
         component={LibraryScreen}
         tabBarLabel="Library"
@@ -105,7 +105,7 @@ const MainTabs = () => {
             <OctiIcons name="search" color={color} size={26} />
           ),
           headerShown: false,
-          tabBarColor: "rgba(252,228,166,0.3)",
+          tabBarColor: "rgba(255,255,255,0.2)",
         }}
         component={SearchScreen}
         tabBarLabel="Search"

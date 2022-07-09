@@ -12,6 +12,7 @@ import {
 import { React, useState, useEffect } from "react";
 import { TextInput } from "react-native-paper";
 import { Card, Title } from "react-native-paper";
+import { StackActions, TabRouter } from "@react-navigation/native";
 
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import OctiIcons from "react-native-vector-icons/Octicons";
@@ -19,6 +20,7 @@ import HeaderBar from "../components/Headers";
 import Small from "../assets/Poppins_Small";
 import searchIcon from "../assets/searchIcon.png";
 import Med from "../assets/Poppins_Medium";
+import { CommonActions } from "@react-navigation/native";
 
 import { PulseIndicator } from "react-native-indicators";
 

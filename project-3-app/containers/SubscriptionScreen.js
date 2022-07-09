@@ -29,6 +29,8 @@ export default function SubscriptionScreen({ navigation }) {
   const [cardDetails, setCardDetails] = useState();
   const { confirmPayment, loading } = useConfirmPayment();
 
+  const [errMsg, setErrMsg] = useState(null);
+
   async function getJwt() {
     const list = await Jwt();
     setUserdata(list.email);
@@ -109,7 +111,7 @@ export default function SubscriptionScreen({ navigation }) {
   const handlePayPress = async () => {
     //1.Gather the customer's billing information (e.g., email)
     if (!cardDetails?.complete) {
-      Alert.alert("Please enter Complete card details");
+      setErrMsg("Please enter complete card details");
       return;
     }
     const billingDetails = { email: userdata };
@@ -128,7 +130,7 @@ export default function SubscriptionScreen({ navigation }) {
         });
 
         if (error) {
-          alert(`Payment Confirmation Error ${error.message}`);
+          setErrMsg(`Payment Confirmation Error ${error.message}`);
         } else if (paymentIntent) {
           console.log("Payment successful ", paymentIntent);
           // payment database
@@ -253,7 +255,13 @@ export default function SubscriptionScreen({ navigation }) {
                     ></Small>
                   </View>
                 </View>
-
+                {errMsg ? (
+                  <Text style={{ color: "rgba(226,91,91,0.6)", bottom: "5%" }}>
+                    {errMsg}
+                  </Text>
+                ) : (
+                  <Text style={{ color: "transparent" }}>hello</Text>
+                )}
                 <View>
                   <CardField
                     postalCodeEnabled={false}
@@ -264,6 +272,7 @@ export default function SubscriptionScreen({ navigation }) {
                     style={styles.cardContainer}
                     onCardChange={(cardDetails) => {
                       setCardDetails(cardDetails);
+                      setErrMsg(null);
                     }}
                   />
                 </View>

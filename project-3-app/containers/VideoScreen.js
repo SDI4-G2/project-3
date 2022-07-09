@@ -19,6 +19,7 @@ import { Poppins_500Medium } from "@expo-google-fonts/poppins";
 import HeaderBar from "../components/Headers";
 import PreviousButton from "../components/PreviousButton";
 import NextButton from "../components/NextButton";
+import { useIsFocused } from "@react-navigation/native";
 
 import GetVideo from "../api/GetVideo";
 
@@ -31,6 +32,7 @@ export default function VideoScreen({ navigation, route, wording }) {
   const [endOfFrontLine, setEndOfFrontLine] = useState(true);
   const [endOfEndLine, setEndOfEndLine] = useState(true);
   const { videoid, url } = route.params;
+  const isFocused = useIsFocused();
 
   async function get() {
     const videos = await GetVideo();
@@ -125,6 +127,7 @@ export default function VideoScreen({ navigation, route, wording }) {
     return (
       <SafeAreaView>
         <HeaderBar></HeaderBar>
+
         <View style={styles.container}>
           <RenderHTML
             contentWidth={width - 52}
@@ -136,7 +139,6 @@ export default function VideoScreen({ navigation, route, wording }) {
             customHTMLElementModels={customHTMLElementModels}
           />
         </View>
-
         <ScrollView style={styles.border}>
           <Text style={styles.title}>{title}</Text>
           <Text style={styles.text}>{text}</Text>
