@@ -1,13 +1,12 @@
 import { View, Text, Image, TouchableOpacity } from "react-native";
 import React from "react";
-import star from "../assets/starFive.png";
-import HeaderBar from "../components/Headers";
+import anotherStar from "../assets/anotherStarSeven.png";
 import { useFonts } from "expo-font";
 import { Poppins_300Light } from "@expo-google-fonts/poppins";
 import { Poppins_500Medium } from "@expo-google-fonts/poppins";
-import Buttons from "../components/Buttons";
+import ButtonsOne from "../components/Buttons";
 
-export default function SubscriptionSuccessfulScreen({ navigation, props }) {
+export default function SignUpSuccessScreen({ navigation }) {
   let [fontsLoaded] = useFonts({
     Poppins_300Light,
     Poppins_500Medium,
@@ -19,12 +18,12 @@ export default function SubscriptionSuccessfulScreen({ navigation, props }) {
       <View>
         {/* <HeaderBar /> */}
 
-        <View style={{ top: "5%", width: "80%", alignSelf: "center" }}>
+        <View style={{ top: "15%", width: "80%", alignSelf: "center" }}>
           <Image
-            source={star}
+            source={anotherStar}
             style={{
-              height: 300,
-              width: 300,
+              height: 200,
+              width: 200,
               alignSelf: "center",
             }}
           />
@@ -37,7 +36,7 @@ export default function SubscriptionSuccessfulScreen({ navigation, props }) {
               textAlign: "center",
             }}
           >
-            Nice!
+            Hurray!
           </Text>
           <Text
             style={{
@@ -49,7 +48,7 @@ export default function SubscriptionSuccessfulScreen({ navigation, props }) {
               fontSize: 15,
             }}
           >
-            You are now subscribed to us!
+            You have created an account with us!
           </Text>
           <Text
             style={{
@@ -61,13 +60,13 @@ export default function SubscriptionSuccessfulScreen({ navigation, props }) {
               fontSize: 15,
             }}
           >
-            Start watching premium content by clicking below.
+            Log in and start your new learning journey right away.
           </Text>
           <TouchableOpacity
             style={{ top: "10%" }}
-            onPress={() => navigation.push("Dashboard")}
+            onPress={() => navigation.push("WelcomeScreen")}
           >
-            <Buttons naming={"Return to Dashboard"} />
+            <ButtonsOne naming={"Log In"} />
           </TouchableOpacity>
         </View>
       </View>

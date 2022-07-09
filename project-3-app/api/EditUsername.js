@@ -25,12 +25,12 @@ export default async function EditUsername({
         SecureStore.setItemAsync("token", res.data);
         return false;
       } else {
-        alert(`test ${res.message}`);
+        alert(` ${res.message}`);
         // res.message;
         return true;
       }
     })
     .catch((err) => {
-      alert("hello", err);
+      alert(err);
     });
 }

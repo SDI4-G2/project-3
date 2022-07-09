@@ -21,6 +21,7 @@ import BookmarksScreen from "../containers/BookmarksScreen";
 import LibraryScreen from "../containers/LibraryScreen";
 import SearchScreen from "../containers/SearchScreen";
 import SubscriptionSuccessfulScreen from "../containers/SubscriptionSuccessfulScreen";
+import SignUpSuccessScreen from "../containers/SignUpSuccessScreen";
 
 import background from "../assets/background.png";
 import {
@@ -202,6 +203,11 @@ const Navigation = () => {
           <Stack.Screen
             name="SubscriptionSuccessfulScreen"
             component={SubscriptionSuccessfulScreen}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="SignUpSuccessScreen"
+            component={SignUpSuccessScreen}
             options={{ headerShown: false }}
           />
         </Stack.Navigator>

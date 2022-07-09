@@ -9,7 +9,7 @@ export default async function ResetPassword({
   confirmPassword,
   navigation,
 }) {
-  await fetch("https://sdi4-g2.herokuapp.com/resetpw", {
+  return await fetch("https://sdi4-g2.herokuapp.com/resetpw", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -17,19 +17,20 @@ export default async function ResetPassword({
     body: JSON.stringify({
       email: email,
       password: password,
-      confirmpassword: confirmPassword
+      confirmpassword: confirmPassword,
     }),
   })
-  .then((response) => response.json())
-  .then((serverResponse) => {
-    if (serverResponse.data) {
-      // console.log(serverResponse.data);
-      navigation.navigate('ResetPwSuccessScreen');
-    } else {
-      alert("Password not match");
-    }
-  })
-  .catch((err) => {
-    alert('Error occured, please try again');
-  });
+    .then((response) => response.json())
+    .then((serverResponse) => {
+      if (serverResponse.data) {
+        // console.log(serverResponse.data);
+        navigation.navigate("ResetPwSuccessScreen");
+      } else {
+        return "Passwords do not match. Please try again.";
+        // console.log(serverResponse.message)
+      }
+    })
+    .catch((err) => {
+      alert("Error occured, please try again");
+    });
 }

@@ -1,8 +1,13 @@
-export default async function Register({ email, username, password, navigation }) {
-  await fetch('https://sdi4-g2.herokuapp.com/register', {
-    method: 'POST',
+export default async function Register({
+  email,
+  username,
+  password,
+  navigation,
+}) {
+  return await fetch("https://sdi4-g2.herokuapp.com/register", {
+    method: "POST",
     headers: {
-      'Content-Type': 'application/json',
+      "Content-Type": "application/json",
     },
     body: JSON.stringify({
       email: email,
@@ -11,11 +16,15 @@ export default async function Register({ email, username, password, navigation }
     }),
   })
     .then((response) => response.json())
-    .then(() => {
-      alert('Account created successfully, please try logging in via main page.');
-      navigation.navigate('WelcomeScreen');
+    .then((serverResponse) => {
+      if (serverResponse.message.includes("Successfully")) {
+        console.log(serverResponse);
+        // alert('Account created successfully, please try logging in via main page.');
+        navigation.navigate("SignUpSuccessScreen");
+      } else return `${serverResponse.message}. Please try another.`;
     })
+
     .catch(() => {
-      alert('Please enter valid username, email and password');
+      return console.log(`hello test ${serverResponse.message}`);
     });
 }
