@@ -26,6 +26,7 @@ export default function WelcomeScreen({ navigation, props }) {
   const [passwordVisible, setPasswordVisible] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
   const [ErrMsg, setErrMsg] = useState(null);
+  const [userEmail, setUserEmail] = useState("");
 
   const passwordRef = useRef();
 
@@ -33,11 +34,15 @@ export default function WelcomeScreen({ navigation, props }) {
     let reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w\w+)+$/;
     if (reg.test(text) === true) {
       setEmail(text);
-      // setUsername(undefined);
+      setUsername(undefined);
+      setUserEmail(text);
+      console.log("email " + userEmail);
       // console.log("email" + email);
     } else {
       setUsername(text);
-      // setEmail(undefined);
+      setEmail(undefined);
+      setUserEmail(text);
+      console.log("username " + userEmail);
       // console.log("username" + username);
     }
   }
@@ -66,7 +71,7 @@ export default function WelcomeScreen({ navigation, props }) {
                 styles.textContainer,
                 {
                   borderColor:
-                    username.length < 1 || username.length > 5
+                    userEmail.length < 1 || userEmail.length > 5
                       ? "rgba(255, 255, 255, 0.4)"
                       : "rgba(244, 107, 107, 0.4)",
                 },
@@ -85,7 +90,7 @@ export default function WelcomeScreen({ navigation, props }) {
                 onChange={() => setErrMsg(null)}
                 onSubmitEditing={() => {
                   {
-                    username.length > 5 ? passwordRef.current.focus() : null;
+                    userEmail.length > 5 ? passwordRef.current.focus() : null;
                   }
                 }}
                 blurOnSubmit={false}
@@ -98,7 +103,7 @@ export default function WelcomeScreen({ navigation, props }) {
             </TouchableOpacity>
             <Text
               style={[
-                username.length < 1 || username.length > 5
+                userEmail.length < 1 || userEmail.length > 5
                   ? styles.normalTwo
                   : styles.disabledTwo,
               ]}
@@ -127,7 +132,7 @@ export default function WelcomeScreen({ navigation, props }) {
                   ref={passwordRef}
                   onSubmitEditing={() => {
                     {
-                      username.length > 5 && password.length > 5
+                      userEmail.length > 5 && password.length > 5
                         ? Login(
                             { email, username, password, navigation },
                             setIsLoading(true)
@@ -168,7 +173,7 @@ export default function WelcomeScreen({ navigation, props }) {
           <View style={styles.buttonsbottom}>
             <TouchableOpacity
               style={
-                username.length < 6 || password.length < 6
+                userEmail.length < 6 || password.length < 6
                   ? styles.disabled
                   : styles.normal
               }
@@ -181,7 +186,7 @@ export default function WelcomeScreen({ navigation, props }) {
                   .then(() => setIsLoading(false))
                   .then(() => setPassword(""));
               }}
-              disabled={username.length < 6 || password.length < 6}
+              disabled={userEmail.length < 6 || password.length < 6}
             >
               <Buttons naming="Log In"></Buttons>
               {isLoading === true && (
