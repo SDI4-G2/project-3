@@ -1,17 +1,27 @@
-import React, { useState, useEffect } from 'react';
-import { Text, View, StyleSheet, ScrollView, Image, TouchableOpacity } from 'react-native';
-import HeaderBar from '../components/Headers';
-import { Card } from 'react-native-paper';
-import MedCenter from '../assets/Poppins_CenterTitle';
-import bitcoinPic from '../assets/bitcoin3.5.png';
-import PreviousButton from '../components/PreviousButton';
-import NextButton from '../components/NextButton';
-import { WebView } from 'react-native-webview';
-import { useIsFocused } from '@react-navigation/native';
+import React, { useState, useEffect } from "react";
+import {
+  Text,
+  View,
+  StyleSheet,
+  ScrollView,
+  Image,
+  TouchableOpacity,
+  ImageBackground,
+} from "react-native";
+import HeaderBar from "../components/Headers";
+import { Card } from "react-native-paper";
+import MedCenter from "../assets/Poppins_CenterTitle";
+import bitcoinPic from "../assets/bitcoin3.5.png";
+import PreviousButton from "../components/PreviousButton";
+import NextButton from "../components/NextButton";
+import { WebView } from "react-native-webview";
+import { useIsFocused } from "@react-navigation/native";
 
-import GetArticle from '../api/GetArticle';
+import GetArticle from "../api/GetArticle";
 
-const PdfReader = ({ url: uri }) => <WebView style={{ flex: 1 }} source={{ uri }} />;
+const PdfReader = ({ url: uri }) => (
+  <WebView style={{ flex: 1 }} source={{ uri }} />
+);
 
 export default function ArticleScreen({ wording, route }) {
   const [articles, setArticles] = useState(null);
@@ -23,6 +33,7 @@ export default function ArticleScreen({ wording, route }) {
   const [endOfEndLine, setEndOfEndLine] = useState(true);
   const { articleid, url } = route.params;
   const isFocused = useIsFocused();
+  const [isLoading, setIsLoading] = useState(true);
 
   async function get() {
     const articles = await GetArticle();
@@ -34,12 +45,20 @@ export default function ArticleScreen({ wording, route }) {
     setTitle(newList[0].title);
     setBg(newList[0].thumbnails);
     setCurrentArticle(newList[0].articleid);
+
+    console.log(`list `, list);
+    console.log(`title `, title);
+    console.log("bg", bg);
+    console.log("current ", currentArticle);
   }
 
   function endOfLineCheck() {
     if (articles) {
       let last = articles.length - 1;
-      if (currentArticle === articles[0].articleid && currentArticle === articles[last].articleid) {
+      if (
+        currentArticle === articles[0].articleid &&
+        currentArticle === articles[last].articleid
+      ) {
         setEndOfFrontLine(true);
         setEndOfEndLine(true);
       } else if (currentArticle === articles[0].articleid) {
@@ -66,7 +85,7 @@ export default function ArticleScreen({ wording, route }) {
         }
       }
     } catch (err) {
-      alert('Unable to previous' + err);
+      alert("Unable to previous" + err);
     }
   }
 
@@ -82,7 +101,7 @@ export default function ArticleScreen({ wording, route }) {
         }
       }
     } catch (err) {
-      console.log('Unable to next' + err);
+      console.log("Unable to next" + err);
     }
   }
 
@@ -111,16 +130,24 @@ export default function ArticleScreen({ wording, route }) {
         <View style={styles.card}>
           <Card style={styles.background}>
             <View>
-              <Image source={bitcoinPic} style={[styles.image]} />
+              <Image
+                source={{ uri: bg }}
+                style={{
+                  width: "100%",
+                  height: 200,
+                  borderRadius: 30,
+                  opacity: 0.8,
+                }}
+                onLoadEnd={() => setIsLoading(false)}
+              />
               <View
                 style={{
                   flex: 1,
-                  position: 'absolute',
-                  alignSelf: 'center',
-                  height: '100%',
-                  justifyContent: 'center',
-                  maxWidth: '90%',
-                  // borderWidth: 3,
+                  position: "absolute",
+                  alignSelf: "center",
+                  height: "100%",
+                  justifyContent: "center",
+                  maxWidth: "100%",
                   opacity: 0.7,
                 }}
               >
@@ -130,18 +157,28 @@ export default function ArticleScreen({ wording, route }) {
 
             <Card.Content>
               <ScrollView style={styles.content}>
-                <View style={{ height: 750, paddingVertical: 15 }}>
+                <View style={{ height: 500, paddingVertical: 15 }}>
                   <PdfReader url={list} />
                 </View>
               </ScrollView>
             </Card.Content>
           </Card>
-          <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-            <TouchableOpacity onPress={() => prevArticle()} disabled={endOfFrontLine === true} style={endOfFrontLine ? styles.disabled : null}>
-              <PreviousButton wording={'Article'} />
+          <View
+            style={{ flexDirection: "row", justifyContent: "space-between" }}
+          >
+            <TouchableOpacity
+              onPress={() => prevArticle()}
+              disabled={endOfFrontLine === true}
+              style={endOfFrontLine ? styles.disabled : null}
+            >
+              <PreviousButton wording={"Article"} />
             </TouchableOpacity>
-            <TouchableOpacity onPress={() => nextArticle()} disabled={endOfEndLine === true} style={endOfEndLine ? styles.disabled : null}>
-              <NextButton wording={'Article'} />
+            <TouchableOpacity
+              onPress={() => nextArticle()}
+              disabled={endOfEndLine === true}
+              style={endOfEndLine ? styles.disabled : null}
+            >
+              <NextButton wording={"Article"} />
             </TouchableOpacity>
           </View>
         </View>
@@ -153,48 +190,48 @@ export default function ArticleScreen({ wording, route }) {
 const styles = StyleSheet.create({
   card: {
     borderRadius: 30,
-    width: '100%',
-    alignSelf: 'center',
-    overflow: 'hidden',
-    paddingBottom: '30%',
+    width: "100%",
+    alignSelf: "center",
+    overflow: "hidden",
+    paddingBottom: "50%",
   },
   background: {
-    backgroundColor: 'rgba(89,60,21, 0.3)',
+    backgroundColor: "rgba(89,60,21, 0.3)",
     borderRadius: 25,
-    borderColor: 'rgba(89,60,21, 0.5)',
-    width: '80%',
-    alignSelf: 'center',
+    borderColor: "rgba(89,60,21, 0.5)",
+    width: "80%",
+    alignSelf: "center",
   },
 
   content: {
     borderRadius: 30,
-    height: '53%',
-    width: '100%',
-    alignSelf: 'center',
+    height: "49%",
+    width: "100%",
+    alignSelf: "center",
   },
 
   text: {
-    textAlign: 'left',
-    fontFamily: 'Poppins_300Light',
-    color: 'white',
-    opacity: 0.7,
-    // top: "3%",
-    fontSize: 13,
-    paddingVertical: 15,
-    paddingHorizontal: 15,
-    lineHeight: 30,
-    // width: "90%",
-    alignSelf: 'center',
-    height: '100%',
+    // textAlign: "left",
+    // fontFamily: "Poppins_300Light",
+    // color: "white",
+    // opacity: 0.7,
+    // // top: "3%",
+    // fontSize: 13,
+    // paddingVertical: 15,
+    // paddingHorizontal: 15,
+    // lineHeight: 30,
+    // // width: "90%",
+    // alignSelf: "center",
+    // height: "100%",
   },
 
   image: {
-    borderRadius: 30,
-    alignSelf: 'center',
-    overflow: 'hidden',
-    opacity: 1,
-    width: '100%',
-    height: 200,
+    // borderRadius: 30,
+    // alignSelf: "center",
+    // overflow: "hidden",
+    // opacity: 1,
+    // width: "100%",
+    // height: 200,
   },
   disabled: {
     opacity: 0.3,
