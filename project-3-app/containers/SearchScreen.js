@@ -98,19 +98,17 @@ export default function SearchScreen({ navigation, route }) {
     get();
   }, []);
 
-  // useEffect(() => {
-  //   if (search.length === 0) {
-  //     setShowSearchImage(true);
-  //   } else setShowSearchImage(false);
-  //   console.log(search);
-  // }, [search]);
-
   useEffect(() => {
-    textSearch();
     setTimeout(() => {
       textSearch();
     }, 10);
   }, [search, videos, articles]);
+
+  useEffect(() => {
+    if (search.length === 0) {
+      setShowSearchImage(true);
+    } else setShowSearchImage(false);
+  });
 
   useEffect(() => {
     passSearch();
@@ -137,6 +135,7 @@ export default function SearchScreen({ navigation, route }) {
               //   textSearch();
               // }}
               // defaultValue={search}
+              value={search}
               theme={{
                 colors: {
                   text: "rgba(255, 255, 255, 0.6)",
