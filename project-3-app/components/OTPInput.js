@@ -1,6 +1,6 @@
 import React, { useRef, useState, useEffect } from "react";
-
 import styled from "styled-components/native";
+import { StyleSheet } from "react-native";
 
 export const OTPInputSection = styled.View`
   justify-content: center;
@@ -78,7 +78,7 @@ const OTPInput = ({ setPinReady, code, setCode, maxLength }) => {
 
     return (
       <StyledOTPInput>
-        <OTPInputText key={index}>{digit}</OTPInputText>
+        <OTPInputText key={testUUID}>{digit}</OTPInputText>
       </StyledOTPInput>
     );
   };
