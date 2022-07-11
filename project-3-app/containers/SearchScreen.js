@@ -31,7 +31,7 @@ export default function SearchScreen({ navigation, route }) {
   const [videos, setVideos] = useState([]);
   const [articles, setArticles] = useState([]);
 
-  const [search, setSearch] = useState('');
+  const [search, setSearch] = useState("");
 
   const [vidResult, setVidResult] = useState([]);
   const [artResult, setArtResult] = useState([]);
@@ -106,21 +106,11 @@ export default function SearchScreen({ navigation, route }) {
   // }, [search]);
 
   useEffect(() => {
-<<<<<<< HEAD
     textSearch();
     setTimeout(() => {
       textSearch();
     }, 10);
   }, [search, videos, articles]);
-=======
-
-    if (search.length === 0) {
-      setShowSearchImage(true);
-    } else setShowSearchImage(false);
-    console.log(search);
-  }, [search]);
->>>>>>> 23b33c32f0e4d044830c228dfb51aa5a319e2f77
-
 
   useEffect(() => {
     passSearch();
