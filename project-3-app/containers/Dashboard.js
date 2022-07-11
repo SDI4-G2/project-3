@@ -166,7 +166,12 @@ export default function Dashboard({ navigation }) {
                   onLoadEnd={() => setIsLoading(false)}
                 >
                   <Card.Content>
-                    <Title style={styles.cardTitle}>{item.Category.description}</Title>
+                    <Text style={styles.cardText} numberOfLines={1}>
+                      {item.Category.description}
+                    </Text>
+                    <Title style={styles.cardTitle} numberOfLines={3}>
+                      {item.title}
+                    </Title>
                     {/* <Progress.Circle
                       progress={0.8}
                       size={50}
