@@ -63,7 +63,7 @@ export default function SearchScreen({ navigation, route }) {
     setArticles(article);
   }
 
-  function textSearch(e) {
+  function textSearch() {
     const vid = videos;
     const art = articles;
     const keys = ["description", "text", "title"];
