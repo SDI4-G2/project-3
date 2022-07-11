@@ -98,13 +98,28 @@ export default function SearchScreen({ navigation, route }) {
     get();
   }, []);
 
+  // useEffect(() => {
+  //   if (search.length === 0) {
+  //     setShowSearchImage(true);
+  //   } else setShowSearchImage(false);
+  //   console.log(search);
+  // }, [search]);
+
   useEffect(() => {
+<<<<<<< HEAD
+    textSearch();
+    setTimeout(() => {
+      textSearch();
+    }, 10);
+  }, [search, videos, articles]);
+=======
 
     if (search.length === 0) {
       setShowSearchImage(true);
     } else setShowSearchImage(false);
     console.log(search);
   }, [search]);
+>>>>>>> 23b33c32f0e4d044830c228dfb51aa5a319e2f77
 
 
   useEffect(() => {
