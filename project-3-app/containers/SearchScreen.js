@@ -255,7 +255,7 @@ export default function SearchScreen({ navigation, route }) {
                     >
                       <ImageBackground
                         resizeMode="stretch"
-                        source={{ uri: item.url }}
+                        source={{ uri: item.thumbnails }}
                         style={styles.cardImage}
                         imageStyle={{
                           borderRadius: 15,
@@ -265,8 +265,11 @@ export default function SearchScreen({ navigation, route }) {
                         onLoadEnd={() => setIsLoading(false)}
                       >
                         <Card.Content>
-                          <Title style={styles.cardTitle}>
+                          <Title style={styles.cardText}>
                             {item.description}
+                          </Title>
+                          <Title style={styles.cardTitle} numberOfLines={3}>
+                            {item.title}
                           </Title>
                         </Card.Content>
                       </ImageBackground>
