@@ -21,7 +21,7 @@ export default function SearchScreen({ navigation, route }) {
   const [isLoading, setIsLoading] = useState(true);
   const [videos, setVideos] = useState([]);
   const [articles, setArticles] = useState([]);
-  const [search, setSearch] = useState([]);
+  const [search, setSearch] = useState('');
   const [vidResult, setVidResult] = useState([]);
   const [artResult, setArtResult] = useState([]);
   const [showBody, setShowBody] = useState(false);
@@ -89,7 +89,9 @@ export default function SearchScreen({ navigation, route }) {
   }, []);
 
   useEffect(() => {
-    textSearch();
+    setTimeout(() => {
+      textSearch();
+    }, 10);
   }, [search, videos, articles]);
 
   useEffect(() => {
