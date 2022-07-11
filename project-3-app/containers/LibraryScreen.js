@@ -41,7 +41,7 @@ export default function LibraryScreen({ navigation }) {
   useEffect(() => {
     const timer = setTimeout(() => {
       fetch_all_category();
-    }, 3000);
+    }, 1000);
   }, []);
 
   const wait = (timeout) => {

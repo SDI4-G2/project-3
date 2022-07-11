@@ -22,6 +22,7 @@ import LibraryScreen from "../containers/LibraryScreen";
 import SearchScreen from "../containers/SearchScreen";
 import SubscriptionSuccessfulScreen from "../containers/SubscriptionSuccessfulScreen";
 import SignUpSuccessScreen from "../containers/SignUpSuccessScreen";
+import SubMainScreen from "../containers/SubMainScreen";
 
 import background from "../assets/background.png";
 import {
@@ -195,11 +196,11 @@ const Navigation = () => {
             component={LibraryScreen}
             options={{ headerShown: false }}
           />
-          {/* <Stack.Screen
+          <Stack.Screen
             name="SubMainScreen"
             component={SubMainScreen}
             options={{ headerShown: false }}
-          /> */}
+          />
           <Stack.Screen
             name="SubscriptionSuccessfulScreen"
             component={SubscriptionSuccessfulScreen}
