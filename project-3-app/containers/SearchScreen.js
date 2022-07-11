@@ -30,7 +30,9 @@ export default function SearchScreen({ navigation, route }) {
   const [isLoading, setIsLoading] = useState(true);
   const [videos, setVideos] = useState([]);
   const [articles, setArticles] = useState([]);
-  const [search, setSearch] = useState("");
+
+  const [search, setSearch] = useState('');
+
   const [vidResult, setVidResult] = useState([]);
   const [artResult, setArtResult] = useState([]);
   const [showSearchImage, setShowSearchImage] = useState(true);
@@ -97,11 +99,13 @@ export default function SearchScreen({ navigation, route }) {
   }, []);
 
   useEffect(() => {
+
     if (search.length === 0) {
       setShowSearchImage(true);
     } else setShowSearchImage(false);
     console.log(search);
   }, [search]);
+
 
   useEffect(() => {
     passSearch();
