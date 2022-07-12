@@ -8,6 +8,7 @@ import Small from '../assets/Poppins_Small';
 
 import { PulseIndicator } from 'react-native-indicators';
 import books from '../assets/books.png';
+import { useFocusEffect } from '@react-navigation/native';
 // import * as Progress from "react-native-progress";
 
 export default function Dashboard({ navigation }) {
@@ -50,13 +51,22 @@ export default function Dashboard({ navigation }) {
     setArticles(list.data);
   }
 
-  useEffect(() => {
-    const timer = setTimeout(() => {
+  // useEffect(() => {
+  //   const timer = setTimeout(() => {
+  //     getJwt();
+  //     fetch_all_videos();
+  //     fetch_all_articles();
+  //   }, 1000);
+  // }, []);
+
+  useFocusEffect(
+    React.useCallback(() => {
       getJwt();
       fetch_all_videos();
       fetch_all_articles();
-    }, 1000);
-  }, []);
+      // console.log('Test1');
+    }, [])
+  );
 
   const wait = (timeout) => {
     return new Promise((resolve) => setTimeout(resolve, timeout));
