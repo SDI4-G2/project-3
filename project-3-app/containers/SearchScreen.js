@@ -8,6 +8,8 @@ import {
   ActivityIndicator,
   Image,
   ImageBackground,
+  Keyboard,
+  Pressable,
 } from "react-native";
 import { React, useState, useEffect } from "react";
 import { TextInput } from "react-native-paper";
@@ -116,98 +118,149 @@ export default function SearchScreen({ navigation, route }) {
 
   return (
     <View>
-      <HeaderBar />
-      <View style={{ width: "80%", alignSelf: "center", top: "0%" }}>
-        <View>
-          <TouchableOpacity style={styles.textContainer}>
-            <TextInput
-              underlineColorAndroid="transparent"
-              spellCheck={false}
-              autoCorrect={false}
-              onChangeText={setSearch}
-              style={[styles.userInput]}
-              returnKeyType="search"
-              onSubmitEditing={textSearch}
-              onChange={() => {
-                textSearch();
-              }}
-              // onChange={() => {
-              //   textSearch();
-              // }}
-              // defaultValue={search}
-              value={search}
-              theme={{
-                colors: {
-                  text: "rgba(255, 255, 255, 0.6)",
-                },
-              }}
-              right={
-                <TextInput.Icon
-                  name={() => (
-                    <OctiIcons
-                      name={"search"}
-                      size={20}
-                      color={"rgba(255,255,255,0.5)"}
-                      onPress={() => textSearch()}
-                    />
-                  )}
-                />
-              }
-            ></TextInput>
-          </TouchableOpacity>
-          {/* <Button
+      <Pressable onPress={Keyboard.dismiss}>
+        <HeaderBar />
+        <View style={{ width: "80%", alignSelf: "center", top: "0%" }}>
+          <View>
+            <TouchableOpacity style={styles.textContainer}>
+              <TextInput
+                underlineColorAndroid="transparent"
+                spellCheck={false}
+                autoCorrect={false}
+                onChangeText={setSearch}
+                style={[styles.userInput]}
+                returnKeyType="search"
+                onSubmitEditing={textSearch}
+                onChange={() => {
+                  textSearch();
+                }}
+                // onChange={() => {
+                //   textSearch();
+                // }}
+                // defaultValue={search}
+                value={search}
+                theme={{
+                  colors: {
+                    text: "rgba(255, 255, 255, 0.6)",
+                  },
+                }}
+                right={
+                  <TextInput.Icon
+                    name={() => (
+                      <OctiIcons
+                        name={"search"}
+                        size={20}
+                        color={"rgba(255,255,255,0.5)"}
+                        onPress={() => textSearch()}
+                      />
+                    )}
+                  />
+                }
+              ></TextInput>
+            </TouchableOpacity>
+            {/* <Button
             title="Test"
             onPress={() => {
               console.log(vidResult);
             }}
           ></Button> */}
-          {showSearchImage ? (
-            <>
-              <Image
-                source={searchIcon}
-                style={{
-                  height: 200,
-                  width: 210,
-                  alignSelf: "center",
-                  top: "35%",
-                }}
-              />
-              <View style={{ top: "40%", alignSelf: "center" }}>
-                <Small
-                  fontSmall={"Type anything to find what you are looking for."}
-                />
-              </View>
-            </>
-          ) : (
-            <>
-              <View style={{ marginBottom: 20 }}>
-                <View style={{ paddingTop: "5%" }}>
-                  <Small fontSmall={"Videos"}></Small>
-                </View>
-                <ScrollView
-                  horizontal={true}
-                  contentContainerStyle={{
-                    justifyContent: "center",
-                    flexDirection: "row",
+            {showSearchImage ? (
+              <>
+                <Image
+                  source={searchIcon}
+                  style={{
+                    height: 200,
+                    width: 210,
+                    alignSelf: "center",
+                    top: "35%",
                   }}
-                >
-                  {isLoading === true && (
-                    <PulseIndicator color={"rgba(255,255,255,0.5)"} />
-                  )}
-                  {vidResult.map((item) => {
-                    return (
+                />
+                <View style={{ top: "40%", alignSelf: "center" }}>
+                  <Small
+                    fontSmall={
+                      "Type anything to find what you are looking for."
+                    }
+                  />
+                </View>
+              </>
+            ) : (
+              <>
+                <View style={{ marginBottom: 20 }}>
+                  <View style={{ paddingTop: "5%" }}>
+                    <Small fontSmall={"Videos"}></Small>
+                  </View>
+                  <ScrollView
+                    horizontal={true}
+                    contentContainerStyle={{
+                      justifyContent: "center",
+                      flexDirection: "row",
+                    }}
+                  >
+                    {isLoading === true && (
+                      <PulseIndicator color={"rgba(255,255,255,0.5)"} />
+                    )}
+                    {vidResult.map((item) => {
+                      return (
+                        <Card
+                          style={styles.cardDashboard}
+                          key={item.videoid}
+                          onPress={() => {
+                            navigation.navigate("VideoScreen", {
+                              videoid: item.videoid,
+                            });
+                          }}
+                        >
+                          <ImageBackground
+                            source={{ uri: item.thumbnails }}
+                            // source={{ uri: item.thumb }}
+                            style={styles.cardImage}
+                            imageStyle={{
+                              borderRadius: 15,
+                              opacity: 0.5,
+                              backgroundColor: "#000",
+                            }}
+                            onLoadEnd={() => setIsLoading(false)}
+                          >
+                            <Card.Content>
+                              <Text style={styles.cardText} numberOfLines={1}>
+                                {item.description}
+                              </Text>
+                              <Title style={styles.cardTitle} numberOfLines={3}>
+                                {item.title}
+                              </Title>
+                            </Card.Content>
+                          </ImageBackground>
+                        </Card>
+                      );
+                    })}
+                  </ScrollView>
+                </View>
+
+                <View style={{ marginBottom: 20 }}>
+                  <Small fontSmall={"Articles"}></Small>
+                  <ScrollView
+                    horizontal={true}
+                    contentContainerStyle={{
+                      justifyContent: "center",
+                      flexDirection: "row",
+                    }}
+                  >
+                    {isLoading === true && (
+                      <PulseIndicator color={"rgba(255,255,255,0.5)"} />
+                    )}
+                    {artResult.map((item, index) => (
                       <Card
                         style={styles.cardDashboard}
-                        key={item.videoid}
+                        key={item.articleid}
                         onPress={() => {
-                          navigation.navigate("VideoScreen", {
-                            videoid: item.videoid,
+                          navigation.navigate("ArticleScreen", {
+                            articleid: item.articleid,
                           });
                         }}
                       >
                         <ImageBackground
+                          resizeMode="stretch"
                           source={{ uri: item.thumbnails }}
-                          // source={{ uri: item.thumb }}
                           style={styles.cardImage}
                           imageStyle={{
                             borderRadius: 15,
@@ -217,70 +270,23 @@ export default function SearchScreen({ navigation, route }) {
                           onLoadEnd={() => setIsLoading(false)}
                         >
                           <Card.Content>
-                            <Text style={styles.cardText} numberOfLines={1}>
+                            <Title style={styles.cardText}>
                               {item.description}
-                            </Text>
+                            </Title>
                             <Title style={styles.cardTitle} numberOfLines={3}>
                               {item.title}
                             </Title>
                           </Card.Content>
                         </ImageBackground>
                       </Card>
-                    );
-                  })}
-                </ScrollView>
-              </View>
-
-              <View style={{ marginBottom: 20 }}>
-                <Small fontSmall={"Articles"}></Small>
-                <ScrollView
-                  horizontal={true}
-                  contentContainerStyle={{
-                    justifyContent: "center",
-                    flexDirection: "row",
-                  }}
-                >
-                  {isLoading === true && (
-                    <PulseIndicator color={"rgba(255,255,255,0.5)"} />
-                  )}
-                  {artResult.map((item, index) => (
-                    <Card
-                      style={styles.cardDashboard}
-                      key={item.articleid}
-                      onPress={() => {
-                        navigation.navigate("ArticleScreen", {
-                          articleid: item.articleid,
-                        });
-                      }}
-                    >
-                      <ImageBackground
-                        resizeMode="stretch"
-                        source={{ uri: item.thumbnails }}
-                        style={styles.cardImage}
-                        imageStyle={{
-                          borderRadius: 15,
-                          opacity: 0.5,
-                          backgroundColor: "#000",
-                        }}
-                        onLoadEnd={() => setIsLoading(false)}
-                      >
-                        <Card.Content>
-                          <Title style={styles.cardText}>
-                            {item.description}
-                          </Title>
-                          <Title style={styles.cardTitle} numberOfLines={3}>
-                            {item.title}
-                          </Title>
-                        </Card.Content>
-                      </ImageBackground>
-                    </Card>
-                  ))}
-                </ScrollView>
-              </View>
-            </>
-          )}
+                    ))}
+                  </ScrollView>
+                </View>
+              </>
+            )}
+          </View>
         </View>
-      </View>
+      </Pressable>
     </View>
   );
 }

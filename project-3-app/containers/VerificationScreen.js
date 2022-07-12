@@ -20,7 +20,7 @@ import Small from "../assets/Poppins_Small";
 import Med from "../assets/Poppins_Medium";
 import jwt_decode from "jwt-decode";
 import OTPInput from "../components/OTPInput";
-import emailSent from "../assets/emailSent.png";
+import emailSent from "../assets/emailSent2.png";
 
 export default function VerificationScreen({ navigation, props }) {
   const [isLoading, setIsLoading] = useState(false);
