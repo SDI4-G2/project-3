@@ -11,12 +11,14 @@ import Jwt from "../api/Jwt";
 export default function HeaderBar() {
   const navigation = useNavigation();
 
-  const [userData, setUserData] = useState([]);
+  const [user, setUser] = useState([]);
 
   async function getJwt() {
     const list = await Jwt();
-    let username = list.username.slice(0, 2);
-    return setUserData(username);
+    let userSlice = list.username.slice(0, 2);
+    let user = userSlice.charAt(0).toUpperCase() + userSlice.slice(1);
+    // console.log(user);
+    return setUser(user);
   }
 
   async function expiryTimeout() {
@@ -52,8 +54,8 @@ export default function HeaderBar() {
             {/* <Image source={profileIcon} /> */}
             <View style={{ alignItems: "center" }}>
               <Avatar.Text
-                size={35}
-                label={userData}
+                size={40}
+                label={user}
                 backgroundColor="rgba(255,255,255,0.1)"
                 color="rgba(255,255,255,0.6)"
                 style={{

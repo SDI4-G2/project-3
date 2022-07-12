@@ -19,8 +19,10 @@ export default function ProfileScreen({ navigation }) {
   async function getJwt() {
     const list = await Jwt();
 
-    let user = list.username.slice(0, 2);
-    setUser(user);
+    let userSlice = list.username.slice(0, 2);
+    let user = userSlice.charAt(0).toUpperCase() + userSlice.slice(1);
+    // console.log(user);
+    return setUser(user);
   }
 
   useEffect(() => {

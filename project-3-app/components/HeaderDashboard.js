@@ -19,7 +19,9 @@ export default function HeaderDashboard() {
     const list = await Jwt();
     setUserdata(list.username);
 
-    let user = list.username.slice(0, 2);
+    let userSlice = list.username.slice(0, 2);
+    let user = userSlice.charAt(0).toUpperCase() + userSlice.slice(1);
+    // console.log(user);
     return setUser(user);
   }
 
@@ -52,7 +54,7 @@ export default function HeaderDashboard() {
             onPress={() => navigation.navigate("ProfileScreen")}
           >
             <Avatar.Text
-              size={35}
+              size={40}
               label={user}
               backgroundColor="rgba(255,255,255,0.1)"
               color="rgba(255,255,255,0.6)"
