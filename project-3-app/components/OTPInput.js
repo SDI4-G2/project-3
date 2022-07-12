@@ -21,13 +21,13 @@ export const OTPInputContainer = styled.Pressable`
 `;
 
 export const OTPInputOne = styled.View`
-  border-color: rgba(154, 152, 205, 0.2);
-  min-width: 16%;
+  border-color: rgba(154, 152, 205, 0.3);
+  min-width: 15%;
   border-width: 1px;
   border-radius: 30px;
   padding: 9px;
 
-  background-color: rgba(154, 152, 205, 0.1);
+  background-color: rgba(154, 152, 205, 0.2);
 `;
 
 export const OTPInputText = styled.Text`
@@ -38,8 +38,8 @@ export const OTPInputText = styled.Text`
 `;
 
 export const OTPInputFocused = styled(OTPInputOne)`
-  border-color: rgba(154, 152, 205, 0.4);
-  background-color: rgba(154, 152, 205, 0.2);
+  border-color: rgba(154, 152, 205, 0.5);
+  background-color: rgba(154, 152, 205, 0.4);
 `;
 
 const OTPInput = ({ setPinReady, code, setCode, maxLength }) => {

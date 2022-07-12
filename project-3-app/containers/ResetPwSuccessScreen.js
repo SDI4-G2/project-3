@@ -15,7 +15,7 @@ import SecondHeaderBar from "../components/SecondHeader";
 import Bold from "../assets/Poppins_Bold";
 import Small from "../assets/Poppins_Small";
 import Med from "../assets/Poppins_Medium";
-import tickSuccess from "../assets/tickSuccess.png";
+import tickSuccess from "../assets/tickSuccessThree.png";
 
 export default function ResetPwSuccessScreen({ navigation, props }) {
   return (
@@ -30,6 +30,7 @@ export default function ResetPwSuccessScreen({ navigation, props }) {
             alignSelf: "center",
           }}
         />
+
         <View
           style={{
             paddingBottom: "8%",

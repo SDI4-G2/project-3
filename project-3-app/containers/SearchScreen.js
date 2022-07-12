@@ -120,7 +120,9 @@ export default function SearchScreen({ navigation, route }) {
     <View>
       <Pressable onPress={Keyboard.dismiss}>
         <HeaderBar />
+
         <View style={{ width: '80%', alignSelf: 'center', top: '0%' }}>
+
           <View>
             <TouchableOpacity style={styles.textContainer}>
               <TextInput
@@ -141,11 +143,20 @@ export default function SearchScreen({ navigation, route }) {
                 value={search}
                 theme={{
                   colors: {
-                    text: 'rgba(255, 255, 255, 0.6)',
+                    text: "rgba(255, 255, 255, 0.6)",
                   },
                 }}
                 right={
-                  <TextInput.Icon name={() => <OctiIcons name={'search'} size={20} color={'rgba(255,255,255,0.5)'} onPress={() => textSearch()} />} />
+                  <TextInput.Icon
+                    name={() => (
+                      <OctiIcons
+                        name={"search"}
+                        size={20}
+                        color={"rgba(255,255,255,0.5)"}
+                        onPress={() => textSearch()}
+                      />
+                    )}
+                  />
                 }
               ></TextInput>
             </TouchableOpacity>
@@ -162,6 +173,7 @@ export default function SearchScreen({ navigation, route }) {
                   style={{
                     height: 200,
                     width: 210,
+
                     alignSelf: 'center',
                     top: '35%',
                   }}
@@ -173,12 +185,15 @@ export default function SearchScreen({ navigation, route }) {
             ) : (
               <>
                 <View style={{ marginBottom: 20 }}>
+
                   <View style={{ paddingTop: '5%' }}>
                     <Small fontSmall={'Videos'}></Small>
+
                   </View>
                   <ScrollView
                     horizontal={true}
                     contentContainerStyle={{
+
                       justifyContent: 'center',
                       flexDirection: 'row',
                     }}
