@@ -175,7 +175,7 @@ export default function ResetPwScreen({ navigation, props }) {
                 .then(() => setIsLoading(false))
             }
           >
-            <Buttons naming="Save"></Buttons>
+            <Buttons naming="Reset"></Buttons>
             {isLoading === true && (
               <View
                 style={[

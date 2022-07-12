@@ -49,7 +49,7 @@ export default function ForgetPwScreen({ navigation, props }) {
             <View style={{ paddingBottom: "5%" }}>
               <Med
                 fontMed={
-                  "We will send you an email to get your password reset."
+                  "We will send you a verification code to reset your password."
                 }
               ></Med>
             </View>
@@ -121,7 +121,7 @@ export default function ForgetPwScreen({ navigation, props }) {
                   .then(() => setIsLoading(false))
               }
             >
-              <Buttons naming="Send Email"></Buttons>
+              <Buttons naming="Send Code"></Buttons>
               {isLoading === true && (
                 <View
                   style={[

@@ -87,12 +87,10 @@ export default function VerificationScreen({ navigation, props }) {
               }}
             />
 
-            <Bold fontBold="Email Sent"></Bold>
+            <Bold fontBold="Code Sent"></Bold>
           </View>
           <View style={{ bottom: "7%" }}>
-            <Med
-              fontMed={"Please enter the 6-digit code sent to your email."}
-            ></Med>
+            <Med fontMed={"Please enter the 6-digit code sent to you."}></Med>
           </View>
           {OTPErrMsg ? (
             <Text style={{ color: "rgba(226,91,91,0.6)", bottom: "7%" }}>
