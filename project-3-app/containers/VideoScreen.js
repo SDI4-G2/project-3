@@ -9,7 +9,7 @@ import { Poppins_500Medium } from '@expo-google-fonts/poppins';
 import HeaderBar from '../components/Headers';
 import PreviousButton from '../components/PreviousButton';
 import NextButton from '../components/NextButton';
-import { useIsFocused } from '@react-navigation/native';
+import { useIsFocused, useFocusEffect } from '@react-navigation/native';
 
 import GetVideo from '../api/GetVideo';
 
@@ -44,7 +44,9 @@ export default function VideoScreen({ navigation, route, wording }) {
         setEndOfEndLine(true);
       } else if (currentVideo === videos[0].videoid) {
         setEndOfFrontLine(true);
+        setEndOfEndLine(false);
       } else if (currentVideo === videos[last].videoid) {
+        setEndOfFrontLine(false);
         setEndOfEndLine(true);
       } else {
         setEndOfFrontLine(false);
@@ -92,9 +94,15 @@ export default function VideoScreen({ navigation, route, wording }) {
     }
   }
 
-  useEffect(() => {
-    get();
-  }, []);
+  // useEffect(() => {
+  //   get();
+  // }, []);
+
+  useFocusEffect(
+    React.useCallback(() => {
+      get();
+    }, [])
+  );
 
   useEffect(() => {
     endOfLineCheck();

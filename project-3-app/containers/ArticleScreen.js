@@ -1,27 +1,17 @@
-import React, { useState, useEffect } from "react";
-import {
-  Text,
-  View,
-  StyleSheet,
-  ScrollView,
-  Image,
-  TouchableOpacity,
-  ImageBackground,
-} from "react-native";
-import HeaderBar from "../components/Headers";
-import { Card } from "react-native-paper";
-import MedCenter from "../assets/Poppins_CenterTitle";
-import bitcoinPic from "../assets/bitcoin3.5.png";
-import PreviousButton from "../components/PreviousButton";
-import NextButton from "../components/NextButton";
-import { WebView } from "react-native-webview";
-import { useIsFocused } from "@react-navigation/native";
+import React, { useState, useEffect } from 'react';
+import { Text, View, StyleSheet, ScrollView, Image, TouchableOpacity, ImageBackground } from 'react-native';
+import HeaderBar from '../components/Headers';
+import { Card } from 'react-native-paper';
+import MedCenter from '../assets/Poppins_CenterTitle';
+import bitcoinPic from '../assets/bitcoin3.5.png';
+import PreviousButton from '../components/PreviousButton';
+import NextButton from '../components/NextButton';
+import { WebView } from 'react-native-webview';
+import { useIsFocused, useFocusEffect } from '@react-navigation/native';
 
-import GetArticle from "../api/GetArticle";
+import GetArticle from '../api/GetArticle';
 
-const PdfReader = ({ url: uri }) => (
-  <WebView style={{ flex: 1 }} source={{ uri }} />
-);
+const PdfReader = ({ url: uri }) => <WebView style={{ flex: 1 }} source={{ uri }} />;
 
 export default function ArticleScreen({ wording, route }) {
   const [articles, setArticles] = useState(null);
@@ -55,15 +45,14 @@ export default function ArticleScreen({ wording, route }) {
   function endOfLineCheck() {
     if (articles) {
       let last = articles.length - 1;
-      if (
-        currentArticle === articles[0].articleid &&
-        currentArticle === articles[last].articleid
-      ) {
+      if (currentArticle === articles[0].articleid && currentArticle === articles[last].articleid) {
         setEndOfFrontLine(true);
         setEndOfEndLine(true);
       } else if (currentArticle === articles[0].articleid) {
         setEndOfFrontLine(true);
+        setEndOfEndLine(false);
       } else if (currentArticle === articles[last].articleid) {
+        setEndOfFrontLine(false);
         setEndOfEndLine(true);
       } else {
         setEndOfFrontLine(false);
@@ -85,7 +74,7 @@ export default function ArticleScreen({ wording, route }) {
         }
       }
     } catch (err) {
-      alert("Unable to previous" + err);
+      alert('Unable to previous' + err);
     }
   }
 
@@ -101,7 +90,7 @@ export default function ArticleScreen({ wording, route }) {
         }
       }
     } catch (err) {
-      console.log("Unable to next" + err);
+      console.log('Unable to next' + err);
     }
   }
 
@@ -111,9 +100,15 @@ export default function ArticleScreen({ wording, route }) {
     }
   }
 
-  useEffect(() => {
-    get();
-  }, []);
+  // useEffect(() => {
+  //   get();
+  // }, []);
+
+  useFocusEffect(
+    React.useCallback(() => {
+      get();
+    }, [])
+  );
 
   useEffect(() => {
     endOfLineCheck();
@@ -133,7 +128,7 @@ export default function ArticleScreen({ wording, route }) {
               <Image
                 source={{ uri: bg }}
                 style={{
-                  width: "100%",
+                  width: '100%',
                   height: 200,
                   borderRadius: 30,
                   opacity: 0.55,
@@ -143,11 +138,11 @@ export default function ArticleScreen({ wording, route }) {
               <View
                 style={{
                   flex: 1,
-                  position: "absolute",
-                  alignSelf: "center",
-                  height: "100%",
-                  justifyContent: "center",
-                  maxWidth: "100%",
+                  position: 'absolute',
+                  alignSelf: 'center',
+                  height: '100%',
+                  justifyContent: 'center',
+                  maxWidth: '100%',
                   opacity: 0.7,
                   paddingHorizontal: 8,
                 }}
@@ -164,22 +159,12 @@ export default function ArticleScreen({ wording, route }) {
               </ScrollView>
             </Card.Content>
           </Card>
-          <View
-            style={{ flexDirection: "row", justifyContent: "space-between" }}
-          >
-            <TouchableOpacity
-              onPress={() => prevArticle()}
-              disabled={endOfFrontLine === true}
-              style={endOfFrontLine ? styles.disabled : null}
-            >
-              <PreviousButton wording={"Article"} />
+          <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+            <TouchableOpacity onPress={() => prevArticle()} disabled={endOfFrontLine === true} style={endOfFrontLine ? styles.disabled : null}>
+              <PreviousButton wording={'Article'} />
             </TouchableOpacity>
-            <TouchableOpacity
-              onPress={() => nextArticle()}
-              disabled={endOfEndLine === true}
-              style={endOfEndLine ? styles.disabled : null}
-            >
-              <NextButton wording={"Article"} />
+            <TouchableOpacity onPress={() => nextArticle()} disabled={endOfEndLine === true} style={endOfEndLine ? styles.disabled : null}>
+              <NextButton wording={'Article'} />
             </TouchableOpacity>
           </View>
         </View>
@@ -191,24 +176,24 @@ export default function ArticleScreen({ wording, route }) {
 const styles = StyleSheet.create({
   card: {
     borderRadius: 30,
-    width: "100%",
-    alignSelf: "center",
-    overflow: "hidden",
-    paddingBottom: "50%",
+    width: '100%',
+    alignSelf: 'center',
+    overflow: 'hidden',
+    paddingBottom: '50%',
   },
   background: {
-    backgroundColor: "rgba(89,60,21, 0.3)",
+    backgroundColor: 'rgba(89,60,21, 0.3)',
     borderRadius: 25,
-    borderColor: "rgba(89,60,21, 0.5)",
-    width: "80%",
-    alignSelf: "center",
+    borderColor: 'rgba(89,60,21, 0.5)',
+    width: '80%',
+    alignSelf: 'center',
   },
 
   content: {
     borderRadius: 30,
-    height: "49%",
-    width: "100%",
-    alignSelf: "center",
+    height: '49%',
+    width: '100%',
+    alignSelf: 'center',
   },
 
   text: {
