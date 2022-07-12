@@ -78,7 +78,7 @@ const OTPInput = ({ setPinReady, code, setCode, maxLength }) => {
 
     return (
       <StyledOTPInput>
-        <OTPInputText key={testUUID}>{digit}</OTPInputText>
+        <OTPInputText key={index}>{digit}</OTPInputText>
       </StyledOTPInput>
     );
   };
