@@ -6,12 +6,10 @@ import {
   ScrollView,
   Image,
   TouchableOpacity,
-  ImageBackground,
 } from "react-native";
 import HeaderBar from "../components/Headers";
 import { Card } from "react-native-paper";
 import MedCenter from "../assets/Poppins_CenterTitle";
-import bitcoinPic from "../assets/bitcoin3.5.png";
 import PreviousButton from "../components/PreviousButton";
 import NextButton from "../components/NextButton";
 import { WebView } from "react-native-webview";
@@ -23,7 +21,7 @@ const PdfReader = ({ url: uri }) => (
   <WebView style={{ flex: 1 }} source={{ uri }} />
 );
 
-export default function ArticleScreen({ wording, route }) {
+export default function ArticleScreen({ route }) {
   const [articles, setArticles] = useState(null);
   const [title, setTitle] = useState(null);
   const [bg, setBg] = useState(null);
@@ -45,11 +43,6 @@ export default function ArticleScreen({ wording, route }) {
     setTitle(newList[0].title);
     setBg(newList[0].thumbnails);
     setCurrentArticle(newList[0].articleid);
-
-    // console.log(`list `, list);
-    // console.log(`title `, title);
-    // console.log("bg", bg);
-    // console.log("current ", currentArticle);
   }
 
   function endOfLineCheck() {
@@ -209,30 +202,6 @@ const styles = StyleSheet.create({
     height: "49%",
     width: "100%",
     alignSelf: "center",
-  },
-
-  text: {
-    // textAlign: "left",
-    // fontFamily: "Poppins_300Light",
-    // color: "white",
-    // opacity: 0.7,
-    // // top: "3%",
-    // fontSize: 13,
-    // paddingVertical: 15,
-    // paddingHorizontal: 15,
-    // lineHeight: 30,
-    // // width: "90%",
-    // alignSelf: "center",
-    // height: "100%",
-  },
-
-  image: {
-    // borderRadius: 30,
-    // alignSelf: "center",
-    // overflow: "hidden",
-    // opacity: 1,
-    // width: "100%",
-    // height: 200,
   },
   disabled: {
     opacity: 0.3,

@@ -16,8 +16,6 @@ export default function SignUpSuccessScreen({ navigation }) {
   } else
     return (
       <View>
-        {/* <HeaderBar /> */}
-
         <View style={{ top: "15%", width: "80%", alignSelf: "center" }}>
           <Image
             source={anotherStar}
@@ -54,7 +52,6 @@ export default function SignUpSuccessScreen({ navigation }) {
             style={{
               color: "rgba(255,255,255,0.7)",
               textAlign: "left",
-              //   alignSelf: "center",
               fontFamily: "Poppins_300Light",
 
               fontSize: 15,

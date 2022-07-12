@@ -2,27 +2,20 @@ import {
   StyleSheet,
   Text,
   View,
-  ScrollView,
   ImageBackground,
-  RefreshControl,
-  ActivityIndicator,
   TouchableOpacity,
-  Image,
   FlatList,
-  Pressable,
 } from "react-native";
-import { Card, Title } from "react-native-paper";
+
 import React, { useState, useEffect } from "react";
 import * as SecureStore from "expo-secure-store";
-import Headers from "../components/Headers";
-import Small from "../assets/Poppins_Small";
 import { PulseIndicator } from "react-native-indicators";
+import Bold from "../assets/Poppins_Bold";
+
+import Headers from "../components/Headers";
 
 export default function LibraryScreen({ navigation }) {
   const [category, setCategory] = useState([]);
-  const [title, setTitle] = useState(null);
-  const [text, setText] = useState(null);
-  const [list, setList] = useState(undefined);
 
   const [isLoading, setIsLoading] = useState(true);
 
@@ -54,6 +47,9 @@ export default function LibraryScreen({ navigation }) {
     <View>
       <Headers />
       <View style={[styles.container]}>
+        <View style={{ left: 10, margin: 10 }}>
+          <Bold fontBold={"Library"}></Bold>
+        </View>
         <View>
           {isLoading === true && (
             <PulseIndicator color={"rgba(255,255,255,0.5)"} />
@@ -70,7 +66,7 @@ export default function LibraryScreen({ navigation }) {
               renderItem={({ item }) => (
                 <TouchableOpacity
                   onPress={() => {
-                    navigation.navigate("Search", {
+                    navigation.navigate("SubMainScreen", {
                       params: { description: item.description },
                     });
                   }}

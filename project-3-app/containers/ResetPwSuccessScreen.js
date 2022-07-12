@@ -1,19 +1,15 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import {
   TouchableOpacity,
   StyleSheet,
   View,
   SafeAreaView,
-  Pressable,
-  ActivityIndicator,
   Image,
 } from "react-native";
-import { TextInput } from "react-native-paper";
 
 import Buttons from "../components/Buttons";
 import SecondHeaderBar from "../components/SecondHeader";
 import Bold from "../assets/Poppins_Bold";
-import Small from "../assets/Poppins_Small";
 import Med from "../assets/Poppins_Medium";
 import tickSuccess from "../assets/tickSuccessThree.png";
 
@@ -73,9 +69,6 @@ const styles = StyleSheet.create({
   userInput: {
     height: 55,
     backgroundColor: "rgba(255, 255,255, 0.05)",
-    // borderColor: "rgba(255, 255, 255, 0.3)",
-    // borderWidth: 1,
-    // borderRadius: 16,
     borderTopEndRadius: 16,
     borderTopStartRadius: 16,
     paddingHorizontal: 10,

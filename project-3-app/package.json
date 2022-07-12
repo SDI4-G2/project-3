@@ -33,6 +33,7 @@
     "react-native": "^0.68.2",
     "react-native-btr": "^2.2.0",
     "react-native-circular-progress-indicator": "^4.2.0",
+    "react-native-image-picker": "^4.8.4",
     "react-native-indicators": "^0.17.0",
     "react-native-otp-form": "^1.0.2",
     "react-native-otp-input": "^1.0.12",

@@ -17,7 +17,6 @@ import ResetPwScreen from "../containers/ResetPwScreen";
 import ResetPwSuccessScreen from "../containers/ResetPwSuccessScreen";
 import SubscriptionScreen from "../containers/SubscriptionScreen";
 import SupportScreen from "../containers/SupportScreen";
-import BookmarksScreen from "../containers/BookmarksScreen";
 import LibraryScreen from "../containers/LibraryScreen";
 import SearchScreen from "../containers/SearchScreen";
 import SubscriptionSuccessfulScreen from "../containers/SubscriptionSuccessfulScreen";
@@ -25,14 +24,7 @@ import SignUpSuccessScreen from "../containers/SignUpSuccessScreen";
 import SubMainScreen from "../containers/SubMainScreen";
 
 import background from "../assets/background.png";
-import {
-  StyleSheet,
-  Text,
-  View,
-  ImageBackground,
-  TouchableOpacity,
-} from "react-native";
-import Feather from "react-native-vector-icons/Feather";
+import { StyleSheet, ImageBackground } from "react-native";
 
 const Stack = createNativeStackNavigator();
 const Tab = createMaterialBottomTabNavigator();
@@ -53,6 +45,11 @@ const HomeStack = () => {
       <Stack.Screen
         name="VideoScreen"
         component={VideoScreen}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="SubMainScreen"
+        component={SubMainScreen}
         options={{ headerShown: false }}
       />
     </Stack.Navigator>
@@ -187,18 +184,8 @@ const Navigation = () => {
             options={{ headerShown: false }}
           />
           <Stack.Screen
-            name="BookmarkScreen"
-            component={BookmarksScreen}
-            options={{ headerShown: false }}
-          />
-          <Stack.Screen
             name="LibraryScreen"
             component={LibraryScreen}
-            options={{ headerShown: false }}
-          />
-          <Stack.Screen
-            name="SubMainScreen"
-            component={SubMainScreen}
             options={{ headerShown: false }}
           />
           <Stack.Screen

@@ -1,7 +1,4 @@
 import * as SecureStore from "expo-secure-store";
-import { Alert } from "react-native";
-
-//work in progress
 
 export default async function ForgetPassword({
   email,

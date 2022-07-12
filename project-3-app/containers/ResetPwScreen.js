@@ -4,22 +4,19 @@ import {
   StyleSheet,
   View,
   SafeAreaView,
-  Pressable,
   ActivityIndicator,
   Text,
-  Keyboard,
 } from "react-native";
 import { TextInput } from "react-native-paper";
-
-import { Formik } from "formik";
-import * as Yup from "yup";
-import Validator from "email-validator";
 
 import Buttons from "../components/Buttons";
 import SecondHeaderBar from "../components/SecondHeader";
 import Bold from "../assets/Poppins_Bold";
 import Small from "../assets/Poppins_Small";
 import Med from "../assets/Poppins_Medium";
+import { useFonts } from "expo-font";
+import { Poppins_300Light } from "@expo-google-fonts/poppins";
+import { Poppins_500Medium } from "@expo-google-fonts/poppins";
 import * as SecureStore from "expo-secure-store";
 import jwt_decode from "jwt-decode";
 import ResetPassword from "../api/ResetPassword";
@@ -57,148 +54,151 @@ export default function ResetPwScreen({ navigation, props }) {
       getJwt();
     }, 1000);
   }, []);
-
-  return (
-    <SafeAreaView>
-      <SecondHeaderBar backScreen="ForgetPwScreen" />
-      <View style={styles.container}>
-        <View style={{ paddingBottom: "0%" }}>
-          <Bold fontBold="Reset Password"></Bold>
-        </View>
-        <View style={{ paddingBottom: "5%" }}>
-          <Med fontMed={"Please enter your new password."}></Med>
-        </View>
-        <View style={{ paddingBottom: "15%", paddingTop: "5%" }}>
-          <View style={{ paddingTop: "5%" }}>
-            {errorMessage ? (
-              <Text style={{ color: "rgba(226,91,91,0.6)", bottom: "5%" }}>
-                {errorMessage}
-              </Text>
-            ) : (
-              <Text style={{ color: "transparent" }}>hello</Text>
-            )}
-            <Small fontSmall="New Password"></Small>
-            <TouchableOpacity
-              style={[
-                styles.textContainer,
-                {
-                  borderColor:
-                    password.length < 1 || password.length > 5
-                      ? "rgba(255, 255, 255, 0.4)"
-                      : "rgba(244, 107, 107, 0.4)",
-                },
-              ]}
-            >
-              <TextInput
-                value={password}
-                onChangeText={setPassword}
-                style={[styles.userInput]}
-                autoFocus={true}
-                theme={{ colors: { text: "rgba(255, 255, 255, 0.6)" } }}
-                secureTextEntry={true}
-                returnKeyType="next"
-                onChange={() => setErrorMessage(null)}
-                onSubmitEditing={() => {
+  let [fontsLoaded] = useFonts({
+    Poppins_300Light,
+    Poppins_500Medium,
+  });
+  if (!fontsLoaded) {
+    return null;
+  } else
+    return (
+      <SafeAreaView>
+        <SecondHeaderBar backScreen="ForgetPwScreen" />
+        <View style={styles.container}>
+          <View style={{ paddingBottom: "0%" }}>
+            <Bold fontBold="Reset Password"></Bold>
+          </View>
+          <View style={{ paddingBottom: "5%" }}>
+            <Med fontMed={"Please enter your new password."}></Med>
+          </View>
+          <View style={{ paddingBottom: "15%", paddingTop: "5%" }}>
+            <View style={{ paddingTop: "5%" }}>
+              {errorMessage ? (
+                <Text style={{ color: "rgba(226,91,91,0.6)", bottom: "5%" }}>
+                  {errorMessage}
+                </Text>
+              ) : (
+                <Text style={{ color: "transparent" }}>hello</Text>
+              )}
+              <Small fontSmall="New Password"></Small>
+              <TouchableOpacity
+                style={[
+                  styles.textContainer,
                   {
-                    password.length > 5 ? newPwRef.current.focus() : null;
-                  }
-                }}
-                blurOnSubmit={false}
-              ></TextInput>
-            </TouchableOpacity>
-            <Text
-              style={[
-                password.length < 1 || password.length > 5
-                  ? styles.normalTwo
-                  : styles.disabledTwo,
-              ]}
-            >
-              New password must be 6 characters long
-            </Text>
-          </View>
-          <View>
-            <Small fontSmall="Confirm New Password"></Small>
-            <TouchableOpacity
-              style={[
-                styles.textContainer,
-                {
-                  borderColor:
-                    confirmPassword.length < 1 || confirmPassword.length > 5
-                      ? "rgba(255, 255, 255, 0.4)"
-                      : "rgba(244, 107, 107, 0.4)",
-                },
-              ]}
-            >
-              <TextInput
-                value={confirmPassword}
-                onChangeText={setConfirmPassword}
-                style={[styles.userInput]}
-                theme={{
-                  colors: {
-                    text: "rgba(255, 255, 255, 0.6)",
+                    borderColor:
+                      password.length < 1 || password.length > 5
+                        ? "rgba(255, 255, 255, 0.4)"
+                        : "rgba(244, 107, 107, 0.4)",
                   },
-                }}
-                secureTextEntry={true}
-                onChange={() => setErrorMessage(null)}
-                ref={newPwRef}
-                onSubmitEditing={() => {
-                  password.length > 5 && confirmPassword.length > 5
-                    ? ResetPassword(
-                        { email, password, confirmPassword, navigation },
-                        setIsLoading(true)
-                      )
-                        .then((res) => setErrorMessage(res))
-                        .then(() => setIsLoading(false))
-                    : null;
-                }}
-              />
-            </TouchableOpacity>
-          </View>
-        </View>
-
-        <TouchableOpacity
-          style={
-            password.length < 6 || confirmPassword.length < 6
-              ? styles.disabled
-              : styles.normal
-          }
-          disabled={password.length < 6 || confirmPassword.length < 6}
-          onPress={() =>
-            ResetPassword(
-              { email, password, confirmPassword, navigation },
-              setIsLoading(true)
-            )
-              .then((res) => setErrorMessage(res))
-              .then(() => setIsLoading(false))
-          }
-        >
-          <Buttons naming="Save"></Buttons>
-          {isLoading === true && (
-            <View
-              style={[
-                {
-                  width: 100,
-                  height: 100,
-                  backgroundColor: "rgba(255, 255,255,0.2)",
-
-                  borderRadius: 20,
-                  justifyContent: "space-evenly",
-                  alignSelf: "center",
-                  bottom: 100,
-                },
-                styles.loading,
-              ]}
-            >
-              <ActivityIndicator
-                // style={styles.loading}
-                color={"rgba(255,255,255,0.5)"}
-              />
+                ]}
+              >
+                <TextInput
+                  value={password}
+                  onChangeText={setPassword}
+                  style={[styles.userInput]}
+                  autoFocus={true}
+                  theme={{ colors: { text: "rgba(255, 255, 255, 0.6)" } }}
+                  secureTextEntry={true}
+                  returnKeyType="next"
+                  onChange={() => setErrorMessage(null)}
+                  onSubmitEditing={() => {
+                    {
+                      password.length > 5 ? newPwRef.current.focus() : null;
+                    }
+                  }}
+                  blurOnSubmit={false}
+                ></TextInput>
+              </TouchableOpacity>
+              <Text
+                style={[
+                  password.length < 1 || password.length > 5
+                    ? styles.normalTwo
+                    : styles.disabledTwo,
+                ]}
+              >
+                New password must be 6 characters long
+              </Text>
             </View>
-          )}
-        </TouchableOpacity>
-      </View>
-    </SafeAreaView>
-  );
+            <View>
+              <Small fontSmall="Confirm New Password"></Small>
+              <TouchableOpacity
+                style={[
+                  styles.textContainer,
+                  {
+                    borderColor:
+                      confirmPassword.length < 1 || confirmPassword.length > 5
+                        ? "rgba(255, 255, 255, 0.4)"
+                        : "rgba(244, 107, 107, 0.4)",
+                  },
+                ]}
+              >
+                <TextInput
+                  value={confirmPassword}
+                  onChangeText={setConfirmPassword}
+                  style={[styles.userInput]}
+                  theme={{
+                    colors: {
+                      text: "rgba(255, 255, 255, 0.6)",
+                    },
+                  }}
+                  secureTextEntry={true}
+                  onChange={() => setErrorMessage(null)}
+                  ref={newPwRef}
+                  onSubmitEditing={() => {
+                    password.length > 5 && confirmPassword.length > 5
+                      ? ResetPassword(
+                          { email, password, confirmPassword, navigation },
+                          setIsLoading(true)
+                        )
+                          .then((res) => setErrorMessage(res))
+                          .then(() => setIsLoading(false))
+                      : null;
+                  }}
+                />
+              </TouchableOpacity>
+            </View>
+          </View>
+
+          <TouchableOpacity
+            style={
+              password.length < 6 || confirmPassword.length < 6
+                ? styles.disabled
+                : styles.normal
+            }
+            disabled={password.length < 6 || confirmPassword.length < 6}
+            onPress={() =>
+              ResetPassword(
+                { email, password, confirmPassword, navigation },
+                setIsLoading(true)
+              )
+                .then((res) => setErrorMessage(res))
+                .then(() => setIsLoading(false))
+            }
+          >
+            <Buttons naming="Save"></Buttons>
+            {isLoading === true && (
+              <View
+                style={[
+                  {
+                    width: 100,
+                    height: 100,
+                    backgroundColor: "rgba(255, 255,255,0.2)",
+
+                    borderRadius: 20,
+                    justifyContent: "space-evenly",
+                    alignSelf: "center",
+                    bottom: 100,
+                  },
+                  styles.loading,
+                ]}
+              >
+                <ActivityIndicator color={"rgba(255,255,255,0.5)"} />
+              </View>
+            )}
+          </TouchableOpacity>
+        </View>
+      </SafeAreaView>
+    );
 }
 
 const styles = StyleSheet.create({
@@ -217,9 +217,6 @@ const styles = StyleSheet.create({
   userInput: {
     height: 55,
     backgroundColor: "rgba(255, 255,255, 0.05)",
-    // borderColor: "rgba(255, 255, 255, 0.3)",
-    // borderWidth: 1,
-    // borderRadius: 16,
     borderTopEndRadius: 16,
     borderTopStartRadius: 16,
     paddingHorizontal: 10,
