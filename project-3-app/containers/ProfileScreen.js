@@ -35,9 +35,7 @@ export default function ProfileScreen({ navigation }) {
         >
           <ProfileButton naming="Subscription"></ProfileButton>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.padding}>
-          <ProfileButton naming="Recently Viewed"></ProfileButton>
-        </TouchableOpacity>
+
         {/* <TouchableOpacity style={styles.padding}>
           <ProfileButton naming="Saved Content"></ProfileButton>
         </TouchableOpacity> */}
