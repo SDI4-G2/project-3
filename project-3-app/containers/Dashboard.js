@@ -5,9 +5,6 @@ import {
   ScrollView,
   ImageBackground,
   RefreshControl,
-  ActivityIndicator,
-  TouchableOpacity,
-  Image,
 } from "react-native";
 import { Card, Title } from "react-native-paper";
 import React, { useState, useEffect } from "react";
@@ -19,9 +16,8 @@ import { useFonts } from "expo-font";
 import { Poppins_300Light } from "@expo-google-fonts/poppins";
 import { Poppins_500Medium } from "@expo-google-fonts/poppins";
 
-import { PulseIndicator } from 'react-native-indicators';
-import books from '../assets/books.png';
-import { useFocusEffect } from '@react-navigation/native';
+import { PulseIndicator } from "react-native-indicators";
+import { useFocusEffect } from "@react-navigation/native";
 
 export default function Dashboard({ navigation }) {
   const [videos, setVideos] = useState([]);
