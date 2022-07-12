@@ -37,11 +37,11 @@ export default function SubMainScreen({ navigation, route }) {
   const [vidResult, setVidResult] = useState([]);
   const [artResult, setArtResult] = useState([]);
   const [list, setList] = useState([]);
-  const { title } = route.params;
+  const { videoid, categoryid, articleid, url } = route.params;
 
   async function get() {
     const video = await GetVideo();
-
+    
     // let newList = video.map((vid) => {
     //   return vid.categoryid;
     // });
@@ -111,8 +111,105 @@ export default function SubMainScreen({ navigation, route }) {
   }, []);
 
   return (
-    <View style={{ top: 40 }}>
-      <Text style={{ color: "white" }}>hello {route.params.title}</Text>
+    <View>
+      <HeaderBar />
+      <View style={{ width: "80%", alignSelf: "center", top: "0%" }}>
+        <View style={styles.container}>
+          <View style={{ color: "white" }}>{list}</View>
+        </View>
+        <View style={{ marginBottom: 20 }}>
+          <View style={{ paddingTop: "5%" }}>
+            <Small fontSmall={"Videos"}></Small>
+          </View>
+          <ScrollView
+            horizontal={true}
+            contentContainerStyle={{
+              justifyContent: "center",
+              flexDirection: "row",
+            }}
+          >
+            {isLoading === true && (
+              <PulseIndicator color={"rgba(255,255,255,0.5)"} />
+            )}
+            {videos.map((item) => {
+              return (
+                <Card
+                  style={styles.cardDashboard}
+                  key={item.videoid}
+                  onPress={() => {
+                    navigation.navigate("VideoScreen", {
+                      videoid: item.videoid,
+                    });
+                  }}
+                >
+                  <ImageBackground
+                    source={{ uri: item.thumbnails }}
+                    // source={{ uri: item.thumb }}
+                    style={styles.cardImage}
+                    imageStyle={{
+                      borderRadius: 15,
+                      opacity: 0.5,
+                      backgroundColor: "#000",
+                    }}
+                    onLoadEnd={() => setIsLoading(false)}
+                  >
+                    <Card.Content>
+                      <Text style={styles.cardText} numberOfLines={1}>
+                        {item.description}
+                      </Text>
+                      <Title style={styles.cardTitle} numberOfLines={3}>
+                        {item.title}
+                      </Title>
+                    </Card.Content>
+                  </ImageBackground>
+                </Card>
+              );
+            })}
+          </ScrollView>
+        </View>
+
+        <View style={{ marginBottom: 20 }}>
+          <Small fontSmall={"Articles"}></Small>
+          <ScrollView
+            horizontal={true}
+            contentContainerStyle={{
+              justifyContent: "center",
+              flexDirection: "row",
+            }}
+          >
+            {isLoading === true && (
+              <PulseIndicator color={"rgba(255,255,255,0.5)"} />
+            )}
+            {articles.map((item, index) => (
+              <Card
+                style={styles.cardDashboard}
+                key={item.articleid}
+                onPress={() => {
+                  navigation.navigate("ArticleScreen", {
+                    articleid: item.articleid,
+                  });
+                }}
+              >
+                <ImageBackground
+                  resizeMode="stretch"
+                  source={{ uri: item.url }}
+                  style={styles.cardImage}
+                  imageStyle={{
+                    borderRadius: 15,
+                    opacity: 0.5,
+                    backgroundColor: "#000",
+                  }}
+                  onLoadEnd={() => setIsLoading(false)}
+                >
+                  <Card.Content>
+                    <Title style={styles.cardTitle}>{item.description}</Title>
+                  </Card.Content>
+                </ImageBackground>
+              </Card>
+            ))}
+          </ScrollView>
+        </View>
+      </View>
     </View>
   );
 }
