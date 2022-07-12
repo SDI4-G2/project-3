@@ -5,13 +5,10 @@ import {
   ImageBackground,
   TouchableOpacity,
   FlatList,
-  Pressable,
 } from "react-native";
-import { Card, Title } from "react-native-paper";
 import React, { useState, useEffect } from "react";
 import * as SecureStore from "expo-secure-store";
 import Headers from "../components/Headers";
-import Small from "../assets/Poppins_Small";
 import Bold from "../assets/Poppins_Bold";
 import { PulseIndicator } from "react-native-indicators";
 import { useFocusEffect } from "@react-navigation/native";
