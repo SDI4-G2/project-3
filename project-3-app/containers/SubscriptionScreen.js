@@ -156,11 +156,12 @@ export default function SubscriptionScreen({ navigation }) {
   const handleCancelSubscription = async () => {
     const { res_subs } = await updateSubscription(!subscribed);
 
-    Alert.alert(
-      "Subscription Cancel",
-      "You are no longer subscribe to our Premium Content",
-      [{ text: "OK", onPress: () => navigation.push("Dashboard") }]
-    );
+    // Alert.alert(
+    //   "Subscription Cancel",
+    //   "You are no longer subscribe to our Premium Content",
+    //   [{ text: "OK", onPress: () => navigation.push("Dashboard") }]
+    // );
+    navigation.navigate("SubscriptionCancellation");
   };
   let [fontsLoaded] = useFonts({
     Poppins_300Light,
