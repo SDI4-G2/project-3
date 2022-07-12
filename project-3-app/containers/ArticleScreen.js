@@ -46,10 +46,10 @@ export default function ArticleScreen({ wording, route }) {
     setBg(newList[0].thumbnails);
     setCurrentArticle(newList[0].articleid);
 
-    console.log(`list `, list);
-    console.log(`title `, title);
-    console.log("bg", bg);
-    console.log("current ", currentArticle);
+    // console.log(`list `, list);
+    // console.log(`title `, title);
+    // console.log("bg", bg);
+    // console.log("current ", currentArticle);
   }
 
   function endOfLineCheck() {
@@ -136,7 +136,7 @@ export default function ArticleScreen({ wording, route }) {
                   width: "100%",
                   height: 200,
                   borderRadius: 30,
-                  opacity: 0.8,
+                  opacity: 0.55,
                 }}
                 onLoadEnd={() => setIsLoading(false)}
               />
@@ -149,6 +149,7 @@ export default function ArticleScreen({ wording, route }) {
                   justifyContent: "center",
                   maxWidth: "100%",
                   opacity: 0.7,
+                  paddingHorizontal: 8,
                 }}
               >
                 <MedCenter fontMedCenter={title} />

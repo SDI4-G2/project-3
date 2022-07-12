@@ -1,10 +1,22 @@
-import { StyleSheet, Text, View, ScrollView, ImageBackground, RefreshControl, ActivityIndicator, TouchableOpacity, Image } from 'react-native';
-import { Card, Title } from 'react-native-paper';
-import React, { useState, useEffect } from 'react';
-import * as SecureStore from 'expo-secure-store';
-import Headers from '../components/Headers';
-import Small from '../assets/Poppins_Small';
-import { PulseIndicator } from 'react-native-indicators';
+import {
+  StyleSheet,
+  Text,
+  View,
+  ScrollView,
+  ImageBackground,
+  RefreshControl,
+  ActivityIndicator,
+  TouchableOpacity,
+  Image,
+  FlatList,
+  Pressable,
+} from "react-native";
+import { Card, Title } from "react-native-paper";
+import React, { useState, useEffect } from "react";
+import * as SecureStore from "expo-secure-store";
+import Headers from "../components/Headers";
+import Small from "../assets/Poppins_Small";
+import { PulseIndicator } from "react-native-indicators";
 
 export default function LibraryScreen({ navigation }) {
   const [category, setCategory] = useState([]);
@@ -15,13 +27,13 @@ export default function LibraryScreen({ navigation }) {
   const [isLoading, setIsLoading] = useState(true);
 
   async function fetch_all_category() {
-    let result = await SecureStore.getItemAsync('token');
+    let result = await SecureStore.getItemAsync("token");
 
-    const response = await fetch('https://sdi4-g2.herokuapp.com/category', {
-      method: 'GET',
+    const response = await fetch("https://sdi4-g2.herokuapp.com/category", {
+      method: "GET",
       headers: {
-        'Content-Type': 'application/json',
-        Authorization: 'Bearer ' + result,
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + result,
       },
     });
     const list = await response.json();
@@ -39,109 +51,78 @@ export default function LibraryScreen({ navigation }) {
   };
 
   return (
-    <ScrollView>
+    <View>
       <Headers />
-      <View style={styles.container}>
-        <View style={{ paddingTop: '5%' }}></View>
-        <View style={{ marginBottom: 20 }}>
-          <View style={{ paddingTop: '5%' }}></View>
-          <ScrollView
-            vertical={true}
-            // contentContainerStyle={{
-            //   justifyContent: "center",
-            //   flexDirection: "column",
-            //   borderWidth: 3,
-            //   borderColor: "white",
-            // }}
+      <View style={[styles.container]}>
+        <View>
+          {isLoading === true && (
+            <PulseIndicator color={"rgba(255,255,255,0.5)"} />
+          )}
+          <View
+            style={{
+              alignSelf: "center",
+            }}
           >
-            {isLoading === true && <PulseIndicator color={'rgba(255,255,255,0.5)'} />}
-            {category.map((item) => {
-              return (
-                <Card
-                  style={styles.cardDashboard}
-                  key={item.categoryid}
+            <FlatList
+              data={category}
+              numColumns={2}
+              horizontal={false}
+              renderItem={({ item }) => (
+                <TouchableOpacity
                   onPress={() => {
-                    navigation.navigate('Search', { params: { description: item.description } });
+                    navigation.navigate("Search", {
+                      params: { description: item.description },
+                    });
                   }}
                 >
-                  <ImageBackground
-                    source={{ uri: item.thumbnails }}
-                    // source={{ uri: item.thumb }}
-                    style={styles.cardImage}
-                    imageStyle={{
-                      borderRadius: 15,
-                      opacity: 0.5,
-                      backgroundColor: '#000',
-                    }}
-                    onLoadEnd={() => setIsLoading(false)}
-                  >
-                    <Card.Content>
-                      <Text style={styles.cardText} numberOfLines={1}>
-                        {item.description}
-                      </Text>
-                    </Card.Content>
-                  </ImageBackground>
-                </Card>
-              );
-            })}
-          </ScrollView>
+                  <View style={{ padding: 10 }}>
+                    <ImageBackground
+                      source={{ uri: item.thumbnails }}
+                      style={styles.cardImage}
+                      imageStyle={{
+                        borderRadius: 15,
+                        opacity: 0.5,
+                      }}
+                      onLoadEnd={() => setIsLoading(false)}
+                    >
+                      <View style={styles.cardDashboard}>
+                        <Text style={styles.cardTitle}>{item.description}</Text>
+                      </View>
+                    </ImageBackground>
+                  </View>
+                </TouchableOpacity>
+              )}
+              keyExtractor={(item) => item.id}
+            />
+          </View>
         </View>
       </View>
-    </ScrollView>
+    </View>
   );
 }
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    // marginTop: 60, //StatusBar.currentHeight,
-    padding: 15,
-    bottom: 35,
-  },
-  mediumText: {
-    fontStyle: 'normal',
-    fontWeight: '400',
-    fontSize: 14,
-    lineHeight: 30,
-    display: 'flex',
-    alignItems: 'center',
-    color: 'rgba(255, 255, 255, 0.7)',
-  },
   cardDashboard: {
     width: 150,
     height: 150,
-    marginTop: 10,
-    marginBottom: 10,
-    marginRight: 15,
-    borderColor: 'rgba(102, 112, 128, 0.3)',
+    justifyContent: "center",
     borderRadius: 15,
-    backgroundColor: '#d2d5db',
-    borderWidth: 1,
-    fontWeight: 700,
+    backgroundColor: "rgba(255,255,255,0.2)",
   },
   cardTitle: {
-    fontStyle: 'normal',
-    fontWeight: '400',
+    fontStyle: "normal",
+    fontWeight: "400",
     fontSize: 20,
     lineHeight: 30,
-    display: 'flex',
-    alignSelf: 'center',
-    textAlign: 'center',
-    color: 'rgba(255, 255, 255, 0.7)',
+    alignSelf: "center",
+    textAlign: "center",
+    color: "rgba(255, 255, 255, 0.7)",
   },
-  cardText: {
-    fontStyle: 'italic',
-    fontWeight: '400',
-    fontSize: 15,
-    lineHeight: 30,
-    display: 'flex',
-    alignSelf: 'center',
-    color: 'rgba(255, 255, 255, 0.7)',
-  },
+
   cardImage: {
     width: 150,
     height: 150,
-    alignItems: 'center',
-    justifyContent: 'center',
-    alignSelf: 'center',
+    alignItems: "center",
+    justifyContent: "center",
+    alignSelf: "center",
   },
 });
