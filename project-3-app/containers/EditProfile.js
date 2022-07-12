@@ -1,5 +1,4 @@
 import { Text, TouchableOpacity, StyleSheet, View, Image } from "react-native";
-
 import React, { useState, useEffect } from "react";
 
 import SecondHeaderBar from "../components/SecondHeader";
@@ -54,7 +53,6 @@ export default function EditProfile() {
                 </View>
                 <TouchableOpacity
                   style={styles.editingIcon}
-                  // onPress={toggleBottomNavigationView}
                   onPress={() => setModalUsernameVisible(!modalUsernameVisible)}
                 >
                   <Image
@@ -146,5 +144,11 @@ const styles = StyleSheet.create({
   },
   normal: {
     opacity: 1,
+  },
+
+  centerContent: {
+    justifyContent: "center",
+    alignItems: "center",
+    marginTop: "center",
   },
 });

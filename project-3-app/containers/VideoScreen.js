@@ -39,7 +39,10 @@ export default function VideoScreen({ navigation, route, wording }) {
   function endOfLineCheck() {
     if (videos) {
       let last = videos.length - 1;
-      if (currentVideo === videos[0].videoid && currentVideo === videos[last].videoid) {
+      if (
+        currentVideo === videos[0].videoid &&
+        currentVideo === videos[last].videoid
+      ) {
         setEndOfFrontLine(true);
         setEndOfEndLine(true);
       } else if (currentVideo === videos[0].videoid) {
@@ -68,7 +71,7 @@ export default function VideoScreen({ navigation, route, wording }) {
         }
       }
     } catch (err) {
-      alert('Unable to previous' + err);
+      alert("Unable to previous" + err);
     }
   }
 
@@ -84,7 +87,7 @@ export default function VideoScreen({ navigation, route, wording }) {
         }
       }
     } catch (err) {
-      console.log('Unable to next' + err);
+      console.log("Unable to next" + err);
     }
   }
 
@@ -150,16 +153,24 @@ export default function VideoScreen({ navigation, route, wording }) {
         </ScrollView>
         <View
           style={{
-            flexDirection: 'row',
-            justifyContent: 'space-between',
+            flexDirection: "row",
+            justifyContent: "space-between",
             top: 40,
           }}
         >
-          <TouchableOpacity onPress={() => prevVideo()} disabled={endOfFrontLine === true} style={endOfFrontLine ? styles.disabled : null}>
-            <PreviousButton wording={'Video'} />
+          <TouchableOpacity
+            onPress={() => prevVideo()}
+            disabled={endOfFrontLine === true}
+            style={endOfFrontLine ? styles.disabled : null}
+          >
+            <PreviousButton wording={"Video"} />
           </TouchableOpacity>
-          <TouchableOpacity onPress={() => nextVideo()} disabled={endOfEndLine === true} style={endOfEndLine ? styles.disabled : null}>
-            <NextButton wording={'Video'} />
+          <TouchableOpacity
+            onPress={() => nextVideo()}
+            disabled={endOfEndLine === true}
+            style={endOfEndLine ? styles.disabled : null}
+          >
+            <NextButton wording={"Video"} />
           </TouchableOpacity>
         </View>
       </SafeAreaView>
@@ -171,26 +182,26 @@ const styles = StyleSheet.create({
   container: {
     marginTop: 10,
     borderWidth: 6,
-    borderColor: 'rgba(102, 112, 128, 0.4)',
+    borderColor: "rgba(102, 112, 128, 0.4)",
     borderRadius: 18,
-    alignItems: 'center',
-    width: '90%',
-    alignSelf: 'center',
+    alignItems: "center",
+    width: "90%",
+    alignSelf: "center",
   },
   border: {
     borderWidth: 1,
-    borderColor: 'rgba(255, 255, 255, 0.4)',
+    borderColor: "rgba(255, 255, 255, 0.4)",
     borderRadius: 18,
-    backgroundColor: 'rgba(255, 255, 255, 0.1)',
-    height: '40%',
-    width: '90%',
-    alignSelf: 'center',
-    top: '5%',
+    backgroundColor: "rgba(255, 255, 255, 0.1)",
+    height: "40%",
+    width: "90%",
+    alignSelf: "center",
+    top: "5%",
   },
   text: {
-    textAlign: 'left',
-    fontFamily: 'Poppins_300Light',
-    color: 'white',
+    textAlign: "left",
+    fontFamily: "Poppins_300Light",
+    color: "white",
     opacity: 0.7,
     paddingTop: StatusBar.currentHeight,
     fontSize: 15,
@@ -198,13 +209,13 @@ const styles = StyleSheet.create({
     lineHeight: 30,
   },
   title: {
-    fontFamily: 'Poppins_500Medium',
-    color: 'white',
+    fontFamily: "Poppins_500Medium",
+    color: "white",
     opacity: 0.7,
     paddingTop: StatusBar.currentHeight,
     fontSize: 17,
     paddingHorizontal: 10,
-    textAlign: 'left',
+    textAlign: "left",
   },
   disabled: {
     opacity: 0.3,

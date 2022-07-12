@@ -2,12 +2,8 @@ import {
   StyleSheet,
   Text,
   View,
-  ScrollView,
   ImageBackground,
-  RefreshControl,
-  ActivityIndicator,
   TouchableOpacity,
-  Image,
   FlatList,
   Pressable,
 } from 'react-native';
@@ -21,9 +17,6 @@ import { useFocusEffect } from '@react-navigation/native';
 
 export default function LibraryScreen({ navigation }) {
   const [category, setCategory] = useState([]);
-  const [title, setTitle] = useState(null);
-  const [text, setText] = useState(null);
-  const [list, setList] = useState(undefined);
 
   const [isLoading, setIsLoading] = useState(true);
 
@@ -62,6 +55,9 @@ export default function LibraryScreen({ navigation }) {
     <View>
       <Headers />
       <View style={[styles.container]}>
+        <View style={{ left: 10, margin: 10 }}>
+          <Bold fontBold={"Library"}></Bold>
+        </View>
         <View>
           {isLoading === true && <PulseIndicator color={'rgba(255,255,255,0.5)'} />}
           <View
@@ -76,7 +72,7 @@ export default function LibraryScreen({ navigation }) {
               renderItem={({ item }) => (
                 <TouchableOpacity
                   onPress={() => {
-                    navigation.navigate('Search', {
+                    navigation.navigate("SubMainScreen", {
                       params: { description: item.description },
                     });
                   }}

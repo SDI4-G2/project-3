@@ -10,8 +10,6 @@ import {
   Keyboard,
 } from "react-native";
 import { TextInput } from "react-native-paper";
-
-import { Formik } from "formik";
 import * as Yup from "yup";
 import Validator from "email-validator";
 
@@ -20,6 +18,9 @@ import SecondHeaderBar from "../components/SecondHeader";
 import Bold from "../assets/Poppins_Bold";
 import Small from "../assets/Poppins_Small";
 import Med from "../assets/Poppins_Medium";
+import { useFonts } from "expo-font";
+import { Poppins_300Light } from "@expo-google-fonts/poppins";
+import { Poppins_500Medium } from "@expo-google-fonts/poppins";
 import ForgetPassword from "../api/ForgetPassword";
 
 export default function ForgetPwScreen({ navigation, props }) {
@@ -30,112 +31,121 @@ export default function ForgetPwScreen({ navigation, props }) {
   const EmailSchema = Yup.object().shape({
     email: Yup.string().email().required("Please enter your email"),
   });
-  return (
-    <SafeAreaView>
-      <SecondHeaderBar backScreen="WelcomeScreen" />
-      <Pressable onPress={Keyboard.dismiss}>
-        <View style={styles.container}>
-          <View style={{ paddingBottom: "5%" }}>
-            <Bold fontBold="No worries,"></Bold>
-          </View>
-          <View style={{ paddingBottom: "5%" }}>
-            {/* <Med fontMed={"No worries,"}></Med> */}
-            <Med
-              fontMed={"We will send you an email to get your password reset."}
-            ></Med>
-          </View>
-          {errorMsg ? (
-            <Text style={{ color: "rgba(226,91,91,0.6)", textAlign: "center" }}>
-              {errorMsg}, please try again.
-            </Text>
-          ) : (
-            <Text style={{ color: "transparent" }}>word</Text>
-          )}
-          <View style={{ paddingBottom: "15%", paddingTop: "0%" }}>
-            <Small fontSmall="Enter your registered email below"></Small>
-            <Pressable
-              style={[
-                styles.textContainer,
-                {
-                  borderColor:
-                    email.length < 1 || Validator.validate(email)
-                      ? "rgba(255, 255, 255, 0.4)"
-                      : "rgba(244, 107, 107, 0.4)",
-                },
-              ]}
-            >
-              <TextInput
-                style={[styles.userInput]}
-                onChangeText={setEmail}
-                keyboardType="email-address"
-                textContentType="emailAddress"
-                autoFocus={true}
-                onChange={() => setErrorMsg(null)}
-                theme={{ colors: { text: "rgba(255, 255, 255, 0.6)" } }}
-                onSubmitEditing={() => {
-                  {
-                    Validator.validate(email)
-                      ? ForgetPassword(
-                          { email, navigation },
-                          setIsLoading(true)
-                        )
-                          .then((res) => setErrorMsg(res))
-
-                          .then(() => setIsLoading(false))
-                      : null;
-                  }
-                }}
-              ></TextInput>
-            </Pressable>
-            <Text
-              style={[
-                email.length < 1 || Validator.validate(email)
-                  ? styles.normalTwo
-                  : styles.disabledTwo,
-              ]}
-            >
-              Please provide a valid email
-            </Text>
-          </View>
-
-          <TouchableOpacity
-            style={Validator.validate(email) ? styles.normal : styles.disabled}
-            disabled={!Validator.validate(email)}
-            onPress={() =>
-              ForgetPassword({ email, navigation }, setIsLoading(true))
-                .then((res) => setErrorMsg(res))
-
-                .then(() => setIsLoading(false))
-            }
-          >
-            <Buttons naming="Send Email"></Buttons>
-            {isLoading === true && (
-              <View
+  let [fontsLoaded] = useFonts({
+    Poppins_300Light,
+    Poppins_500Medium,
+  });
+  if (!fontsLoaded) {
+    return null;
+  } else
+    return (
+      <SafeAreaView>
+        <SecondHeaderBar backScreen="WelcomeScreen" />
+        <Pressable onPress={Keyboard.dismiss}>
+          <View style={styles.container}>
+            <View style={{ paddingBottom: "5%" }}>
+              <Bold fontBold="No worries,"></Bold>
+            </View>
+            <View style={{ paddingBottom: "5%" }}>
+              <Med
+                fontMed={
+                  "We will send you an email to get your password reset."
+                }
+              ></Med>
+            </View>
+            {errorMsg ? (
+              <Text
+                style={{ color: "rgba(226,91,91,0.6)", textAlign: "center" }}
+              >
+                {errorMsg}, please try again.
+              </Text>
+            ) : (
+              <Text style={{ color: "transparent" }}>word</Text>
+            )}
+            <View style={{ paddingBottom: "15%", paddingTop: "0%" }}>
+              <Small fontSmall="Enter your registered email below"></Small>
+              <Pressable
                 style={[
+                  styles.textContainer,
                   {
-                    width: 100,
-                    height: 100,
-                    backgroundColor: "rgba(255, 255,255,0.2)",
-
-                    borderRadius: 20,
-                    justifyContent: "space-evenly",
-                    alignSelf: "center",
-                    bottom: 100,
+                    borderColor:
+                      email.length < 1 || Validator.validate(email)
+                        ? "rgba(255, 255, 255, 0.4)"
+                        : "rgba(244, 107, 107, 0.4)",
                   },
-                  styles.loading,
                 ]}
               >
-                <ActivityIndicator
-                  // style={styles.loading}
-                  color={"rgba(255,255,255,0.5)"}
-                />
-              </View>
-            )}
-          </TouchableOpacity>
-        </View>
-      </Pressable>
-    </SafeAreaView>
-  );
+                <TextInput
+                  style={[styles.userInput]}
+                  onChangeText={setEmail}
+                  keyboardType="email-address"
+                  textContentType="emailAddress"
+                  autoFocus={true}
+                  onChange={() => setErrorMsg(null)}
+                  theme={{ colors: { text: "rgba(255, 255, 255, 0.6)" } }}
+                  onSubmitEditing={() => {
+                    {
+                      Validator.validate(email)
+                        ? ForgetPassword(
+                            { email, navigation },
+                            setIsLoading(true)
+                          )
+                            .then((res) => setErrorMsg(res))
+
+                            .then(() => setIsLoading(false))
+                        : null;
+                    }
+                  }}
+                ></TextInput>
+              </Pressable>
+              <Text
+                style={[
+                  email.length < 1 || Validator.validate(email)
+                    ? styles.normalTwo
+                    : styles.disabledTwo,
+                ]}
+              >
+                Please provide a valid email
+              </Text>
+            </View>
+
+            <TouchableOpacity
+              style={
+                Validator.validate(email) ? styles.normal : styles.disabled
+              }
+              disabled={!Validator.validate(email)}
+              onPress={() =>
+                ForgetPassword({ email, navigation }, setIsLoading(true))
+                  .then((res) => setErrorMsg(res))
+
+                  .then(() => setIsLoading(false))
+              }
+            >
+              <Buttons naming="Send Email"></Buttons>
+              {isLoading === true && (
+                <View
+                  style={[
+                    {
+                      width: 100,
+                      height: 100,
+                      backgroundColor: "rgba(255, 255,255,0.2)",
+
+                      borderRadius: 20,
+                      justifyContent: "space-evenly",
+                      alignSelf: "center",
+                      bottom: 100,
+                    },
+                    styles.loading,
+                  ]}
+                >
+                  <ActivityIndicator color={"rgba(255,255,255,0.5)"} />
+                </View>
+              )}
+            </TouchableOpacity>
+          </View>
+        </Pressable>
+      </SafeAreaView>
+    );
 }
 
 const styles = StyleSheet.create({
@@ -154,9 +164,6 @@ const styles = StyleSheet.create({
   userInput: {
     height: 55,
     backgroundColor: "rgba(255, 255,255, 0.05)",
-    // borderColor: "rgba(255, 255, 255, 0.3)",
-    // borderWidth: 1,
-    // borderRadius: 16,
     borderTopEndRadius: 16,
     borderTopStartRadius: 16,
     paddingHorizontal: 10,

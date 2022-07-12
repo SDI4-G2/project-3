@@ -1,16 +1,10 @@
-import {
-  TouchableOpacity,
-  View,
-  StyleSheet,
-  Image,
-  Button,
-} from "react-native";
+import React from "react";
+import { TouchableOpacity, View, StyleSheet, Image } from "react-native";
 import * as SecureStore from "expo-secure-store";
 import ProfileButton from "../components/ProfileButtons";
 import SecondHeaderBar from "../components/SecondHeader";
 import Avatar from "../assets/Avatar.png";
 import LogOutButton from "../components/LogOutButton";
-import editprofile from "../assets/editprofile.png";
 
 export default function ProfileScreen({ navigation }) {
   function Logout() {
@@ -18,6 +12,7 @@ export default function ProfileScreen({ navigation }) {
     // alert("Logout Successful");
     navigation.navigate("WelcomeScreen");
   }
+
   return (
     <View>
       <SecondHeaderBar backScreen="Dashboard"></SecondHeaderBar>
@@ -35,10 +30,6 @@ export default function ProfileScreen({ navigation }) {
         >
           <ProfileButton naming="Subscription"></ProfileButton>
         </TouchableOpacity>
-
-        {/* <TouchableOpacity style={styles.padding}>
-          <ProfileButton naming="Saved Content"></ProfileButton>
-        </TouchableOpacity> */}
         <TouchableOpacity
           style={styles.padding}
           onPress={() => navigation.navigate("SupportScreen")}

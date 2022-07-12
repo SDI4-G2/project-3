@@ -1,81 +1,57 @@
 import {
   View,
   Text,
-  TouchableOpacity,
   StyleSheet,
   ScrollView,
-  Button,
-  ActivityIndicator,
-  Image,
   ImageBackground,
+  Keyboard,
+  Pressable,
 } from "react-native";
 import { React, useState, useEffect } from "react";
-import { TextInput } from "react-native-paper";
 import { Card, Title } from "react-native-paper";
-import { StackActions, TabRouter } from "@react-navigation/native";
-
-import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
-import OctiIcons from "react-native-vector-icons/Octicons";
-import HeaderBar from "../components/Headers";
 import Small from "../assets/Poppins_Small";
-import searchIcon from "../assets/searchIcon.png";
-import Med from "../assets/Poppins_Medium";
-import { CommonActions } from "@react-navigation/native";
-
+import { useFonts } from "expo-font";
+import { Poppins_300Light } from "@expo-google-fonts/poppins";
+import { Poppins_500Medium } from "@expo-google-fonts/poppins";
+import Bold from "../assets/Poppins_Bold";
 import { PulseIndicator } from "react-native-indicators";
 
 import GetVideo from "../api/GetVideo";
 import GetArticle from "../api/GetArticle";
-import GetCategory from "../api/GetCategory";
+import HeaderBar from "../components/Headers";
 
 export default function SubMainScreen({ navigation, route }) {
   const [isLoading, setIsLoading] = useState(true);
   const [videos, setVideos] = useState([]);
-  const [category, setCategory] = useState([]);
   const [articles, setArticles] = useState([]);
-  const [search, setSearch] = useState([]);
+
+  const [search, setSearch] = useState("");
+
   const [vidResult, setVidResult] = useState([]);
   const [artResult, setArtResult] = useState([]);
-  const [list, setList] = useState([]);
-  const { videoid, categoryid, articleid, url } = route.params;
+  const description = route.params;
 
   async function get() {
     const video = await GetVideo();
-    
-    // let newList = video.map((vid) => {
-    //   return vid.categoryid;
-    // });
-    // console.log(newList);
-
-    // setList(newList.url);
-
     const article = await GetArticle();
-    // let newList2 = article.filter((art) => {
-    //   return art.articleid;
-    // });
-    // console.log(newList2);
-
-    // setList(newList2.url);
-    const category = await GetCategory();
-
-    // for (let i = 0; i < video.length; i++) {
-    //   let vid = video[i];
-    //   for (var key in vid) {
-    //     if (key !== "Category" && vid.Category) {
-    //       vid.Category[key] = vid[key];
-    //     }
-    //   }
-    //   video[i] = vid.Category || vid;
-    // }
-    // for (let i = 0; i < article.length; i++) {
-    //   let art = article[i];
-    //   for (var key in art) {
-    //     if (key !== "Category" && art.Category) {
-    //       art.Category[key] = art[key];
-    //     }
-    //   }
-    //   article[i] = art.Category || art;
-    // }
+    for (let i = 0; i < video.length; i++) {
+      let vid = video[i];
+      for (var key in vid) {
+        if (key !== "Category" && vid.Category) {
+          vid.Category[key] = vid[key];
+        }
+      }
+      video[i] = vid.Category || vid;
+    }
+    for (let i = 0; i < article.length; i++) {
+      let art = article[i];
+      for (var key in art) {
+        if (key !== "Category" && art.Category) {
+          art.Category[key] = art[key];
+        }
+      }
+      article[i] = art.Category || art;
+    }
     setVideos(video);
     setArticles(article);
   }
@@ -92,126 +68,153 @@ export default function SubMainScreen({ navigation, route }) {
         return regex.test(e[a]);
       });
     });
-
     setVidResult(filteredVid);
-    // console.log(filteredVid);
 
     const filteredArt = art.filter((e) => {
       return keys.some(function (a) {
         return regex.test(e[a]);
       });
     });
-
     setArtResult(filteredArt);
-    // console.log(filteredArt)
+    // console.log(search);
+  }
+
+  function passSearch() {
+    if (description) {
+      setSearch(description.params.description);
+    }
   }
 
   useEffect(() => {
     get();
   }, []);
 
-  return (
-    <View>
-      <HeaderBar />
-      <View style={{ width: "80%", alignSelf: "center", top: "0%" }}>
-        <View style={styles.container}>
-          <View style={{ color: "white" }}>{list}</View>
-        </View>
-        <View style={{ marginBottom: 20 }}>
-          <View style={{ paddingTop: "5%" }}>
-            <Small fontSmall={"Videos"}></Small>
-          </View>
-          <ScrollView
-            horizontal={true}
-            contentContainerStyle={{
-              justifyContent: "center",
-              flexDirection: "row",
-            }}
-          >
-            {isLoading === true && (
-              <PulseIndicator color={"rgba(255,255,255,0.5)"} />
-            )}
-            {videos.map((item) => {
-              return (
-                <Card
-                  style={styles.cardDashboard}
-                  key={item.videoid}
-                  onPress={() => {
-                    navigation.navigate("VideoScreen", {
-                      videoid: item.videoid,
-                    });
-                  }}
-                >
-                  <ImageBackground
-                    source={{ uri: item.thumbnails }}
-                    // source={{ uri: item.thumb }}
-                    style={styles.cardImage}
-                    imageStyle={{
-                      borderRadius: 15,
-                      opacity: 0.5,
-                      backgroundColor: "#000",
-                    }}
-                    onLoadEnd={() => setIsLoading(false)}
-                  >
-                    <Card.Content>
-                      <Text style={styles.cardText} numberOfLines={1}>
-                        {item.description}
-                      </Text>
-                      <Title style={styles.cardTitle} numberOfLines={3}>
-                        {item.title}
-                      </Title>
-                    </Card.Content>
-                  </ImageBackground>
-                </Card>
-              );
-            })}
-          </ScrollView>
-        </View>
+  useEffect(() => {
+    setTimeout(() => {
+      textSearch();
+    }, 10);
+  }, [search, videos, articles]);
 
-        <View style={{ marginBottom: 20 }}>
-          <Small fontSmall={"Articles"}></Small>
-          <ScrollView
-            horizontal={true}
-            contentContainerStyle={{
-              justifyContent: "center",
-              flexDirection: "row",
-            }}
-          >
-            {isLoading === true && (
-              <PulseIndicator color={"rgba(255,255,255,0.5)"} />
-            )}
-            {articles.map((item, index) => (
-              <Card
-                style={styles.cardDashboard}
-                key={item.articleid}
-                onPress={() => {
-                  navigation.navigate("ArticleScreen", {
-                    articleid: item.articleid,
-                  });
-                }}
-              >
-                <ImageBackground
-                  resizeMode="stretch"
-                  source={{ uri: item.url }}
-                  style={styles.cardImage}
-                  imageStyle={{
-                    borderRadius: 15,
-                    opacity: 0.5,
-                    backgroundColor: "#000",
+  useEffect(() => {
+    passSearch();
+  }, [description]);
+  let [fontsLoaded] = useFonts({
+    Poppins_300Light,
+    Poppins_500Medium,
+  });
+  if (!fontsLoaded) {
+    return null;
+  } else
+    return (
+      <View>
+        <Pressable onPress={Keyboard.dismiss}>
+          <HeaderBar />
+
+          <View style={{ width: "80%", alignSelf: "center", top: "0%" }}>
+            <View>
+              <Bold fontBold={search}></Bold>
+              <View style={{ marginBottom: 20 }}>
+                <View style={{ paddingTop: "5%" }}>
+                  <Small fontSmall={"Videos"}></Small>
+                </View>
+                <ScrollView
+                  horizontal={true}
+                  contentContainerStyle={{
+                    justifyContent: "center",
+                    flexDirection: "row",
                   }}
-                  onLoadEnd={() => setIsLoading(false)}
                 >
-                  <Card.Content>
-                    <Title style={styles.cardTitle}>{item.description}</Title>
-                  </Card.Content>
-                </ImageBackground>
-              </Card>
-            ))}
-          </ScrollView>
-        </View>
+                  {isLoading === true && (
+                    <PulseIndicator color={"rgba(255,255,255,0.5)"} />
+                  )}
+                  {vidResult.map((item) => {
+                    return (
+                      <Card
+                        style={styles.cardDashboard}
+                        key={item.videoid}
+                        onPress={() => {
+                          navigation.navigate("VideoScreen", {
+                            videoid: item.videoid,
+                          });
+                        }}
+                      >
+                        <ImageBackground
+                          source={{ uri: item.thumbnails }}
+                          // source={{ uri: item.thumb }}
+                          style={styles.cardImage}
+                          imageStyle={{
+                            borderRadius: 15,
+                            opacity: 0.5,
+                            backgroundColor: "#000",
+                          }}
+                          onLoadEnd={() => setIsLoading(false)}
+                        >
+                          <Card.Content>
+                            <Text style={styles.cardText} numberOfLines={1}>
+                              {item.description}
+                            </Text>
+                            <Title style={styles.cardTitle} numberOfLines={3}>
+                              {item.title}
+                            </Title>
+                          </Card.Content>
+                        </ImageBackground>
+                      </Card>
+                    );
+                  })}
+                </ScrollView>
+              </View>
+
+              <View style={{ marginBottom: 20 }}>
+                <Small fontSmall={"Articles"}></Small>
+                <ScrollView
+                  horizontal={true}
+                  contentContainerStyle={{
+                    justifyContent: "center",
+                    flexDirection: "row",
+                  }}
+                >
+                  {isLoading === true && (
+                    <PulseIndicator color={"rgba(255,255,255,0.5)"} />
+                  )}
+                  {artResult.map((item, index) => (
+                    <Card
+                      style={styles.cardDashboard}
+                      key={item.articleid}
+                      onPress={() => {
+                        navigation.navigate("ArticleScreen", {
+                          articleid: item.articleid,
+                        });
+                      }}
+                    >
+                      <ImageBackground
+                        resizeMode="stretch"
+                        source={{ uri: item.thumbnails }}
+                        style={styles.cardImage}
+                        imageStyle={{
+                          borderRadius: 15,
+                          opacity: 0.5,
+                          backgroundColor: "#000",
+                        }}
+                        onLoadEnd={() => setIsLoading(false)}
+                      >
+                        <Card.Content>
+                          <Title style={styles.cardText}>
+                            {item.description}
+                          </Title>
+                          <Title style={styles.cardTitle} numberOfLines={3}>
+                            {item.title}
+                          </Title>
+                        </Card.Content>
+                      </ImageBackground>
+                    </Card>
+                  ))}
+                </ScrollView>
+              </View>
+            </View>
+          </View>
+        </Pressable>
       </View>
-    </View>
-  );
+    );
 }
 
 const styles = StyleSheet.create({

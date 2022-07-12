@@ -10,13 +10,12 @@ import {
   Text,
   ActivityIndicator,
 } from "react-native";
-import { TextInput } from "react-native-paper";
+
 import * as SecureStore from "expo-secure-store";
 
 import Buttons from "../components/Buttons";
 import SecondHeaderBar from "../components/SecondHeader";
 import Bold from "../assets/Poppins_Bold";
-import Small from "../assets/Poppins_Small";
 import Med from "../assets/Poppins_Medium";
 import jwt_decode from "jwt-decode";
 import OTPInput from "../components/OTPInput";
@@ -101,26 +100,6 @@ export default function VerificationScreen({ navigation, props }) {
             </Text>
           ) : null}
           <View style={{ paddingBottom: "10%", bottom: "5%" }}>
-            {/* <TouchableOpacity
-              style={[
-                styles.textContainer,
-                {
-                  borderColor:
-                    code === undefined || code.length < 1 || code.length > 5
-                      ? "rgba(255, 255, 255, 0.4)"
-                      : "rgba(244, 107, 107, 0.4)",
-                },
-              ]}
-            >
-              <TextInput
-                style={[styles.userInput]}
-                onChangeText={setCode}
-                keyboardType="number-pad"
-                autoFocus={true}
-                theme={{ colors: { text: "rgba(255, 255, 255, 0.6)" } }}
-              ></TextInput>
-            </TouchableOpacity> */}
-
             <OTPInput
               setPinReady={setPinReady}
               code={code}
@@ -152,10 +131,7 @@ export default function VerificationScreen({ navigation, props }) {
                   styles.loading,
                 ]}
               >
-                <ActivityIndicator
-                  // style={styles.loading}
-                  color={"rgba(255,255,255,0.5)"}
-                />
+                <ActivityIndicator color={"rgba(255,255,255,0.5)"} />
               </View>
             )}
           </TouchableOpacity>
@@ -181,9 +157,6 @@ const styles = StyleSheet.create({
   userInput: {
     height: 55,
     backgroundColor: "rgba(255, 255,255, 0.05)",
-    // borderColor: "rgba(255, 255, 255, 0.3)",
-    // borderWidth: 1,
-    // borderRadius: 16,
     borderTopEndRadius: 16,
     borderTopStartRadius: 16,
     paddingHorizontal: 10,

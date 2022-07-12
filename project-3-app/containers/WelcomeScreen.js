@@ -4,7 +4,6 @@ import {
   TouchableOpacity,
   StyleSheet,
   View,
-  Button,
   ActivityIndicator,
   Pressable,
   Keyboard,
@@ -205,10 +204,7 @@ export default function WelcomeScreen({ navigation, props }) {
                     styles.loading,
                   ]}
                 >
-                  <ActivityIndicator
-                    // style={styles.loading}
-                    color={"rgba(255,255,255,0.5)"}
-                  />
+                  <ActivityIndicator color={"rgba(255,255,255,0.5)"} />
                 </View>
               )}
             </TouchableOpacity>

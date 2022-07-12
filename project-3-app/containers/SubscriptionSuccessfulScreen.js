@@ -1,7 +1,6 @@
 import { View, Text, Image, TouchableOpacity } from "react-native";
 import React from "react";
 import star from "../assets/starFive.png";
-import HeaderBar from "../components/Headers";
 import { useFonts } from "expo-font";
 import { Poppins_300Light } from "@expo-google-fonts/poppins";
 import { Poppins_500Medium } from "@expo-google-fonts/poppins";
@@ -17,8 +16,6 @@ export default function SubscriptionSuccessfulScreen({ navigation, props }) {
   } else
     return (
       <View>
-        {/* <HeaderBar /> */}
-
         <View style={{ top: "5%", width: "80%", alignSelf: "center" }}>
           <Image
             source={star}
@@ -55,7 +52,6 @@ export default function SubscriptionSuccessfulScreen({ navigation, props }) {
             style={{
               color: "rgba(255,255,255,0.7)",
               textAlign: "left",
-              //   alignSelf: "center",
               fontFamily: "Poppins_300Light",
 
               fontSize: 15,

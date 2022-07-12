@@ -3,13 +3,10 @@ import {
   TouchableOpacity,
   StyleSheet,
   View,
-  Button,
   Alert,
   ActivityIndicator,
-  ScrollView,
-  RefreshControl,
 } from "react-native";
-import { TextInput, RadioButton } from "react-native-paper";
+import { RadioButton } from "react-native-paper";
 import React, { useState, useEffect } from "react";
 import { CardField, useConfirmPayment } from "@stripe/stripe-react-native";
 import * as SecureStore from "expo-secure-store";
@@ -20,7 +17,9 @@ import Register from "../api/Register";
 import SecondHeaderBar from "../components/SecondHeader";
 import Bold from "../assets/Poppins_Bold";
 import Small from "../assets/Poppins_Small";
-import Underline from "../assets/Poppins_Underline";
+import { useFonts } from "expo-font";
+import { Poppins_300Light } from "@expo-google-fonts/poppins";
+import { Poppins_500Medium } from "@expo-google-fonts/poppins";
 
 export default function SubscriptionScreen({ navigation }) {
   const [userdata, setUserdata] = useState("");
@@ -163,57 +162,22 @@ export default function SubscriptionScreen({ navigation }) {
       [{ text: "OK", onPress: () => navigation.push("Dashboard") }]
     );
   };
-
-  return (
-    <View>
-      <SecondHeaderBar backScreen="ProfileScreen" />
-      <View style={styles.container}>
-        <View style={styles.padding}>
-          <Bold fontBold="Subscription"></Bold>
-          {subscribed === true ? (
-            <View>
-              <View style={styles.fieldsInput}>
-                <View style={styles.userInput}>
-                  <Text
-                    style={{
-                      textAlign: "center",
-                      color: "rgba(255,255,255, 0.6)",
-                    }}
-                  >
-                    You are already subscribed to our Premium Content!
-                  </Text>
-                </View>
-              </View>
-
-              <View style={styles.buttonsbottom}>
-                <TouchableOpacity
-                  onPress={handleCancelSubscription}
-                  disabled={loading}
-                >
-                  <Buttons naming="Cancel Subscription"></Buttons>
-                  {loading === true && (
-                    <ActivityIndicator
-                      style={styles.loading}
-                      color={"rgba(255,255,255,0.5)"}
-                    />
-                  )}
-                </TouchableOpacity>
-              </View>
-            </View>
-          ) : (
-            <View>
-              <View style={styles.fieldsInput}>
-                <View style={styles.userInput}>
-                  <Text
-                    style={{
-                      textAlign: "center",
-                      color: "rgba(255,255,255, 0.6)",
-                    }}
-                  >
-                    You are not subscribed to our Premium Content
-                  </Text>
-                </View>
-                <View style={styles.textContainer}>
+  let [fontsLoaded] = useFonts({
+    Poppins_300Light,
+    Poppins_500Medium,
+  });
+  if (!fontsLoaded) {
+    return null;
+  } else
+    return (
+      <View>
+        <SecondHeaderBar backScreen="ProfileScreen" />
+        <View style={styles.container}>
+          <View style={styles.padding}>
+            <Bold fontBold="Subscription"></Bold>
+            {subscribed === true ? (
+              <View>
+                <View style={styles.fieldsInput}>
                   <View style={styles.userInput}>
                     <Text
                       style={{
@@ -221,80 +185,123 @@ export default function SubscriptionScreen({ navigation }) {
                         color: "rgba(255,255,255, 0.6)",
                       }}
                     >
-                      - Access to all content
+                      You are already subscribed to our Premium Content!
                     </Text>
+                  </View>
+                </View>
+
+                <View style={styles.buttonsbottom}>
+                  <TouchableOpacity
+                    onPress={handleCancelSubscription}
+                    disabled={loading}
+                  >
+                    <Buttons naming="Cancel Subscription"></Buttons>
+                    {loading === true && (
+                      <ActivityIndicator
+                        style={styles.loading}
+                        color={"rgba(255,255,255,0.5)"}
+                      />
+                    )}
+                  </TouchableOpacity>
+                </View>
+              </View>
+            ) : (
+              <View>
+                <View style={styles.fieldsInput}>
+                  <View style={styles.userInput}>
                     <Text
                       style={{
                         textAlign: "center",
                         color: "rgba(255,255,255, 0.6)",
                       }}
                     >
-                      - Skip advertisements"
+                      You are not subscribed to our Premium Content
                     </Text>
                   </View>
-                </View>
-
-                <View
-                  style={{
-                    flexDirection: "row",
-                    alignContent: "center",
-                    marginTop: 15,
-                    marginBottom: 15,
-                  }}
-                >
-                  <View style={{ flex: 1, alignSelf: "center" }}>
-                    <RadioButton
-                      status={checked === true ? "checked" : "unchecked"}
-                      color="rgba(255,255,255, 0.6)"
-                    />
+                  <View style={styles.textContainer}>
+                    <View style={styles.userInput}>
+                      <Text
+                        style={{
+                          textAlign: "center",
+                          color: "rgba(255,255,255, 0.6)",
+                        }}
+                      >
+                        - Access to all content
+                      </Text>
+                      <Text
+                        style={{
+                          textAlign: "center",
+                          color: "rgba(255,255,255, 0.6)",
+                        }}
+                      >
+                        - Skip advertisements"
+                      </Text>
+                    </View>
                   </View>
-                  <View style={{ flex: 4, paddingTop: 7 }}>
-                    <Small
-                      style={{ marginTop: 27 }}
-                      fontSmall="1 Year Subscription @ $12.00"
-                    ></Small>
-                  </View>
-                </View>
-                {errMsg ? (
-                  <Text style={{ color: "rgba(226,91,91,0.6)", bottom: "5%" }}>
-                    {errMsg}
-                  </Text>
-                ) : (
-                  <Text style={{ color: "transparent" }}>hello</Text>
-                )}
-                <View>
-                  <CardField
-                    postalCodeEnabled={false}
-                    placeholder={{
-                      number: "4242 4242 4242 4242",
-                    }}
-                    cardStyle={styles.card}
-                    style={styles.cardContainer}
-                    onCardChange={(cardDetails) => {
-                      setCardDetails(cardDetails);
-                      setErrMsg(null);
-                    }}
-                  />
-                </View>
-              </View>
 
-              <View style={styles.buttonsbottom}>
-                <TouchableOpacity onPress={handlePayPress} disabled={loading}>
-                  <Buttons naming="Subscribe"></Buttons>
-                  {loading === true && (
-                    <ActivityIndicator
-                      style={styles.loading}
-                      color={"rgba(255,255,255,0.5)"}
-                    />
+                  <View
+                    style={{
+                      flexDirection: "row",
+                      alignContent: "center",
+                      marginTop: 15,
+                      marginBottom: 15,
+                    }}
+                  >
+                    <View style={{ flex: 1, alignSelf: "center" }}>
+                      <RadioButton
+                        status={checked === true ? "checked" : "unchecked"}
+                        color="rgba(255,255,255, 0.6)"
+                      />
+                    </View>
+                    <View style={{ flex: 4, paddingTop: 7 }}>
+                      <Small
+                        style={{ marginTop: 27 }}
+                        fontSmall="1 Year Subscription @ $12.00"
+                      ></Small>
+                    </View>
+                  </View>
+                  {errMsg ? (
+                    <Text
+                      style={{ color: "rgba(226,91,91,0.6)", bottom: "5%" }}
+                    >
+                      {errMsg}
+                    </Text>
+                  ) : (
+                    <Text style={{ color: "transparent" }}>hello</Text>
                   )}
-                </TouchableOpacity>
+                  <View>
+                    <CardField
+                      postalCodeEnabled={false}
+                      placeholder={{
+                        number: "4242 4242 4242 4242",
+                      }}
+                      cardStyle={styles.card}
+                      style={styles.cardContainer}
+                      onCardChange={(cardDetails) => {
+                        setCardDetails(cardDetails);
+                        setErrMsg(null);
+                      }}
+                    />
+                  </View>
+                </View>
+
+                <View style={styles.buttonsbottom}>
+                  <TouchableOpacity onPress={handlePayPress} disabled={loading}>
+                    <Buttons naming="Subscribe"></Buttons>
+                    {loading === true && (
+                      <ActivityIndicator
+                        style={styles.loading}
+                        color={"rgba(255,255,255,0.5)"}
+                      />
+                    )}
+                  </TouchableOpacity>
+                </View>
               </View>
-            </View>
-          )}
+            )}
+          </View>
         </View>
       </View>
-    </View>
-  );
+    );
 }
 const styles = StyleSheet.create({
   container: {
@@ -337,9 +344,6 @@ const styles = StyleSheet.create({
     bottom: 0,
     right: 0,
     left: 0,
-  },
-  card: {
-    // backgroundColor: "rgba(255,255,255, 0.05)",
   },
   cardContainer: {
     height: 50,
