@@ -24,6 +24,7 @@ import searchIcon from '../assets/searchIcon.png';
 import Med from '../assets/Poppins_Medium';
 
 import { PulseIndicator } from 'react-native-indicators';
+import { useFocusEffect } from '@react-navigation/native';
 
 import GetVideo from '../api/GetVideo';
 import GetArticle from '../api/GetArticle';
@@ -96,9 +97,15 @@ export default function SearchScreen({ navigation, route }) {
     }
   }
 
-  useEffect(() => {
-    get();
-  }, []);
+  // useEffect(() => {
+  //   get();
+  // }, []);
+
+  useFocusEffect(
+    React.useCallback(() => {
+      get();
+    }, [])
+  );
 
   useEffect(() => {
     setTimeout(() => {
@@ -122,7 +129,6 @@ export default function SearchScreen({ navigation, route }) {
         <HeaderBar />
 
         <View style={{ width: '80%', alignSelf: 'center', top: '0%' }}>
-
           <View>
             <TouchableOpacity style={styles.textContainer}>
               <TextInput
@@ -143,20 +149,11 @@ export default function SearchScreen({ navigation, route }) {
                 value={search}
                 theme={{
                   colors: {
-                    text: "rgba(255, 255, 255, 0.6)",
+                    text: 'rgba(255, 255, 255, 0.6)',
                   },
                 }}
                 right={
-                  <TextInput.Icon
-                    name={() => (
-                      <OctiIcons
-                        name={"search"}
-                        size={20}
-                        color={"rgba(255,255,255,0.5)"}
-                        onPress={() => textSearch()}
-                      />
-                    )}
-                  />
+                  <TextInput.Icon name={() => <OctiIcons name={'search'} size={20} color={'rgba(255,255,255,0.5)'} onPress={() => textSearch()} />} />
                 }
               ></TextInput>
             </TouchableOpacity>
@@ -185,15 +182,12 @@ export default function SearchScreen({ navigation, route }) {
             ) : (
               <>
                 <View style={{ marginBottom: 20 }}>
-
                   <View style={{ paddingTop: '5%' }}>
                     <Small fontSmall={'Videos'}></Small>
-
                   </View>
                   <ScrollView
                     horizontal={true}
                     contentContainerStyle={{
-
                       justifyContent: 'center',
                       flexDirection: 'row',
                     }}
