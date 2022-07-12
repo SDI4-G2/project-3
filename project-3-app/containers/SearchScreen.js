@@ -11,7 +11,7 @@ import {
   Keyboard,
   Pressable,
 } from 'react-native';
-import { React, useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { TextInput } from 'react-native-paper';
 import { Card, Title } from 'react-native-paper';
 import { StackActions, TabRouter } from '@react-navigation/native';
