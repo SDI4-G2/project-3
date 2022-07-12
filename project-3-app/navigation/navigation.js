@@ -22,6 +22,7 @@ import SearchScreen from "../containers/SearchScreen";
 import SubscriptionSuccessfulScreen from "../containers/SubscriptionSuccessfulScreen";
 import SignUpSuccessScreen from "../containers/SignUpSuccessScreen";
 import SubMainScreen from "../containers/SubMainScreen";
+import SubscriptionCancellation from "../containers/SubscriptionCancellation";
 
 import background from "../assets/background.png";
 import { StyleSheet, ImageBackground } from "react-native";
@@ -191,6 +192,11 @@ const Navigation = () => {
           <Stack.Screen
             name="SubscriptionSuccessfulScreen"
             component={SubscriptionSuccessfulScreen}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="SubscriptionCancellation"
+            component={SubscriptionCancellation}
             options={{ headerShown: false }}
           />
           <Stack.Screen
