@@ -5,14 +5,15 @@ import {
   ImageBackground,
   TouchableOpacity,
   FlatList,
-} from "react-native";
-
-import React, { useState, useEffect } from "react";
-import * as SecureStore from "expo-secure-store";
-import { PulseIndicator } from "react-native-indicators";
-import Bold from "../assets/Poppins_Bold";
-
-import Headers from "../components/Headers";
+  Pressable,
+} from 'react-native';
+import { Card, Title } from 'react-native-paper';
+import React, { useState, useEffect } from 'react';
+import * as SecureStore from 'expo-secure-store';
+import Headers from '../components/Headers';
+import Small from '../assets/Poppins_Small';
+import { PulseIndicator } from 'react-native-indicators';
+import { useFocusEffect } from '@react-navigation/native';
 
 export default function LibraryScreen({ navigation }) {
   const [category, setCategory] = useState([]);
@@ -20,24 +21,31 @@ export default function LibraryScreen({ navigation }) {
   const [isLoading, setIsLoading] = useState(true);
 
   async function fetch_all_category() {
-    let result = await SecureStore.getItemAsync("token");
+    let result = await SecureStore.getItemAsync('token');
 
-    const response = await fetch("https://sdi4-g2.herokuapp.com/category", {
-      method: "GET",
+    const response = await fetch('https://sdi4-g2.herokuapp.com/category', {
+      method: 'GET',
       headers: {
-        "Content-Type": "application/json",
-        Authorization: "Bearer " + result,
+        'Content-Type': 'application/json',
+        Authorization: 'Bearer ' + result,
       },
     });
     const list = await response.json();
     // console.log(list.data);
     setCategory(list.data);
   }
-  useEffect(() => {
-    const timer = setTimeout(() => {
+
+  // useEffect(() => {
+  //   const timer = setTimeout(() => {
+  //     fetch_all_category();
+  //   }, 1000);
+  // }, []);
+
+  useFocusEffect(
+    React.useCallback(() => {
       fetch_all_category();
-    }, 1000);
-  }, []);
+    }, [])
+  );
 
   const wait = (timeout) => {
     return new Promise((resolve) => setTimeout(resolve, timeout));
@@ -51,12 +59,10 @@ export default function LibraryScreen({ navigation }) {
           <Bold fontBold={"Library"}></Bold>
         </View>
         <View>
-          {isLoading === true && (
-            <PulseIndicator color={"rgba(255,255,255,0.5)"} />
-          )}
+          {isLoading === true && <PulseIndicator color={'rgba(255,255,255,0.5)'} />}
           <View
             style={{
-              alignSelf: "center",
+              alignSelf: 'center',
             }}
           >
             <FlatList
@@ -100,25 +106,25 @@ const styles = StyleSheet.create({
   cardDashboard: {
     width: 150,
     height: 150,
-    justifyContent: "center",
+    justifyContent: 'center',
     borderRadius: 15,
-    backgroundColor: "rgba(255,255,255,0.2)",
+    backgroundColor: 'rgba(255,255,255,0.2)',
   },
   cardTitle: {
-    fontStyle: "normal",
-    fontWeight: "400",
+    fontStyle: 'normal',
+    fontWeight: '400',
     fontSize: 20,
     lineHeight: 30,
-    alignSelf: "center",
-    textAlign: "center",
-    color: "rgba(255, 255, 255, 0.7)",
+    alignSelf: 'center',
+    textAlign: 'center',
+    color: 'rgba(255, 255, 255, 0.7)',
   },
 
   cardImage: {
     width: 150,
     height: 150,
-    alignItems: "center",
-    justifyContent: "center",
-    alignSelf: "center",
+    alignItems: 'center',
+    justifyContent: 'center',
+    alignSelf: 'center',
   },
 });

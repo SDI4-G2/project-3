@@ -1,27 +1,17 @@
-import React, { useState, useEffect } from "react";
-import {
-  Text,
-  View,
-  Button,
-  StyleSheet,
-  useWindowDimensions,
-  ScrollView,
-  SafeAreaView,
-  StatusBar,
-  TouchableOpacity,
-} from "react-native";
-import WebView from "react-native-webview";
-import IframeRenderer, { iframeModel } from "@native-html/iframe-plugin";
-import RenderHTML from "react-native-render-html";
-import { useFonts } from "expo-font";
-import { Poppins_300Light } from "@expo-google-fonts/poppins";
-import { Poppins_500Medium } from "@expo-google-fonts/poppins";
-import HeaderBar from "../components/Headers";
-import PreviousButton from "../components/PreviousButton";
-import NextButton from "../components/NextButton";
-import { useIsFocused } from "@react-navigation/native";
+import React, { useState, useEffect } from 'react';
+import { Text, View, Button, StyleSheet, useWindowDimensions, ScrollView, SafeAreaView, StatusBar, TouchableOpacity } from 'react-native';
+import WebView from 'react-native-webview';
+import IframeRenderer, { iframeModel } from '@native-html/iframe-plugin';
+import RenderHTML from 'react-native-render-html';
+import { useFonts } from 'expo-font';
+import { Poppins_300Light } from '@expo-google-fonts/poppins';
+import { Poppins_500Medium } from '@expo-google-fonts/poppins';
+import HeaderBar from '../components/Headers';
+import PreviousButton from '../components/PreviousButton';
+import NextButton from '../components/NextButton';
+import { useIsFocused, useFocusEffect } from '@react-navigation/native';
 
-import GetVideo from "../api/GetVideo";
+import GetVideo from '../api/GetVideo';
 
 export default function VideoScreen({ navigation, route, wording }) {
   const [videos, setVideos] = useState(null);
@@ -57,7 +47,9 @@ export default function VideoScreen({ navigation, route, wording }) {
         setEndOfEndLine(true);
       } else if (currentVideo === videos[0].videoid) {
         setEndOfFrontLine(true);
+        setEndOfEndLine(false);
       } else if (currentVideo === videos[last].videoid) {
+        setEndOfFrontLine(false);
         setEndOfEndLine(true);
       } else {
         setEndOfFrontLine(false);
@@ -105,9 +97,15 @@ export default function VideoScreen({ navigation, route, wording }) {
     }
   }
 
-  useEffect(() => {
-    get();
-  }, []);
+  // useEffect(() => {
+  //   get();
+  // }, []);
+
+  useFocusEffect(
+    React.useCallback(() => {
+      get();
+    }, [])
+  );
 
   useEffect(() => {
     endOfLineCheck();

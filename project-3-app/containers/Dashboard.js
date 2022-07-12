@@ -19,7 +19,9 @@ import { useFonts } from "expo-font";
 import { Poppins_300Light } from "@expo-google-fonts/poppins";
 import { Poppins_500Medium } from "@expo-google-fonts/poppins";
 
-import { PulseIndicator } from "react-native-indicators";
+import { PulseIndicator } from 'react-native-indicators';
+import books from '../assets/books.png';
+import { useFocusEffect } from '@react-navigation/native';
 
 export default function Dashboard({ navigation }) {
   const [videos, setVideos] = useState([]);
@@ -61,13 +63,22 @@ export default function Dashboard({ navigation }) {
     setArticles(list.data);
   }
 
-  useEffect(() => {
-    const timer = setTimeout(() => {
+  // useEffect(() => {
+  //   const timer = setTimeout(() => {
+  //     getJwt();
+  //     fetch_all_videos();
+  //     fetch_all_articles();
+  //   }, 1000);
+  // }, []);
+
+  useFocusEffect(
+    React.useCallback(() => {
       getJwt();
       fetch_all_videos();
       fetch_all_articles();
-    }, 1000);
-  }, []);
+      // console.log('Test1');
+    }, [])
+  );
 
   const wait = (timeout) => {
     return new Promise((resolve) => setTimeout(resolve, timeout));
