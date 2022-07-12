@@ -85,7 +85,7 @@ export default function SearchScreen({ navigation, route }) {
       });
     });
     setArtResult(filteredArt);
-    console.log(search);
+    // console.log(search);
   }
 
   function passSearch() {

@@ -36,13 +36,13 @@ export default function WelcomeScreen({ navigation, props }) {
       setEmail(text);
       setUsername(undefined);
       setUserEmail(text);
-      console.log("email " + userEmail);
+      // console.log("email " + userEmail);
       // console.log("email" + email);
     } else {
       setUsername(text);
       setEmail(undefined);
       setUserEmail(text);
-      console.log("username " + userEmail);
+      // console.log("username " + userEmail);
       // console.log("username" + username);
     }
   }
