@@ -290,10 +290,23 @@ export default function SubscriptionScreen({ navigation }) {
                   <TouchableOpacity onPress={handlePayPress} disabled={loading}>
                     <Buttons naming="Subscribe"></Buttons>
                     {loading === true && (
-                      <ActivityIndicator
-                        style={styles.loading}
-                        color={"rgba(255,255,255,0.5)"}
-                      />
+                      <View
+                        style={[
+                          {
+                            width: 100,
+                            height: 100,
+                            backgroundColor: "rgba(255, 255,255,0.2)",
+
+                            borderRadius: 20,
+                            justifyContent: "space-evenly",
+                            alignSelf: "center",
+                            bottom: 200,
+                          },
+                          styles.loading,
+                        ]}
+                      >
+                        <ActivityIndicator color={"rgba(255,255,255,0.5)"} />
+                      </View>
                     )}
                   </TouchableOpacity>
                 </View>
@@ -341,10 +354,6 @@ const styles = StyleSheet.create({
   loading: {
     position: "absolute",
     zIndex: 10000,
-    top: 0,
-    bottom: 0,
-    right: 0,
-    left: 0,
   },
   cardContainer: {
     height: 50,

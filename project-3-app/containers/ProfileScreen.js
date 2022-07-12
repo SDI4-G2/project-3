@@ -1,22 +1,44 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { TouchableOpacity, View, StyleSheet, Image } from "react-native";
 import * as SecureStore from "expo-secure-store";
 import ProfileButton from "../components/ProfileButtons";
 import SecondHeaderBar from "../components/SecondHeader";
-import Avatar from "../assets/Avatar.png";
+
 import LogOutButton from "../components/LogOutButton";
+import { Avatar } from "react-native-paper";
+import Jwt from "../api/Jwt";
 
 export default function ProfileScreen({ navigation }) {
+  const [user, setUser] = useState("");
   function Logout() {
     SecureStore.deleteItemAsync("token");
     // alert("Logout Successful");
     navigation.navigate("WelcomeScreen");
   }
 
+  async function getJwt() {
+    const list = await Jwt();
+
+    let user = list.username.slice(0, 2);
+    setUser(user);
+  }
+
+  useEffect(() => {
+    getJwt();
+  }, []);
+
   return (
     <View>
       <SecondHeaderBar backScreen="Dashboard"></SecondHeaderBar>
-      <Image style={styles.avatar} source={Avatar} />
+      <View style={{ alignItems: "center" }}>
+        <Avatar.Text
+          size={150}
+          label={user}
+          backgroundColor="rgba(255,255,255,0.1)"
+          color="rgba(255,255,255,0.5)"
+          style={{ borderWidth: 1, borderColor: "rgba(255,255,255,0.3)" }}
+        />
+      </View>
       <View style={styles.container}>
         <TouchableOpacity
           style={styles.padding}
