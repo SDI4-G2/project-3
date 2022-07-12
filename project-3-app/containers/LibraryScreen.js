@@ -52,8 +52,8 @@ export default function LibraryScreen({ navigation }) {
   return (
     <View>
       <Headers />
-      <View style={{ width: "80%", alignSelf: "center", top: "0%" }}>
-        <View>
+      <View>
+        <View style={{ width: "80%", alignSelf: "center" }}>
           <Bold fontBold={"Library"}></Bold>
         </View>
         <View>
