@@ -29,9 +29,9 @@ export default function SupportScreen() {
         "Unfortunately, the email you've signed up with can't be changed.",
     },
     {
-      question: "Can I Save Videos?",
+      question: "Can I Search by Categories For All Content?",
       answer:
-        "Yes you can. You can bookmark videos or articles you like for ease of viewing.",
+        "Yes you can. You can choose between browsing from Library page or use our Search page with any key words to populate the relevant videos or articles.",
     },
   ];
 
