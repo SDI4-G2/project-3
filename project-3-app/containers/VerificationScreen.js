@@ -5,10 +5,10 @@ import {
   View,
   SafeAreaView,
   Pressable,
-  ActivityIndicator,
   Keyboard,
   Image,
   Text,
+  ActivityIndicator,
 } from "react-native";
 import { TextInput } from "react-native-paper";
 import * as SecureStore from "expo-secure-store";
@@ -140,10 +140,23 @@ export default function VerificationScreen({ navigation, props }) {
           >
             <Buttons naming="Verify"></Buttons>
             {isLoading === true && (
-              <ActivityIndicator
-                style={styles.loading}
-                color={"rgba(255,255,255,0.5)"}
-              />
+              <View
+                style={[
+                  {
+                    width: 100,
+                    height: 100,
+                    backgroundColor: "rgba(255, 255,255,0.15)",
+                    borderRadius: 20,
+                    justifyContent: "space-evenly",
+                  },
+                  styles.loading,
+                ]}
+              >
+                <ActivityIndicator
+                  // style={styles.loading}
+                  color={"rgba(255,255,255,0.5)"}
+                />
+              </View>
             )}
           </TouchableOpacity>
         </View>
@@ -187,9 +200,7 @@ const styles = StyleSheet.create({
   loading: {
     position: "absolute",
     zIndex: 10000,
-    top: 0,
-    bottom: 0,
-    right: 0,
-    left: 0,
+    bottom: 100,
+    left: 110,
   },
 });
