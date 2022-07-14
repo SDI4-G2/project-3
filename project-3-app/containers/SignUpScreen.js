@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import {
   Text,
   TouchableOpacity,
@@ -10,6 +10,7 @@ import {
   Pressable,
 } from "react-native";
 import { TextInput } from "react-native-paper";
+import { useFocusEffect } from "@react-navigation/native";
 
 import Buttons from "../components/Buttons";
 import Register from "../api/Register";
@@ -30,9 +31,22 @@ export default function SignUpScreen({ navigation }) {
   const [passwordVisible, setPasswordVisible] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState(null);
+  console.log(password);
 
   const emailRef = useRef(null);
   const pwRef = useRef(null);
+
+  function clearInputFields() {
+    setUsername("");
+    setPassword("");
+    setEmail("");
+  }
+
+  useFocusEffect(
+    React.useCallback(() => {
+      clearInputFields();
+    }, [])
+  );
 
   let [fontsLoaded] = useFonts({
     Poppins_300Light,
@@ -157,6 +171,7 @@ export default function SignUpScreen({ navigation }) {
                   ]}
                 >
                   <TextInput
+                    value={password}
                     onPress={() => setPasswordVisible(!passwordVisible)}
                     onChangeText={setPassword}
                     style={styles.userInput}
@@ -173,6 +188,7 @@ export default function SignUpScreen({ navigation }) {
                               { email, username, password, navigation },
                               setIsLoading(true)
                             )
+                              .then(() => setPassword(""))
                               .then((res) => setErrorMessage(res))
                               .then(() => setIsLoading(false))
                           : null;
@@ -221,6 +237,7 @@ export default function SignUpScreen({ navigation }) {
                   )
                     .then((res) => setErrorMessage(res))
                     .then(() => setIsLoading(false))
+                    .then(() => setPassword(""))
                 }
                 disabled={
                   username.length < 6 ||
