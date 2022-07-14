@@ -80,7 +80,6 @@ export default function ForgetPwScreen({ navigation, props }) {
                   onChangeText={setEmail}
                   keyboardType="email-address"
                   textContentType="emailAddress"
-                  autoFocus={true}
                   onChange={() => setErrorMsg(null)}
                   theme={{ colors: { text: "rgba(255, 255, 255, 0.6)" } }}
                   onSubmitEditing={() => {
