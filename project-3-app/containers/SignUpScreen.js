@@ -78,7 +78,6 @@ export default function SignUpScreen({ navigation }) {
                     }}
                     value={username}
                     onChangeText={setUsername}
-                    autoFocus={true}
                     returnKeyType="next"
                     onChange={() => setErrorMessage(null)}
                     onSubmitEditing={() => {

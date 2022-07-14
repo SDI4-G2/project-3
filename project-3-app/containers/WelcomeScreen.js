@@ -84,7 +84,6 @@ export default function WelcomeScreen({ navigation, props }) {
                 style={[styles.userInput]}
                 keyboardType="email-address"
                 textContentType="emailAddress"
-                autoFocus={true}
                 returnKeyType="next"
                 onChange={() => setErrMsg(null)}
                 onSubmitEditing={() => {

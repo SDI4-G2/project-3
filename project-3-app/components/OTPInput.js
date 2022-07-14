@@ -95,7 +95,6 @@ const OTPInput = ({ setPinReady, code, setCode, maxLength }) => {
         keyboardType="number-pad"
         returnKeyType="done"
         textContentType="oneTimeCode"
-        autoFocus={true}
         ref={textInputRef}
         onBlur={handleOnBlur}
       />

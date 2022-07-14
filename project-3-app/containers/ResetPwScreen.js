@@ -96,7 +96,6 @@ export default function ResetPwScreen({ navigation, props }) {
                   value={password}
                   onChangeText={setPassword}
                   style={[styles.userInput]}
-                  autoFocus={true}
                   theme={{ colors: { text: "rgba(255, 255, 255, 0.6)" } }}
                   secureTextEntry={true}
                   returnKeyType="next"
