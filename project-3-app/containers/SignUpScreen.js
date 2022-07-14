@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useRef, useState } from "react";
 import {
   Text,
   TouchableOpacity,
@@ -31,7 +31,6 @@ export default function SignUpScreen({ navigation }) {
   const [passwordVisible, setPasswordVisible] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState(null);
-  console.log(password);
 
   const emailRef = useRef(null);
   const pwRef = useRef(null);
@@ -188,7 +187,6 @@ export default function SignUpScreen({ navigation }) {
                               { email, username, password, navigation },
                               setIsLoading(true)
                             )
-                              .then(() => setPassword(""))
                               .then((res) => setErrorMessage(res))
                               .then(() => setIsLoading(false))
                           : null;
@@ -237,7 +235,6 @@ export default function SignUpScreen({ navigation }) {
                   )
                     .then((res) => setErrorMessage(res))
                     .then(() => setIsLoading(false))
-                    .then(() => setPassword(""))
                 }
                 disabled={
                   username.length < 6 ||
