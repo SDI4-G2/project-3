@@ -25,6 +25,6 @@ export default async function Register({
     })
 
     .catch(() => {
-      return console.log(`hello test ${serverResponse.message}`);
+      return console.log(`${serverResponse.message}`);
     });
 }

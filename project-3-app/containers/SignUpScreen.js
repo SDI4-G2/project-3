@@ -10,6 +10,7 @@ import {
   Pressable,
 } from "react-native";
 import { TextInput } from "react-native-paper";
+import { useFocusEffect } from "@react-navigation/native";
 
 import Buttons from "../components/Buttons";
 import Register from "../api/Register";
@@ -33,6 +34,18 @@ export default function SignUpScreen({ navigation }) {
 
   const emailRef = useRef(null);
   const pwRef = useRef(null);
+
+  function clearInputFields() {
+    setUsername("");
+    setPassword("");
+    setEmail("");
+  }
+
+  useFocusEffect(
+    React.useCallback(() => {
+      clearInputFields();
+    }, [])
+  );
 
   let [fontsLoaded] = useFonts({
     Poppins_300Light,
@@ -157,6 +170,7 @@ export default function SignUpScreen({ navigation }) {
                   ]}
                 >
                   <TextInput
+                    value={password}
                     onPress={() => setPasswordVisible(!passwordVisible)}
                     onChangeText={setPassword}
                     style={styles.userInput}
