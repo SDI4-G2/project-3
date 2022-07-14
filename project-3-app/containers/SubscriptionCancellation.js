@@ -63,7 +63,7 @@ export default function SubscriptionCancellation({ navigation, props }) {
             You can subscribe with us anytime......
           </Text>
           <TouchableOpacity style={{ top: '10%' }} onPress={() => navigation.dispatch(popAction)}>
-            <Buttons naming={'Return to Dashboard'} />
+            <Buttons naming={'Return'} />
           </TouchableOpacity>
         </View>
       </View>

@@ -63,7 +63,7 @@ export default function SubscriptionSuccessfulScreen({ navigation, props }) {
             Start watching premium content by clicking below.
           </Text>
           <TouchableOpacity style={{ top: '10%' }} onPress={() => navigation.dispatch(popAction)}>
-            <Buttons naming={'Return to Dashboard'} />
+            <Buttons naming={'Return'} />
           </TouchableOpacity>
         </View>
       </View>
